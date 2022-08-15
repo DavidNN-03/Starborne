@@ -1,0 +1,8 @@
+{
+  "name": "Heavy Fighter",
+  "maxHP": 200.0,
+  "shotsPerSecond": 1.0,
+  "damagePerShot": 7.0,
+  "speed": 3.0,
+  "turnSensitivity": 1.0
+}

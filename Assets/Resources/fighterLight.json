@@ -1,0 +1,8 @@
+{
+  "name": "Light Fighter",
+  "maxHP": 100.0,
+  "shotsPerSecond": 3.0,
+  "damagePerShot": 3.0,
+  "speed": 5.0,
+  "turnSensitivity": 2.0
+}
