@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float rollSensitivity = 1f;
     [SerializeField] float pitchSensitivity = 1f;
@@ -17,6 +17,12 @@ public class PlayerControl : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Start()
+    {
+        Character characterStats = FindObjectOfType<CharacterHandler>().GetCharacterStats();
+        
     }
 
     void Update()

@@ -88,6 +88,9 @@ public class CharacterSelect : MonoBehaviour
 
     public void SelectCharacter()
     {
+        FindObjectOfType<CharacterHandler>().SetCharacterStats(characters[index]);
+        SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
 
+        sceneHandler.LoadScene(sceneHandler.levelSelectSceneIndex);
     }
 }
