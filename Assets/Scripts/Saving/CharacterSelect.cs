@@ -82,7 +82,7 @@ public class CharacterSelect : MonoBehaviour
         healthText.text = "HP: " + characters[index].maxHP;
         damageText.text = "Damage: " + characters[index].damagePerShot;
         shotsPerSecondText.text = "Rate of fire: " + characters[index].shotsPerSecond;
-        speedText.text = "Speed: " + characters[index].speed;
+        //speedText.text = "Speed: " + characters[index].speed;
         agilityText.text = "Agility: " + characters[index].turnSensitivity;
     }
 

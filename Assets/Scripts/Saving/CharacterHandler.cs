@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CharacterHandler : MonoBehaviour
 {
-    Character characterStats;
+    public Character characterStats;
+
+    void Start()
+    {
+
+    }
 
     public void SetCharacterStats(Character character)
     {

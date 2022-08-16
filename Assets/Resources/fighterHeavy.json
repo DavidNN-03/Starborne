@@ -3,6 +3,7 @@
   "maxHP": 200.0,
   "shotsPerSecond": 1.0,
   "damagePerShot": 7.0,
-  "speed": 3.0,
+  "enginePower": 1.0,
+  "maxSpeed": 3.0,
   "turnSensitivity": 1.0
 }

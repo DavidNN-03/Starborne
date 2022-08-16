@@ -10,7 +10,8 @@ public class CharacterWriter : MonoBehaviour
     [SerializeField] float maxHP;
     [SerializeField] float shotsPerSecond;
     [SerializeField] float damagePerShot;
-    [SerializeField] float speed;
+    [SerializeField] float enginePower;
+    [SerializeField] float maxSpeed;
     [SerializeField] float turnSensitivity;
 
     Character currentCharacter = new Character();
@@ -21,7 +22,8 @@ public class CharacterWriter : MonoBehaviour
         currentCharacter.maxHP = maxHP;
         currentCharacter.shotsPerSecond = shotsPerSecond;
         currentCharacter.damagePerShot = damagePerShot;
-        currentCharacter.speed = speed;
+        currentCharacter.enginePower = enginePower;
+        currentCharacter.maxSpeed = maxSpeed;
         currentCharacter.turnSensitivity = turnSensitivity;
 
         string json = JsonUtility.ToJson(currentCharacter);

@@ -9,6 +9,7 @@ public class SceneHandler : MonoBehaviour
     public int charSelectSceneIndex;
     public int levelSelectSceneIndex;
     public int levelOneSceneIndex;
+    public int creditsSceneIndex;
 
     public void LoadScene(int index)
     {

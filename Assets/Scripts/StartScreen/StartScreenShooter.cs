@@ -6,7 +6,7 @@ public class StartScreenShooter : MonoBehaviour
 {
     [SerializeField] float maxRaycastDistance = 10f;
 
-    [SerializeField] StartScreenProjectile prefab;
+    [SerializeField] StartScreenProjectile[] prefabs;
     [SerializeField] Transform[] shooterOriginPoints;
 
 
@@ -22,6 +22,7 @@ public class StartScreenShooter : MonoBehaviour
 
             if (!rayHit) return;
 
+            StartScreenProjectile prefab = prefabs[Random.Range(0, prefabs.Length)];
             StartScreenProjectile instance = Instantiate(prefab, pointOfOrigin, Quaternion.identity);
 
             instance.transform.LookAt(hitInfo.point);
@@ -32,5 +33,6 @@ public class StartScreenShooter : MonoBehaviour
     private Ray GetMouseRay()
     {
         return Camera.main.ScreenPointToRay(Input.mousePosition);
+
     }
 }
