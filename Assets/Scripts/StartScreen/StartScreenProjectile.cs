@@ -8,7 +8,13 @@ public class StartScreenProjectile : MonoBehaviour
     [SerializeField] GameObject deathFXPrefab;
     [SerializeField] float explosionForce = 2f;
     [SerializeField] float explosionRange = 1f;
-    public float speed = 1f;
+    [SerializeField] float speed = 1f;
+
+    public void SetTarget(Vector3 targetPos)
+    {
+        transform.LookAt(targetPos);
+        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +34,7 @@ public class StartScreenProjectile : MonoBehaviour
             Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
         }
 
-        Rigidbody rb = other    .GetComponent<Rigidbody>();
+        Rigidbody rb = other.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.None;
         rb.AddExplosionForce(explosionForce, forceOrigin.position, explosionRange, 0f, ForceMode.Force);
 

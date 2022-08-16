@@ -4,22 +4,23 @@ using UnityEngine;
 using System;
 using System.IO;
 
-public class CharacterPathsWriter : MonoBehaviour
+namespace Starborne.Saving
 {
-    [SerializeField] string[] paths;
-
-    void Start()
+    public class CharacterPathsWriter : MonoBehaviour
     {
-        ArrayContainer arrayContainer = new ArrayContainer();
-        arrayContainer.array = paths;
+        [SerializeField] string[] paths;
 
-        Debug.Log(arrayContainer);
-        string json = JsonUtility.ToJson(arrayContainer);
-        Debug.Log(arrayContainer);
-        string path = "Assets/Resources/Paths.json";
+        void Start()
+        {
+            ArrayContainer arrayContainer = new ArrayContainer();
+            arrayContainer.array = paths;
 
-        StreamWriter t = new StreamWriter(path, true);
-        t.Write(json);
-        t.Close();
+            string json = JsonUtility.ToJson(arrayContainer);
+            string path = "Assets/Resources/Paths.json";
+
+            StreamWriter t = new StreamWriter(path, true);
+            t.Write(json);
+            t.Close();
+        }
     }
 }

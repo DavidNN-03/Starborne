@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class CharacterReader : MonoBehaviour
+namespace Starborne.Saving
 {
-    public Character GetCharacter(string path)
+    public class CharacterReader : MonoBehaviour
     {
-        StreamReader reader = new StreamReader(path);
-        string jcharacter = reader.ReadToEnd();
-        Character character = JsonUtility.FromJson<Character>(jcharacter);
-        return character;
+        public Character GetCharacter(string path)
+        {
+            StreamReader reader = new StreamReader(path);
+            string jcharacter = reader.ReadToEnd();
+            Character character = JsonUtility.FromJson<Character>(jcharacter);
+            return character;
+        }
     }
 }

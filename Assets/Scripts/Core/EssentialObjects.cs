@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EssentialObjects : MonoBehaviour
+namespace Starborne.Core
 {
-    static EssentialObjects instance;
-
-    void Awake()
+    public class EssentialObjects : MonoBehaviour
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
+        static EssentialObjects instance;
 
-        if(instance == this)
+        void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (instance == null)
+            {
+                instance = this;
+            }
+
+            if (instance == this)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

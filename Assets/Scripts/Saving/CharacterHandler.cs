@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHandler : MonoBehaviour
+namespace Starborne.Saving
 {
-    public Character characterStats;
-
-    void Start()
+    public class CharacterHandler : MonoBehaviour
     {
+        public Character characterStats;
 
-    }
+        public void SetCharacterStats(Character character)
+        {
+            characterStats = character;
+        }
 
-    public void SetCharacterStats(Character character)
-    {
-        characterStats = character;
-    }
-
-    public Character GetCharacterStats()
-    {
-        return characterStats;
+        public Character GetCharacterStats()
+        {
+            return characterStats;
+        }
     }
 }

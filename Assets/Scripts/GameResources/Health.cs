@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Starborne.Saving;
 
-public class Health : MonoBehaviour
+namespace Starborne.GameResources
 {
-    private float health;
-    private float maxHealth;
-
-    void Start()
+    public class Health : MonoBehaviour
     {
-        Character characterStats = FindObjectOfType<CharacterHandler>().GetCharacterStats();
+        private float health;
+        private float maxHealth;
 
-        maxHealth = characterStats.maxHP;
-    }
+        void Start()
+        {
+            Character characterStats = FindObjectOfType<CharacterHandler>().GetCharacterStats();
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
+            maxHealth = characterStats.maxHP;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            health -= damage;
+        }
     }
 }

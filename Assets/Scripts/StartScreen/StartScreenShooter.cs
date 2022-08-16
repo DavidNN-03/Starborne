@@ -25,8 +25,7 @@ public class StartScreenShooter : MonoBehaviour
             StartScreenProjectile prefab = prefabs[Random.Range(0, prefabs.Length)];
             StartScreenProjectile instance = Instantiate(prefab, pointOfOrigin, Quaternion.identity);
 
-            instance.transform.LookAt(hitInfo.point);
-            instance.GetComponent<Rigidbody>().velocity = instance.transform.forward * instance.speed;
+            instance.SetTarget(hitInfo.point);
         }
     }
 

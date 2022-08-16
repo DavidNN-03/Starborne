@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneHandler : MonoBehaviour
+namespace Starborne.SceneHandling
 {
-    public int mainMenuSceneIndex;
-    public int charSelectSceneIndex;
-    public int levelSelectSceneIndex;
-    public int levelOneSceneIndex;
-    public int creditsSceneIndex;
-
-    public void LoadScene(int index)
+    public class SceneHandler : MonoBehaviour
     {
-        SceneManager.LoadScene(index);
-    }
+        public int mainMenuSceneIndex;
+        public int charSelectSceneIndex;
+        public int levelSelectSceneIndex;
+        public int levelOneSceneIndex;
+        public int creditsSceneIndex;
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void LoadScene(int index)
+        {
+            SceneManager.LoadScene(index);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

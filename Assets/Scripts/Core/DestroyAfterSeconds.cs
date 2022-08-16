@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyAfterSeconds : MonoBehaviour
+namespace Starborne.Core
 {
-    [SerializeField] float delay = 5f;
-
-    void Start()
+    public class DestroyAfterSeconds : MonoBehaviour
     {
-        StartCoroutine(DestroyGameObject());
-    }
+        [SerializeField] float delay = 5f;
 
-    private IEnumerator DestroyGameObject()
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
+        void Start()
+        {
+            StartCoroutine(DestroyGameObject());
+        }
+
+        private IEnumerator DestroyGameObject()
+        {
+            yield return new WaitForSeconds(delay);
+            Destroy(gameObject);
+        }
     }
 }
