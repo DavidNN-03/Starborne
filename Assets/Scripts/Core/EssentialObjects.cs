@@ -6,7 +6,7 @@ namespace Starborne.Core
 {
     public class EssentialObjects : MonoBehaviour
     {
-        static EssentialObjects instance;
+        public static EssentialObjects instance;
 
         void Awake()
         {

@@ -7,9 +7,14 @@ namespace Starborne.Combat
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] float speed;
+        [SerializeField] float speed = 1f;
         [SerializeField] float damage;
         [SerializeField] GameObject deathFXPrefab;
+
+        void Awake()
+        {
+            GetComponent<Rigidbody>().velocity = transform.forward * speed; //also add parent speed?
+        }
 
         public void SetDamage(float newDamage)
         {
@@ -23,9 +28,17 @@ namespace Starborne.Combat
                 Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
             }
 
-            other.GetComponent<Health>().TakeDamage(damage);
+            Health otherHealth = other.GetComponent<Health>();
+            
+            if(otherHealth != null)
+            {
+                other.GetComponent<Health>().TakeDamage(damage);
+            }
 
-            Destroy(gameObject);
+            if(other.tag != "DDP")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

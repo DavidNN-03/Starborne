@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Starborne.Saving;
 using Starborne.Combat;
+using Starborne.Core;
 
 namespace Starborne.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        //roll = z-axis
+        //pitch = x-axis
+        //yaw = y-axis
+        [SerializeField] float maxEnginePower = 5f;
         [SerializeField] float enginePower = 1;
         [SerializeField] float rollSensitivity = 1f;
         [SerializeField] float pitchSensitivity = 1f;
@@ -17,8 +22,10 @@ namespace Starborne.Control
         float pitchInput;
         float yawInput;
         float throttleInput;
+        float throttle;
 
         [SerializeField] Gun[] guns;
+        [SerializeField] Character characterStats;
 
         [SerializeField] bool invertVertical = true;
         [SerializeField] bool invertHorizontal = false;
@@ -32,14 +39,14 @@ namespace Starborne.Control
 
         void Start()
         {
-            Character characterStats = FindObjectOfType<CharacterHandler>().GetCharacterStats();
+            characterStats = EssentialObjects.instance.GetComponentInChildren<CharacterHandler>().GetCharacterStats();
 
             maxSpeed = characterStats.maxSpeed;
             rollSensitivity = characterStats.turnSensitivity;
 
             foreach (Gun gun in guns)
             {
-                gun.SetProjectileDamage(characterStats.damagePerShot);
+                gun.SetValues(characterStats.damagePerShot, characterStats.shotsPerSecond);
             }
         }
 
@@ -69,6 +76,8 @@ namespace Starborne.Control
 
             //ClampInputs(); values from Input.GetAxis() should alreadu be between -1 and 1?
 
+            ControlThrottle();
+
             CalculateForces();
 
             ClampSpeed();
@@ -76,16 +85,25 @@ namespace Starborne.Control
 
         private void ClampInputs()
         {
+            Debug.Log("rollInput:" + rollInput + "     " + "pitchInput:" + pitchInput + "     " + "yawInput:" + yawInput + "     " + "throttleInput:" + throttleInput);
             rollInput = Mathf.Clamp(rollInput, -1, 1);
             pitchInput = Mathf.Clamp(pitchInput, -1, 1);
             yawInput = Mathf.Clamp(yawInput, -1, 1);
             throttleInput = Mathf.Clamp(throttleInput, -1, 1);
+            
+        }
+
+        private void ControlThrottle()
+        {
+            throttle = Mathf.Clamp(throttle + throttleInput*Time.deltaTime, -1, 1);
+
+            enginePower = throttle * maxEnginePower;
         }
 
         private void CalculateForces()
         {
             Vector3 forces = Vector3.zero;
-            forces += enginePower * transform.forward; //DONT ALWAYS APPLY FORCE DUMBDUMB
+            forces += enginePower * transform.forward;
 
             rb.AddForce(forces);
         }
