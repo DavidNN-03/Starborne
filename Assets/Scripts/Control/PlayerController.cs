@@ -36,6 +36,11 @@ namespace Starborne.Control
 
             maxSpeed = characterStats.maxSpeed;
             rollSensitivity = characterStats.turnSensitivity;
+
+            foreach (Gun gun in guns)
+            {
+                gun.SetProjectileDamage(characterStats.damagePerShot);
+            }
         }
 
         private void FixedUpdate()
@@ -80,7 +85,7 @@ namespace Starborne.Control
         private void CalculateForces()
         {
             Vector3 forces = Vector3.zero;
-            forces += enginePower * transform.forward;
+            forces += enginePower * transform.forward; //DONT ALWAYS APPLY FORCE DUMBDUMB
 
             rb.AddForce(forces);
         }

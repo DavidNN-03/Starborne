@@ -6,10 +6,16 @@ namespace Starborne.Combat
 {
     public class Gun : MonoBehaviour
     {
+        [SerializeField] float projectileDamage;
         [SerializeField] Projectile prefab;
 
         private float secondsBetweenShots;
         bool canFire = true;
+
+        public void SetProjectileDamage(float newDamage)
+        {
+            projectileDamage = newDamage;
+        }
 
         public void AttemptFire()
         {
@@ -24,7 +30,7 @@ namespace Starborne.Combat
         private void Fire()
         {
             Projectile projectile = Instantiate(prefab, transform.position, Quaternion.identity);
-            //projectile.SetDamage();
+            projectile.SetDamage(projectileDamage);
         }
 
         private IEnumerator LoadNextShot()
