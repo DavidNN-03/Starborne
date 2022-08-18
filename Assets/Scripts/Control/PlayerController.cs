@@ -22,7 +22,6 @@ namespace Starborne.Control
         float pitchInput;
         float yawInput;
         float throttleInput;
-        float throttle;
 
         [SerializeField] Gun[] guns;
         [SerializeField] Character characterStats;
@@ -56,6 +55,7 @@ namespace Starborne.Control
             float pitch = Input.GetAxis("Mouse Y");
             float yaw = Input.GetAxis("Horizontal");
             float throttle = Input.GetAxis("Vertical");
+
             Move(roll, pitch, yaw, throttle);
 
             if (Input.GetMouseButton(0))
@@ -90,14 +90,12 @@ namespace Starborne.Control
             pitchInput = Mathf.Clamp(pitchInput, -1, 1);
             yawInput = Mathf.Clamp(yawInput, -1, 1);
             throttleInput = Mathf.Clamp(throttleInput, -1, 1);
-            
+
         }
 
         private void ControlThrottle()
         {
-            throttle = Mathf.Clamp(throttle + throttleInput*Time.deltaTime, -1, 1);
-
-            enginePower = throttle * maxEnginePower;
+            enginePower = throttleInput * maxEnginePower * Time.deltaTime;
         }
 
         private void CalculateForces()
