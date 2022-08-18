@@ -4,6 +4,8 @@ using UnityEngine;
 using Starborne.Saving;
 using Starborne.Combat;
 using Starborne.Core;
+using Starborne.GameResources;
+using Starborne.SceneHandling;
 
 namespace Starborne.Control
 {
@@ -18,30 +20,39 @@ namespace Starborne.Control
         [SerializeField] float pitchSensitivity = 1f;
         [SerializeField] float yawSensitivity = 1f;
         [SerializeField] float maxSpeed = 1f;
-        float rollInput;
-        float pitchInput;
-        float yawInput;
-        float throttleInput;
+        [SerializeField] float changeSceneDelay = 1f;
+        public float speed;
+        public float roll;
+        public float pitch;
+        public float yaw;
+        public float throttle;
 
         [SerializeField] Gun[] guns;
         [SerializeField] Character characterStats;
+        [SerializeField] GameObject deathFX;
 
         [SerializeField] bool invertVertical = true;
-        [SerializeField] bool invertHorizontal = false;
 
         Rigidbody rb;
+        PlayerHealth health;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            health = GetComponent<PlayerHealth>();
         }
 
         void Start()
         {
             characterStats = EssentialObjects.instance.GetComponentInChildren<CharacterHandler>().GetCharacterStats();
 
+            health.onDeath += Die;
+
             maxSpeed = characterStats.maxSpeed;
-            rollSensitivity = characterStats.turnSensitivity;
+            maxEnginePower = characterStats.enginePower;
+            rollSensitivity = characterStats.rollSensitivity;
+            pitchSensitivity = characterStats.pitchSensitivity;
+            yawSensitivity = characterStats.yawSensitivity;
 
             foreach (Gun gun in guns)
             {
@@ -51,12 +62,17 @@ namespace Starborne.Control
 
         private void FixedUpdate()
         {
-            float roll = Input.GetAxis("Mouse X");
-            float pitch = Input.GetAxis("Mouse Y");
-            float yaw = Input.GetAxis("Horizontal");
-            float throttle = Input.GetAxis("Vertical");
+            roll = Input.GetAxis("Mouse X") * -1f * rollSensitivity;
+            pitch = Input.GetAxis("Mouse Y") * pitchSensitivity;
+            yaw = Input.GetAxis("Horizontal") * yawSensitivity;
+            throttle = Input.GetAxis("Vertical");
 
-            Move(roll, pitch, yaw, throttle);
+            if(!invertVertical)
+            { 
+                pitch *= -1f;
+            }
+
+            Move();
 
             if (Input.GetMouseButton(0))
             {
@@ -67,53 +83,79 @@ namespace Starborne.Control
             }
         }
 
-        private void Move(float roll, float pitch, float yaw, float throttle)
+        private void Move()
         {
-            rollInput = roll;
-            pitchInput = pitch;
-            yawInput = yaw;
-            throttleInput = throttle;
-
             //ClampInputs(); values from Input.GetAxis() should alreadu be between -1 and 1?
+
+            ControlVelocityDirection();
 
             ControlThrottle();
 
-            CalculateForces();
+            CalculateTorque();
 
-            ClampSpeed();
+            SetSpeed();
         }
 
         private void ClampInputs()
         {
-            Debug.Log("rollInput:" + rollInput + "     " + "pitchInput:" + pitchInput + "     " + "yawInput:" + yawInput + "     " + "throttleInput:" + throttleInput);
-            rollInput = Mathf.Clamp(rollInput, -1, 1);
-            pitchInput = Mathf.Clamp(pitchInput, -1, 1);
-            yawInput = Mathf.Clamp(yawInput, -1, 1);
-            throttleInput = Mathf.Clamp(throttleInput, -1, 1);
+            roll = Mathf.Clamp(roll, -1, 1);
+            pitch = Mathf.Clamp(pitch, -1, 1);
+            yaw = Mathf.Clamp(yaw, -1, 1);
+            throttle = Mathf.Clamp(throttle, -1, 1);
+        }
 
+        private void ControlVelocityDirection()
+        {
+            float speed = rb.velocity.magnitude;
+            rb.velocity = transform.forward * speed;
         }
 
         private void ControlThrottle()
         {
-            enginePower = throttleInput * maxEnginePower * Time.deltaTime;
+            enginePower = throttle * maxEnginePower * Time.deltaTime;
         }
 
-        private void CalculateForces()
+        private void CalculateTorque()
         {
+            /*
+            Vector3 torque = Vector3.zero;
+            torque += pitch * transform.right;
+            torque += yaw * transform.up;
+            torque += roll * transform.forward;
+            rb.AddTorque(torque);*/
+
+            float xRotate = pitch;
+            float yRotate = yaw;
+            float zRotate = roll;
+
+            transform.Rotate(xRotate,yRotate,zRotate,Space.Self);
+        }
+
+        private void SetSpeed()
+        {
+            /*
             Vector3 forces = Vector3.zero;
             forces += enginePower * transform.forward;
 
             rb.AddForce(forces);
+            */
+            speed += enginePower;
+
+            speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
+
+            rb.velocity = speed * transform.forward;
         }
 
-        private void ClampSpeed()
+        void OnCollisionEnter(Collision collision)
         {
-            Vector3 velocity = rb.velocity;
+            Die();
+        }
 
-            if (velocity.magnitude > maxSpeed)
-            {
-                velocity = velocity.normalized * maxSpeed;
-            }
+        private void Die()
+        {
+            if(deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
+            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneDelay);
         }
     }
 }

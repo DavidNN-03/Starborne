@@ -86,7 +86,7 @@ namespace Starborne.Control
             damageText.text = "Damage: " + characters[index].damagePerShot;
             shotsPerSecondText.text = "Rate of fire: " + characters[index].shotsPerSecond;
             //speedText.text = "Speed: " + characters[index].speed;
-            agilityText.text = "Agility: " + characters[index].turnSensitivity;
+            //agilityText.text = "Agility: " + characters[index].turnSensitivity;
         }
 
         public void SelectCharacter()

@@ -18,7 +18,7 @@ namespace Starborne.Saving
             string json = JsonUtility.ToJson(arrayContainer);
             string path = "Assets/Resources/Paths.json";
 
-            StreamWriter t = new StreamWriter(path, true);
+            StreamWriter t = new StreamWriter(path, false);
             t.Write(json);
             t.Close();
         }

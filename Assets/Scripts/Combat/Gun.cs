@@ -36,7 +36,7 @@ namespace Starborne.Combat
 
         private void Fire()
         {
-            Projectile projectile = Instantiate(prefab, transform.position, Quaternion.identity, shotsParent);
+            Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, shotsParent);
             projectile.SetDamage(projectileDamage);
         }
 

@@ -14,7 +14,9 @@ namespace Starborne.Saving
         [SerializeField] float damagePerShot;
         [SerializeField] float enginePower;
         [SerializeField] float maxSpeed;
-        [SerializeField] float turnSensitivity;
+        [SerializeField] float rollSensitivity;
+        [SerializeField] float pitchSensitivity;
+        [SerializeField] float yawSensitivity;
 
         Character currentCharacter = new Character();
 
@@ -26,12 +28,14 @@ namespace Starborne.Saving
             currentCharacter.damagePerShot = damagePerShot;
             currentCharacter.enginePower = enginePower;
             currentCharacter.maxSpeed = maxSpeed;
-            currentCharacter.turnSensitivity = turnSensitivity;
+            currentCharacter.rollSensitivity = rollSensitivity;
+            currentCharacter.pitchSensitivity = pitchSensitivity;
+            currentCharacter.yawSensitivity = yawSensitivity;
 
             string json = JsonUtility.ToJson(currentCharacter);
             string path = "Assets/Resources/" + fileName + ".json";
 
-            StreamWriter t = new StreamWriter(path, true);
+            StreamWriter t = new StreamWriter(path, false);
             t.Write(json);
             t.Close();
         }

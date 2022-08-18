@@ -1,9 +1,1 @@
-{
-  "name": "Light Fighter",
-  "maxHP": 100.0,
-  "shotsPerSecond": 3.0,
-  "damagePerShot": 3.0,
-  "enginePower": 2.0,
-  "maxSpeed": 5.0,
-  "turnSensitivity": 2.0
-}
+{"name":"Light Fighter","maxHP":100.0,"shotsPerSecond":3.0,"damagePerShot":3.0,"enginePower":1.0,"maxSpeed":15.0,"rollSensitivity":4.0,"pitchSensitivity":4.0,"yawSensitivity":4.0}

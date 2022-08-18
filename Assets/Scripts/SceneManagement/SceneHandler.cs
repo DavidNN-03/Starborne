@@ -18,6 +18,17 @@ namespace Starborne.SceneHandling
             SceneManager.LoadScene(index);
         }
 
+        public void LoadScene(int index, float delay)
+        {
+            StartCoroutine(LoadSceneAfterSeconds(index, delay));
+        }
+
+        IEnumerator LoadSceneAfterSeconds(int index, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            LoadScene(index);
+        }
+
         public void QuitGame()
         {
             Application.Quit();
