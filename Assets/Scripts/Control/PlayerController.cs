@@ -63,11 +63,6 @@ namespace Starborne.Control
 
         private void FixedUpdate()
         {
-            //roll = Input.GetAxis("Mouse X") * -1f * rollSensitivity;
-            //pitch = Input.GetAxis("Mouse Y") * pitchSensitivity;
-            //yaw = Input.GetAxis("Horizontal") * yawSensitivity;
-            //throttle = Input.GetAxis("Vertical");
-
             roll = GetInputFromInputSet(inputConfig.rollInputSet) * rollSensitivity;
             pitch = GetInputFromInputSet(inputConfig.pitchInputSet) * pitchSensitivity;
             yaw = GetInputFromInputSet(inputConfig.yawInputSet) * yawSensitivity;
@@ -147,7 +142,7 @@ namespace Starborne.Control
 
         private void ClampInputs()
         {
-            roll = Mathf.Clamp(roll, -100, 100);
+            roll = Mathf.Clamp(roll, -1, 1);
             pitch = Mathf.Clamp(pitch, -1, 1);
             yaw = Mathf.Clamp(yaw, -1, 1);
             throttle = Mathf.Clamp(throttle, -1, 1);
@@ -166,13 +161,6 @@ namespace Starborne.Control
 
         private void CalculateTorque()
         {
-            /*
-            Vector3 torque = Vector3.zero;
-            torque += pitch * transform.right;
-            torque += yaw * transform.up;
-            torque += roll * transform.forward;
-            rb.AddTorque(torque);*/
-
             float xRotate = pitch;
             float yRotate = yaw;
             float zRotate = roll;
@@ -182,12 +170,6 @@ namespace Starborne.Control
 
         private void SetSpeed()
         {
-            /*
-            Vector3 forces = Vector3.zero;
-            forces += enginePower * transform.forward;
-
-            rb.AddForce(forces);
-            */
             speed += enginePower;
 
             speed= Mathf.Clamp(speed, -maxSpeed, maxSpeed);

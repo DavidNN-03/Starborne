@@ -8,8 +8,8 @@ namespace Starborne.GameResources
 {
     public class PlayerHealth : MonoBehaviour
     {
-        private float health;
-        private float maxHealth;
+        [SerializeField] float health;
+        [SerializeField] float maxHealth;
 
         public event Action onDeath;
 

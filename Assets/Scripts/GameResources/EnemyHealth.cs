@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Starborne.GameResources
 {
-    public class DummyHealth : MonoBehaviour
+    public class EnemyHealth : MonoBehaviour
     {
         [SerializeField] private float health;
 

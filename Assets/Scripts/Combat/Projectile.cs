@@ -28,11 +28,11 @@ namespace Starborne.Combat
                 Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
             }
 
-            DummyHealth otherHealth = other.GetComponent<DummyHealth>();
+            EnemyHealth otherHealth = other.GetComponent<EnemyHealth>();
             
             if(otherHealth != null)
             {
-                other.GetComponent<DummyHealth>().TakeDamage(damage);
+                other.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
 
             if(other.tag != "DDP")

@@ -240,10 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4925f725e6429384181445aae82dd3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throttleInputSet: 2
-  rollInputSet: 0
-  pitchInputSet: 1
-  yawInputSet: 3
+  inputConfig: {fileID: 11400000, guid: ec66182c137890c4eb453e0986225e8a, type: 2}
   maxEnginePower: 25
   enginePower: 1
   rollSensitivity: 1
@@ -271,7 +268,6 @@ MonoBehaviour:
     yawSensitivity: 0
     spriteFileName: 
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
-  invertVertical: 1
 --- !u!114 &4098349511449062352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c89870b22ab65489be8739adbbafb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
 --- !u!1 &7888235739487492251
 GameObject:
   m_ObjectHideFlags: 0

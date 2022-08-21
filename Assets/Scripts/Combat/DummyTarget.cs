@@ -11,7 +11,7 @@ namespace Starborne.Combat
 
         void Start()
         {
-            GetComponent<DummyHealth>().onDeath += Die;
+            GetComponent<EnemyHealth>().onDeath += Die;
         }
 
         private void Die()
