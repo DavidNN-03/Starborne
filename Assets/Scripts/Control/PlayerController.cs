@@ -11,6 +11,8 @@ namespace Starborne.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] InputConfig inputConfig;
+
         //roll = z-axis
         //pitch = x-axis
         //yaw = y-axis
@@ -30,8 +32,6 @@ namespace Starborne.Control
         [SerializeField] Gun[] guns;
         [SerializeField] Character characterStats;
         [SerializeField] GameObject deathFX;
-
-        [SerializeField] bool invertVertical = true;
 
         Rigidbody rb;
         PlayerHealth health;
@@ -63,15 +63,17 @@ namespace Starborne.Control
 
         private void FixedUpdate()
         {
-            roll = Input.GetAxis("Mouse X") * -1f * rollSensitivity;
-            pitch = Input.GetAxis("Mouse Y") * pitchSensitivity;
-            yaw = Input.GetAxis("Horizontal") * yawSensitivity;
-            throttle = Input.GetAxis("Vertical");
+            //roll = Input.GetAxis("Mouse X") * -1f * rollSensitivity;
+            //pitch = Input.GetAxis("Mouse Y") * pitchSensitivity;
+            //yaw = Input.GetAxis("Horizontal") * yawSensitivity;
+            //throttle = Input.GetAxis("Vertical");
 
-            if (!invertVertical)
-            {
-                pitch *= -1f;
-            }
+            roll = GetInputFromInputSet(inputConfig.rollInputSet) * rollSensitivity;
+            pitch = GetInputFromInputSet(inputConfig.pitchInputSet) * pitchSensitivity;
+            yaw = GetInputFromInputSet(inputConfig.yawInputSet) * yawSensitivity;
+            throttle = GetInputFromInputSet(inputConfig.throttleInputSet);
+
+            InvertInputs();
 
             Move();
 
@@ -81,6 +83,52 @@ namespace Starborne.Control
                 {
                     gun.AttemptFire();
                 }
+            }
+        }
+
+        float GetInputFromInputSet(InputSet inputSet)
+        {
+            if(inputSet == InputSet.mouseX)
+            {
+                return Input.GetAxis("Mouse X");
+            }
+            else if(inputSet == InputSet.mouseY)
+            {
+                return Input.GetAxis("Mouse Y");
+            }
+            else if(inputSet == InputSet.wAndS)
+            {
+                return Input.GetAxis("Vertical");
+
+            }
+            else if(inputSet == InputSet.aAndD)
+            {
+                return Input.GetAxis("Horizontal");
+            }
+            else if(inputSet == InputSet.eAndQ)
+            {
+                return Input.GetAxis("Roll");
+            }
+            return 0f;
+        }
+
+        void InvertInputs()
+        {
+            if (inputConfig.inverThrottle)
+            {
+                throttle *= -1f;
+            }
+            if (inputConfig.invertRoll)
+            {
+                roll *= -1f;
+            }
+            if (inputConfig.invertPitch)
+            {
+                pitch *= -1f;
+            }
+            if(inputConfig.invertYaw)
+            {
+                yaw *= -1f;
             }
         }
 
