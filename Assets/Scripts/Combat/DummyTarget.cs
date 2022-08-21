@@ -16,7 +16,7 @@ namespace Starborne.Combat
 
         private void Die()
         {
-            if(deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

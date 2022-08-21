@@ -44,6 +44,7 @@ namespace Starborne.Control
 
         void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             characterStats = EssentialObjects.instance.GetComponentInChildren<CharacterHandler>().GetCharacterStats();
 
             health.onDeath += Die;
@@ -67,8 +68,8 @@ namespace Starborne.Control
             yaw = Input.GetAxis("Horizontal") * yawSensitivity;
             throttle = Input.GetAxis("Vertical");
 
-            if(!invertVertical)
-            { 
+            if (!invertVertical)
+            {
                 pitch *= -1f;
             }
 
@@ -98,7 +99,7 @@ namespace Starborne.Control
 
         private void ClampInputs()
         {
-            roll = Mathf.Clamp(roll, -1, 1);
+            roll = Mathf.Clamp(roll, -100, 100);
             pitch = Mathf.Clamp(pitch, -1, 1);
             yaw = Mathf.Clamp(yaw, -1, 1);
             throttle = Mathf.Clamp(throttle, -1, 1);
@@ -128,7 +129,7 @@ namespace Starborne.Control
             float yRotate = yaw;
             float zRotate = roll;
 
-            transform.Rotate(xRotate,yRotate,zRotate,Space.Self);
+            transform.Rotate(xRotate, yRotate, zRotate, Space.Self);
         }
 
         private void SetSpeed()
@@ -141,7 +142,7 @@ namespace Starborne.Control
             */
             speed += enginePower;
 
-            speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
+            speed= Mathf.Clamp(speed, -maxSpeed, maxSpeed);
 
             rb.velocity = speed * transform.forward;
         }
@@ -153,7 +154,8 @@ namespace Starborne.Control
 
         private void Die()
         {
-            if(deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            Cursor.lockState = CursorLockMode.None;
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
             sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneDelay);
         }

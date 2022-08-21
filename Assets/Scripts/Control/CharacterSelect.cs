@@ -5,6 +5,7 @@ using TMPro;
 using System.IO;
 using Starborne.SceneHandling;
 using Starborne.Saving;
+using UnityEngine.UI;
 
 namespace Starborne.Control
 {
@@ -18,8 +19,10 @@ namespace Starborne.Control
         [SerializeField] TextMeshProUGUI shotsPerSecondText;
         [SerializeField] TextMeshProUGUI speedText;
         [SerializeField] TextMeshProUGUI agilityText;
+        [SerializeField] Image characterImage;
 
         Character[] characters;
+        Sprite[] sprites;
 
         void Start()
         {
@@ -30,13 +33,16 @@ namespace Starborne.Control
 
             string[] charPaths = arrayContainer.array;
             characters = new Character[charPaths.Length];
+            sprites = new Sprite[charPaths.Length];
 
             for (int i = 0; i < charPaths.Length; i++)
             {
                 characters[i] = GetCharacter(charPaths[i]);
+                string spriteFileName = characters[i].spriteFileName;
+                sprites[i] = Resources.Load<Sprite>("Sprites/" + spriteFileName);
             }
 
-            UpdateStats();
+            UpdateUI();
         }
 
         private Character GetCharacter(string path)
@@ -66,7 +72,7 @@ namespace Starborne.Control
             {
                 index = 0;
             }
-            UpdateStats();
+            UpdateUI();
         }
 
         public void previousChar()
@@ -76,10 +82,10 @@ namespace Starborne.Control
             {
                 index = characters.Length - 1;
             }
-            UpdateStats();
+            UpdateUI();
         }
 
-        private void UpdateStats()
+        private void UpdateUI()
         {
             nameText.text = characters[index].name;
             healthText.text = "HP: " + characters[index].maxHP;
@@ -87,6 +93,7 @@ namespace Starborne.Control
             shotsPerSecondText.text = "Rate of fire: " + characters[index].shotsPerSecond;
             //speedText.text = "Speed: " + characters[index].speed;
             //agilityText.text = "Agility: " + characters[index].turnSensitivity;
+            characterImage.sprite = sprites[index];
         }
 
         public void SelectCharacter()

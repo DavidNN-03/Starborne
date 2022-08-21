@@ -12,4 +12,5 @@ public class Character
     public float rollSensitivity;
     public float pitchSensitivity;
     public float yawSensitivity;
+    public string spriteFileName;
 }

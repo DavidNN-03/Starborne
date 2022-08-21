@@ -5,5 +5,8 @@
   "damagePerShot": 7.0,
   "enginePower": 1.0,
   "maxSpeed": 3.0,
-  "turnSensitivity": 1.0
+  "rollSensitivity": 1.0,
+  "pitchSensitivity": 1.0,
+  "yawSensitivity": 1.0,
+  "spriteFileName": "heavyFighterSprite"
 }

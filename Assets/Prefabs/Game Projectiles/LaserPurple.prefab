@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eec9722f8c077649bf3fcdbbb577963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
+  speed: 60
   damage: 0
   deathFXPrefab: {fileID: 4499288547176347955, guid: 21b4c5ea42df9f34c989ebc7a7ceb9d1, type: 3}
 --- !u!1 &2365649020107649316

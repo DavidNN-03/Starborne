@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyHealth : MonoBehaviour
+namespace Starborne.GameResources
 {
-    private float health;
-    [SerializeField] private float maxHealth;
+    public class DummyHealth : MonoBehaviour
+    {
+        [SerializeField] private float health;
 
-    public event Action onDeath;
+        public event Action onDeath;
 
-    public void TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
-            if(health <= 0)
+            if (health <= 0)
             {
                 onDeath();
             }
         }
+    }
 }
