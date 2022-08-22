@@ -8,5 +8,6 @@
   "rollSensitivity": 4.0,
   "pitchSensitivity": 4.0,
   "yawSensitivity": 4.0,
-  "spriteFileName": "lightFighterSprite"
+  "spriteFileName": "lightFighterSprite",
+  "meshFileName": "StarSparrow2"
 }

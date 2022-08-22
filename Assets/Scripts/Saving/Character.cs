@@ -13,4 +13,5 @@ public class Character
     public float pitchSensitivity;
     public float yawSensitivity;
     public string spriteFileName;
+    public string meshFileName;
 }

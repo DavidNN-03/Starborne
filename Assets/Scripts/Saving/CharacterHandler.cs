@@ -19,7 +19,7 @@ namespace Starborne.Saving
 
         public Character GetCharacterStats()
         {
-            if(characterAssigned)
+            if (characterAssigned)
             {
                 //return assigned character
                 return characterStats;

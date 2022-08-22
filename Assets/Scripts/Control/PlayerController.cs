@@ -83,24 +83,24 @@ namespace Starborne.Control
 
         float GetInputFromInputSet(InputSet inputSet)
         {
-            if(inputSet == InputSet.mouseX)
+            if (inputSet == InputSet.mouseX)
             {
                 return Input.GetAxis("Mouse X");
             }
-            else if(inputSet == InputSet.mouseY)
+            else if (inputSet == InputSet.mouseY)
             {
                 return Input.GetAxis("Mouse Y");
             }
-            else if(inputSet == InputSet.wAndS)
+            else if (inputSet == InputSet.wAndS)
             {
                 return Input.GetAxis("Vertical");
 
             }
-            else if(inputSet == InputSet.aAndD)
+            else if (inputSet == InputSet.aAndD)
             {
                 return Input.GetAxis("Horizontal");
             }
-            else if(inputSet == InputSet.eAndQ)
+            else if (inputSet == InputSet.eAndQ)
             {
                 return Input.GetAxis("Roll");
             }
@@ -121,7 +121,7 @@ namespace Starborne.Control
             {
                 pitch *= -1f;
             }
-            if(inputConfig.invertYaw)
+            if (inputConfig.invertYaw)
             {
                 yaw *= -1f;
             }
@@ -172,7 +172,7 @@ namespace Starborne.Control
         {
             speed += enginePower;
 
-            speed= Mathf.Clamp(speed, -maxSpeed, maxSpeed);
+            speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
 
             rb.velocity = speed * transform.forward;
         }

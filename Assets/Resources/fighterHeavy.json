@@ -8,5 +8,6 @@
   "rollSensitivity": 1.0,
   "pitchSensitivity": 1.0,
   "yawSensitivity": 1.0,
-  "spriteFileName": "heavyFighterSprite"
+  "spriteFileName": "heavyFighterSprite",
+  "meshFileName": "StarSparrow1"
 }

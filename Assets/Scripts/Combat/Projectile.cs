@@ -29,13 +29,13 @@ namespace Starborne.Combat
             }
 
             EnemyHealth otherHealth = other.GetComponent<EnemyHealth>();
-            
-            if(otherHealth != null)
+
+            if (otherHealth != null)
             {
                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
 
-            if(other.tag != "DDP")
+            if (other.tag != "DDP")
             {
                 Destroy(gameObject);
             }
