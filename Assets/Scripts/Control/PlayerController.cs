@@ -30,6 +30,7 @@ namespace Starborne.Control
         public float throttle;
 
         [SerializeField] Gun[] guns;
+        [SerializeField] MeshFilter meshFilter;
         [SerializeField] Character characterStats;
         [SerializeField] GameObject deathFX;
 
@@ -40,6 +41,7 @@ namespace Starborne.Control
         {
             rb = GetComponent<Rigidbody>();
             health = GetComponent<PlayerHealth>();
+            meshFilter = GetComponentInChildren<MeshFilter>();
         }
 
         void Start()
@@ -59,6 +61,8 @@ namespace Starborne.Control
             {
                 gun.SetValues(characterStats.damagePerShot, characterStats.shotsPerSecond);
             }
+
+            meshFilter.mesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
         }
 
         private void FixedUpdate()

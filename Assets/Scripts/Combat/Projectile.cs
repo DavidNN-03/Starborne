@@ -25,7 +25,7 @@ namespace Starborne.Combat
         {
             if (deathFXPrefab != null)
             {
-                Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
+                Instantiate(deathFXPrefab, transform.position, Quaternion.identity, GameObject.Find("Shots Parent").transform);
             }
 
             EnemyHealth otherHealth = other.GetComponent<EnemyHealth>();

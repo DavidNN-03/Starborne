@@ -8,20 +8,14 @@ namespace Starborne.Combat
     {
         [SerializeField] float projectileDamage;
         [SerializeField] Projectile prefab;
-        Transform shotsParent;
 
         public float secondsBetweenShots = 1f;
         bool canFire = true;
 
-        private void Awake()
-        {
-            shotsParent = GameObject.Find("Shots Parent").transform;
-        }
-
         public void SetValues(float newDamage, float shotsPerSecond)
         {
             projectileDamage = newDamage;
-            secondsBetweenShots = 1f/shotsPerSecond;
+            secondsBetweenShots = 1f / shotsPerSecond;
         }
 
         public void AttemptFire()
@@ -36,7 +30,7 @@ namespace Starborne.Combat
 
         private void Fire()
         {
-            Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, shotsParent);
+            Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, GameObject.Find("Shots Parent").transform);
             projectile.SetDamage(projectileDamage);
         }
 
