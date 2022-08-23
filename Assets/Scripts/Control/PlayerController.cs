@@ -263,6 +263,7 @@ namespace Starborne.Control
         void OnCollisionEnter(Collision collision)
         {
             Die();
+            enabled = false;
         }
 
         private void Die()
