@@ -13,11 +13,13 @@ namespace Starborne.Saving
         [SerializeField] float shotsPerSecond;
         [SerializeField] float damagePerShot;
         [SerializeField] float enginePower;
+        [SerializeField] float dampeningSpeedChange;
         [SerializeField] float maxSpeed;
+        [SerializeField] float baseSpeed;
         [SerializeField] float rollSensitivity;
         [SerializeField] float pitchSensitivity;
         [SerializeField] float yawSensitivity;
-        [SerializeField] string spriteFileName;
+        [SerializeField] string meshFileName;
 
         Character currentCharacter = new Character();
 
@@ -28,11 +30,13 @@ namespace Starborne.Saving
             currentCharacter.shotsPerSecond = shotsPerSecond;
             currentCharacter.damagePerShot = damagePerShot;
             currentCharacter.enginePower = enginePower;
+            currentCharacter.dampeningSpeedChange = dampeningSpeedChange;
             currentCharacter.maxSpeed = maxSpeed;
+            currentCharacter.baseSpeed = baseSpeed;
             currentCharacter.rollSensitivity = rollSensitivity;
             currentCharacter.pitchSensitivity = pitchSensitivity;
             currentCharacter.yawSensitivity = yawSensitivity;
-            currentCharacter.spriteFileName = spriteFileName;
+            currentCharacter.meshFileName = meshFileName;
 
             string json = JsonUtility.ToJson(currentCharacter);
             string path = "Assets/Resources/" + fileName + ".json";

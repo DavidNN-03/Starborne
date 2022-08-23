@@ -4,10 +4,11 @@
   "shotsPerSecond": 10.0,
   "damagePerShot": 3.0,
   "enginePower": 2.0,
-  "maxSpeed": 25.0,
-  "rollSensitivity": 4.0,
-  "pitchSensitivity": 4.0,
-  "yawSensitivity": 4.0,
-  "spriteFileName": "lightFighterSprite",
+  "maxSpeed": 20.0,
+  "baseSpeed": 10.0,
+  "dampeningSpeedChange": 2.0,
+  "rollSensitivity": 3.0,
+  "pitchSensitivity": 3.0,
+  "yawSensitivity": 0.3,
   "meshFileName": "StarSparrow2"
 }

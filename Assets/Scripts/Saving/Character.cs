@@ -9,9 +9,10 @@ public class Character
     public float damagePerShot;
     public float enginePower;
     public float maxSpeed;
+    public float baseSpeed;
+    public float dampeningSpeedChange;
     public float rollSensitivity;
     public float pitchSensitivity;
     public float yawSensitivity;
-    public string spriteFileName;
     public string meshFileName;
 }

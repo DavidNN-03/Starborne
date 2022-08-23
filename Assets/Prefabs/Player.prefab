@@ -185,12 +185,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4098349511449062358}
   - component: {fileID: 4098349511449062353}
+  - component: {fileID: 8743949147880058056}
   - component: {fileID: 4098349511449062359}
   - component: {fileID: 4098349511449062352}
-  - component: {fileID: 8743949147880058056}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,6 +229,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8743949147880058056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098349511449062357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4098349511449062359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,16 +261,18 @@ MonoBehaviour:
   pitchSensitivity: 1
   yawSensitivity: 1
   maxSpeed: 1
+  baseSpeed: 1
+  dampeningSpeedChange: 1
   changeSceneDelay: 1
   speed: 0
   roll: 0
   pitch: 0
   yaw: 0
   throttle: 0
+  movementType: 0
   guns:
   - {fileID: 4098349511919288606}
   - {fileID: 5881465335320487966}
-  meshFilter: {fileID: 0}
   characterStats:
     name: 
     maxHP: 0
@@ -265,10 +280,11 @@ MonoBehaviour:
     damagePerShot: 0
     enginePower: 0
     maxSpeed: 0
+    baseSpeed: 0
+    dampeningSpeedChange: 0
     rollSensitivity: 0
     pitchSensitivity: 0
     yawSensitivity: 0
-    spriteFileName: 
     meshFileName: 
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &4098349511449062352
@@ -285,19 +301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
---- !u!65 &8743949147880058056
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4098349511449062357}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8552596571304254756
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,14 @@
 {
   "name": "Heavy Fighter",
-  "maxHP": 200.0,
-  "shotsPerSecond": 1.0,
-  "damagePerShot": 7.0,
+  "maxHP": 300.0,
+  "shotsPerSecond": 2.0,
+  "damagePerShot": 25.0,
   "enginePower": 1.0,
-  "maxSpeed": 3.0,
-  "rollSensitivity": 1.0,
-  "pitchSensitivity": 1.0,
+  "maxSpeed": 10.0,
+  "baseSpeed": 2.0,
+  "dampeningSpeedChange": 1.0,
+  "rollSensitivity": 3.0,
+  "pitchSensitivity": 3.0,
   "yawSensitivity": 1.0,
-  "spriteFileName": "heavyFighterSprite",
   "meshFileName": "StarSparrow1"
 }

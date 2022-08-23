@@ -17,7 +17,7 @@ namespace Starborne.Control
 
         void Awake()
         {
-            target = FindObjectOfType<PlayerController>().gameObject;
+            target = GameObject.FindWithTag("Player");
             guns = GetComponentsInChildren<Gun>();
         }
 
@@ -28,11 +28,11 @@ namespace Starborne.Control
 
         void Update()
         {
-            if(Vector3.Distance(transform.position, target.transform.position) > aimRange) return;
+            if (Vector3.Distance(transform.position, target.transform.position) > aimRange) return;
             gunsParent.LookAt(target.transform.position);
-            if(ClearShotToTarget())
+            if (ClearShotToTarget())
             {
-                foreach(Gun gun in guns)
+                foreach (Gun gun in guns)
                 {
                     gun.AttemptFire();
                 }
@@ -45,12 +45,12 @@ namespace Starborne.Control
             RaycastHit[] hits = Physics.RaycastAll(transform.position, directionToTarget, aimRange);
             float[] distances = new float[hits.Length];
 
-            for(int i = 0; i < hits.Length; i++)
+            for (int i = 0; i < hits.Length; i++)
             {
                 distances[i] = hits[i].distance;
             }
 
-            Array.Sort(distances,hits);
+            Array.Sort(distances, hits);
 
             return hits[0].transform.gameObject == target;
         }
