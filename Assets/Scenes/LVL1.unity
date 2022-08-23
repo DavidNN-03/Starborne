@@ -1964,7 +1964,12 @@ PrefabInstance:
       propertyPath: dampeningPower
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8743949147880058056, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6259770824902021912, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
 --- !u!1001 &6108111360976831360
 PrefabInstance:
