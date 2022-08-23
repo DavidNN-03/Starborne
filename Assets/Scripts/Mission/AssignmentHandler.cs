@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Starborne.GameResources;
 using Starborne.UI;
 using UnityEngine;
+using Starborne.SceneHandling;
 
 namespace Starborne.Mission
 {
     public class AssignmentHandler : MonoBehaviour
     {
+        [SerializeField] float changeSceneOnWinDelay = 1f;
         EnemyHealth[] enemies;
         GameUI gameUI;
 
@@ -18,6 +20,7 @@ namespace Starborne.Mission
         {
             gameUI = FindObjectOfType<GameUI>();
             enemies = GameObject.FindObjectsOfType<EnemyHealth>();
+            Debug.Log(enemies.Length);
             enemyCount = enemies.Length;
             enemiesKilled = 0;
         }
@@ -41,7 +44,7 @@ namespace Starborne.Mission
         {
             if (enemiesKilled == enemyCount)
             {
-                //won
+                Win();
             }
             UpdateUI();
         }
@@ -49,6 +52,13 @@ namespace Starborne.Mission
         private void UpdateUI()
         {
             gameUI.UpdateMissionText(enemiesKilled, enemyCount);
+        }
+
+        private void Win()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
+            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneOnWinDelay);
         }
     }
 }

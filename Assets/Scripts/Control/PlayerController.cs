@@ -25,7 +25,7 @@ namespace Starborne.Control
         [SerializeField] float maxSpeed = 1f;
         [SerializeField] float baseSpeed = 1f;
         [SerializeField] float dampeningSpeedChange = 1f;
-        [SerializeField] float changeSceneDelay = 1f;
+        [SerializeField] float changeSceneOnDeathDelay = 1f;
         public float speed;
         public float roll;
         public float pitch;
@@ -271,7 +271,7 @@ namespace Starborne.Control
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
             Cursor.lockState = CursorLockMode.None;
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
-            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneDelay);
+            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneOnDeathDelay);
         }
     }
 }
