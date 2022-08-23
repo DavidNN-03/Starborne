@@ -9,6 +9,7 @@ namespace Starborne.UI
     {
         [SerializeField] TextMeshProUGUI missionText;
         [SerializeField] TextMeshProUGUI dampeningTypeText;
+        [SerializeField] TextMeshProUGUI healthText;
         [SerializeField] TextMeshProUGUI speedText;
 
         public void UpdateMissionText(int enemiesKilled, int enemiesCount)
@@ -25,9 +26,19 @@ namespace Starborne.UI
             dampeningTypeText.text = newText;
         }
 
+        public void UpdateHealthText(float hp, float maxHP)
+        {
+            healthText.text = RoundToDecimal(hp, 2) + "/" + RoundToDecimal(maxHP, 2) + " HP";
+        }
+
         public void UpdateSpeedText(float speed, float maxSpeed)
         {
             speedText.text = (Mathf.Round(speed * 100f) / 100f) + "/" + (Mathf.Round(maxSpeed * 100f) / 100f);
+        }
+
+        private float RoundToDecimal(float value, int decimalPlaces)
+        {
+            return Mathf.Round(value * Mathf.Pow(10f, decimalPlaces)) / Mathf.Pow(10f, decimalPlaces);
         }
     }
 }

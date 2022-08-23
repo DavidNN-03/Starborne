@@ -76,9 +76,24 @@ namespace Starborne.Control
             gameUI.UpdateDampeningText(movementType);
         }
 
-        private void FixedUpdate()
+        private void FixedUpdate() //consider using Update() for better responsiveness or check the set framerate for FixedUpdate()
         {
             if (Input.GetKeyDown("z")) CycleMovementType();
+            /*if (Input.GetKeyDown("1"))
+            {
+                movementType = MovementType.noDampening;
+                gameUI.UpdateDampeningText(movementType);
+            }
+            else if (Input.GetKeyDown("2"))
+            {
+                movementType = MovementType.dampenedBaseSpeed;
+                gameUI.UpdateDampeningText(movementType);
+            }
+            else if (Input.GetKeyDown("3"))
+            {
+                movementType = MovementType.dampenedStatic;
+                gameUI.UpdateDampeningText(movementType);
+            }*/
 
             Move();
 

@@ -6,6 +6,7 @@ namespace Starborne.Combat
 {
     public class Gun : MonoBehaviour
     {
+        [SerializeField] bool overwriteDefaultProjectileDamage = false;
         [SerializeField] float projectileDamage;
         [SerializeField] Projectile prefab;
 
@@ -31,7 +32,8 @@ namespace Starborne.Combat
         private void Fire()
         {
             Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, GameObject.Find("Shots Parent").transform);
-            projectile.SetDamage(projectileDamage);
+            if (overwriteDefaultProjectileDamage) projectile.SetDamage(projectileDamage);
+            projectile.SetOwner(gameObject);
         }
 
         private IEnumerator LoadNextShot()

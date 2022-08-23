@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Starborne.GameResources
 {
-    public class EnemyHealth : MonoBehaviour
+    public class EnemyHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private float health;
         bool isDead = false;

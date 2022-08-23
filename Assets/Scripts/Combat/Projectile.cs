@@ -10,6 +10,7 @@ namespace Starborne.Combat
         [SerializeField] float speed = 1f;
         [SerializeField] float damage;
         [SerializeField] GameObject deathFXPrefab;
+        GameObject owner;
 
         void Awake()
         {
@@ -21,23 +22,33 @@ namespace Starborne.Combat
             damage = newDamage;
         }
 
+        public void SetOwner(GameObject newOwner)
+        {
+            owner = newOwner;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (deathFXPrefab != null)
+            if (other.gameObject == owner)
             {
-                Instantiate(deathFXPrefab, transform.position, Quaternion.identity, GameObject.Find("Shots Parent").transform);
+                Destroy(gameObject);
+                return;
             }
 
-            EnemyHealth otherHealth = other.GetComponent<EnemyHealth>();
+            IHealth otherHealth = other.GetComponent<IHealth>();
 
             if (otherHealth != null)
             {
-                other.GetComponent<EnemyHealth>().TakeDamage(damage);
+                otherHealth.TakeDamage(damage);
             }
 
             if (other.tag != "DDP")
             {
                 Destroy(gameObject);
+                if (deathFXPrefab != null)
+                {
+                    Instantiate(deathFXPrefab, transform.position, Quaternion.identity, GameObject.Find("Shots Parent").transform);
+                }
             }
         }
     }
