@@ -78,13 +78,6 @@ namespace Starborne.Control
 
         private void FixedUpdate()
         {
-            roll = GetInputFromInputSet(inputConfig.rollInputSet) * rollSensitivity;
-            pitch = GetInputFromInputSet(inputConfig.pitchInputSet) * pitchSensitivity;
-            yaw = GetInputFromInputSet(inputConfig.yawInputSet) * yawSensitivity;
-            throttle = GetInputFromInputSet(inputConfig.throttleInputSet);
-
-            InvertInputs();
-
             if (Input.GetKeyDown("z")) CycleMovementType();
 
             Move();
@@ -115,6 +108,35 @@ namespace Starborne.Control
                 movementType = MovementType.noDampening;
             }
             gameUI.UpdateDampeningText(movementType);
+        }
+
+        private void Move()
+        {
+            GetInputs();
+
+            InvertInputs();
+
+            ClampInputs(); //values from Input.GetAxis() should alreadu be between -1 and 1 ?
+
+            ApplySensitivity();
+
+            ControlVelocityDirection();
+
+            ControlThrottle();
+
+            CalculateTorque();
+
+            SetSpeed();
+
+            ModifySpeed();
+        }
+
+        private void GetInputs()
+        {
+            roll = GetInputFromInputSet(inputConfig.rollInputSet);
+            pitch = GetInputFromInputSet(inputConfig.pitchInputSet);
+            yaw = GetInputFromInputSet(inputConfig.yawInputSet);
+            throttle = GetInputFromInputSet(inputConfig.throttleInputSet);
         }
 
         float GetInputFromInputSet(InputSet inputSet)
@@ -163,27 +185,19 @@ namespace Starborne.Control
             }
         }
 
-        private void Move()
-        {
-            //ClampInputs(); values from Input.GetAxis() should alreadu be between -1 and 1?
-
-            ControlVelocityDirection();
-
-            ControlThrottle();
-
-            CalculateTorque();
-
-            SetSpeed();
-
-            ModifySpeed();
-        }
-
         private void ClampInputs()
         {
             roll = Mathf.Clamp(roll, -1, 1);
             pitch = Mathf.Clamp(pitch, -1, 1);
             yaw = Mathf.Clamp(yaw, -1, 1);
             throttle = Mathf.Clamp(throttle, -1, 1);
+        }
+
+        void ApplySensitivity()
+        {
+            roll *= rollSensitivity;
+            pitch *= pitchSensitivity;
+            yaw *= yawSensitivity;
         }
 
         private void ControlVelocityDirection()

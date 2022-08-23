@@ -7,8 +7,8 @@
   "maxSpeed": 20.0,
   "baseSpeed": 4.0,
   "dampeningSpeedChange": 2.0,
-  "rollSensitivity": 3.0,
-  "pitchSensitivity": 3.0,
+  "rollSensitivity": 5.0,
+  "pitchSensitivity": 5.0,
   "yawSensitivity": 0.3,
   "meshFileName": "StarSparrow2"
 }
