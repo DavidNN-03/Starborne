@@ -32,6 +32,7 @@ namespace Starborne.Control
         public float yaw;
         public float throttle;
 
+        [Tooltip("-No dampening: The player's speed will stay constant when throttle is 0 \n-Dampening base speed: Player will accelerate to base speed when throttle is 0 \n-Dampening static speed: Player will accelerate to speed=0 when throttle is 0")]
         [SerializeField] MovementType movementType = MovementType.noDampening;
         [SerializeField] Gun[] guns;
         [SerializeField] Character characterStats;

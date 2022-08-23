@@ -20,7 +20,6 @@ namespace Starborne.Mission
         {
             gameUI = FindObjectOfType<GameUI>();
             enemies = GameObject.FindObjectsOfType<EnemyHealth>();
-            Debug.Log(enemies.Length);
             enemyCount = enemies.Length;
             enemiesKilled = 0;
         }
