@@ -68,7 +68,8 @@ namespace Starborne.Control
 
             foreach (Gun gun in guns)
             {
-                gun.SetValues(characterStats.damagePerShot, characterStats.shotsPerSecond);
+                gun.SetDamage(characterStats.damagePerShot);
+                gun.SetRateOfFire(characterStats.shotsPerSecond);
             }
 
             meshFilter.mesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);

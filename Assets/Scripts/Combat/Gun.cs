@@ -6,16 +6,20 @@ namespace Starborne.Combat
 {
     public class Gun : MonoBehaviour
     {
-        [SerializeField] bool overwriteDefaultProjectileDamage = false;
-        [SerializeField] float projectileDamage;
+        float projectileDamage;
+        public float secondsBetweenShots = 1f;
+
         [SerializeField] Projectile prefab;
 
-        public float secondsBetweenShots = 1f;
         bool canFire = true;
 
-        public void SetValues(float newDamage, float shotsPerSecond)
+        public void SetDamage(float newDamage)
         {
             projectileDamage = newDamage;
+        }
+
+        public void SetRateOfFire(float shotsPerSecond)
+        {
             secondsBetweenShots = 1f / shotsPerSecond;
         }
 
@@ -32,7 +36,7 @@ namespace Starborne.Combat
         private void Fire()
         {
             Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, GameObject.Find("Shots Parent").transform);
-            if (overwriteDefaultProjectileDamage) projectile.SetDamage(projectileDamage);
+            projectile.SetDamage(projectileDamage);
             projectile.SetOwner(gameObject);
         }
 

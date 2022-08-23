@@ -365,10 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overwriteDefaultProjectileDamage: 0
-  projectileDamage: 0
-  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
   secondsBetweenShots: 2
+  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6811309416355034304
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimRange: 100
+  projectileDamage: 5
+  shotsPerSecond: 0.5
   gunsParent: {fileID: 6811309416792363902}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &6811309416355034308
@@ -617,10 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overwriteDefaultProjectileDamage: 0
-  projectileDamage: 0
-  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
   secondsBetweenShots: 2
+  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6811309417420943560
 GameObject:
   m_ObjectHideFlags: 0

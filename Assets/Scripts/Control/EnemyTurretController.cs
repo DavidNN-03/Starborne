@@ -10,6 +10,8 @@ namespace Starborne.Control
     public class EnemyTurretController : MonoBehaviour
     {
         [SerializeField] float aimRange = 20f;
+        [SerializeField] float projectileDamage = 5f;
+        [SerializeField] float shotsPerSecond;
         [SerializeField] Transform gunsParent;
         [SerializeField] GameObject deathFX;
         GameObject target;
@@ -24,6 +26,12 @@ namespace Starborne.Control
         void Start()
         {
             GetComponent<EnemyHealth>().onDeath += Die;
+
+            foreach (Gun gun in guns)
+            {
+                gun.SetDamage(projectileDamage);
+                gun.SetRateOfFire(shotsPerSecond);
+            }
         }
 
         void Update()
@@ -59,6 +67,12 @@ namespace Starborne.Control
         {
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, aimRange);
         }
     }
 }
