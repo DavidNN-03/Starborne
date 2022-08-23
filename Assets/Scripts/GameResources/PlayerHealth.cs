@@ -35,8 +35,8 @@ namespace Starborne.GameResources
 
         public void TakeDamage(float damage)
         {
-            health -= damage;
-            if (health <= 0)
+            health = Mathf.Max(0f, health - damage);
+            if (health <= 0f)
             {
                 onDeath();
             }
