@@ -20,10 +20,12 @@ namespace Starborne.Control
         [SerializeField] TextMeshProUGUI speedText;
         [SerializeField] TextMeshProUGUI agilityText;
         //[SerializeField] Image characterImage;
-        [SerializeField] MeshFilter charPreview;
+        [SerializeField] MeshFilter meshFilter;
+        [SerializeField] MeshRenderer meshRenderer;
 
         Character[] characters;
         Mesh[] meshes;
+        Material[] materials;
 
         void Start()
         {
@@ -35,12 +37,15 @@ namespace Starborne.Control
             string[] charPaths = arrayContainer.array;
             characters = new Character[charPaths.Length];
             meshes = new Mesh[charPaths.Length];
+            materials = new Material[charPaths.Length];
 
             for (int i = 0; i < charPaths.Length; i++)
             {
                 characters[i] = GetCharacter(charPaths[i]);
                 string meshFileName = characters[i].meshFileName;
                 meshes[i] = Resources.Load<Mesh>("Meshes/" + meshFileName);
+                string materialFileName = characters[i].materialFileName;
+                materials[i] = Resources.Load<Material>("Materials/" + materialFileName);
             }
 
             UpdateUI();
@@ -94,7 +99,8 @@ namespace Starborne.Control
             shotsPerSecondText.text = "Rate of fire: " + characters[index].shotsPerSecond;
             //speedText.text = "Speed: " + characters[index].speed;
             //agilityText.text = "Agility: " + characters[index].turnSensitivity;
-            charPreview.mesh = meshes[index];
+            meshFilter.mesh = meshes[index];
+            meshRenderer.material = materials[index];
         }
 
         public void SelectCharacter()

@@ -20,6 +20,7 @@ namespace Starborne.Saving
         [SerializeField] float pitchSensitivity;
         [SerializeField] float yawSensitivity;
         [SerializeField] string meshFileName;
+        [SerializeField] string materialFileName;
 
         Character currentCharacter = new Character();
 
@@ -37,6 +38,7 @@ namespace Starborne.Saving
             currentCharacter.pitchSensitivity = pitchSensitivity;
             currentCharacter.yawSensitivity = yawSensitivity;
             currentCharacter.meshFileName = meshFileName;
+            currentCharacter.materialFileName = materialFileName;
 
             string json = JsonUtility.ToJson(currentCharacter);
             string path = "Assets/Resources/" + fileName + ".json";

@@ -10,5 +10,6 @@
   "rollSensitivity": 3.0,
   "pitchSensitivity": 3.0,
   "yawSensitivity": 1.0,
-  "meshFileName": "StarSparrow1"
+  "meshFileName": "StarSparrow1",
+  "materialFileName": "StarSparrow_Red"
 }

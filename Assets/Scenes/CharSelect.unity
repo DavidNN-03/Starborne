@@ -938,7 +938,8 @@ MonoBehaviour:
   shotsPerSecondText: {fileID: 491287457}
   speedText: {fileID: 1875767587}
   agilityText: {fileID: 67509042}
-  charPreview: {fileID: 1384452558}
+  meshFilter: {fileID: 1384452558}
+  meshRenderer: {fileID: 1384452557}
 --- !u!1 &942423569
 GameObject:
   m_ObjectHideFlags: 0

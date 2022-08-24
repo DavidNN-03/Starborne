@@ -8,11 +8,12 @@ public class Character
     public float shotsPerSecond;
     public float damagePerShot;
     public float enginePower;
+    public float dampeningSpeedChange;
     public float maxSpeed;
     public float baseSpeed;
-    public float dampeningSpeedChange;
     public float rollSensitivity;
     public float pitchSensitivity;
     public float yawSensitivity;
     public string meshFileName;
+    public string materialFileName;
 }

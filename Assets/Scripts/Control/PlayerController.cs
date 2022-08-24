@@ -42,6 +42,7 @@ namespace Starborne.Control
         Rigidbody rb;
         PlayerHealth health;
         MeshFilter meshFilter;
+        MeshRenderer meshRenderer;
 
         void Awake()
         {
@@ -49,6 +50,7 @@ namespace Starborne.Control
             rb = GetComponent<Rigidbody>();
             health = GetComponent<PlayerHealth>();
             meshFilter = GetComponentInChildren<MeshFilter>();
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
 
         void Start()
@@ -73,6 +75,7 @@ namespace Starborne.Control
             }
 
             meshFilter.mesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
+            meshRenderer.material = Resources.Load<Material>("Materials/" + characterStats.materialFileName);
 
             gameUI.UpdateDampeningText(movementType);
         }

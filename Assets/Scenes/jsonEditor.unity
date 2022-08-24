@@ -167,19 +167,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acd7b2a87f1e594589437f5958384c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: fighterHeavy
-  charName: Heavy Fighter
-  maxHP: 300
-  shotsPerSecond: 2
-  damagePerShot: 25
-  enginePower: 1
-  dampeningSpeedChange: 1
-  maxSpeed: 10
-  baseSpeed: 2
-  rollSensitivity: 3
-  pitchSensitivity: 3
-  yawSensitivity: 1
-  meshFileName: StarSparrow1
+  fileName: fighterLight
+  charName: Light Fighter
+  maxHP: 100
+  shotsPerSecond: 10
+  damagePerShot: 3
+  enginePower: 2
+  dampeningSpeedChange: 2
+  maxSpeed: 20
+  baseSpeed: 4
+  rollSensitivity: 5
+  pitchSensitivity: 5
+  yawSensitivity: 0.3
+  meshFileName: StarSparrow2
+  materialFileName: StarSparrow_Blue
 --- !u!114 &484500901
 MonoBehaviour:
   m_ObjectHideFlags: 0
