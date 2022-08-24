@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Starborne.Combat;
 using Starborne.GameResources;
+using Starborne.UI;
 
 namespace Starborne.Control
 {
@@ -66,6 +67,7 @@ namespace Starborne.Control
         void Die()
         {
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            FindObjectOfType<EnemyPointer>().EnemyDestroyed(gameObject);
             Destroy(gameObject);
         }
 

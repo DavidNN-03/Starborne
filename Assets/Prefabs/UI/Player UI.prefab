@@ -134,6 +134,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1992687239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992687240}
+  m_Layer: 0
+  m_Name: Pointers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1992687240
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992687239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6072287021163747261}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6072287020886491233
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +622,7 @@ RectTransform:
   - {fileID: 6072287020886491232}
   - {fileID: 6072287021745741876}
   - {fileID: 6072287022483789894}
+  - {fileID: 1992687240}
   m_Father: {fileID: 6072287021199145903}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -666,6 +702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6072287021199145903}
   - component: {fileID: 6072287021199145902}
+  - component: {fileID: 240835032}
   m_Layer: 0
   m_Name: Player UI
   m_TagString: Untagged
@@ -704,6 +741,22 @@ MonoBehaviour:
   dampeningTypeText: {fileID: 6072287022818439429}
   healthText: {fileID: 1855415164}
   speedText: {fileID: 6072287020988829186}
+--- !u!114 &240835032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072287021199145896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e710d21403d05374faee836f232300e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOffset: {x: 0, y: 100, z: 0}
+  pointersParent: {fileID: 1992687240}
+  pointerPrefab: {fileID: 636427270542356845, guid: e3a5664c7cabe754e8eb78f3dd68505a, type: 3}
+  enemies: []
 --- !u!1 &6072287021206330851
 GameObject:
   m_ObjectHideFlags: 0

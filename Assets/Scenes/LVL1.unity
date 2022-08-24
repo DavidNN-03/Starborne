@@ -757,10 +757,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
-    - target: {fileID: 3402123682385448897, guid: 681d3d11a20c97a4c9ae2ba3ee8a6a53, type: 3}
-      propertyPath: m_TagString
-      value: DestroyTarget
-      objectReference: {fileID: 0}
     - target: {fileID: 7599189655616907129, guid: 681d3d11a20c97a4c9ae2ba3ee8a6a53, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -818,25 +814,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Turret
       objectReference: {fileID: 0}
-    - target: {fileID: 6811309416355034304, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
-      propertyPath: m_TagString
-      value: DestroyTarget
-      objectReference: {fileID: 0}
     - target: {fileID: 6811309416355034305, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6811309416355034305, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6811309416355034305, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6811309416355034305, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6811309416355034305, guid: a926e2cef1817cb4eb80a9140202947a, type: 3}
       propertyPath: m_LocalPosition.x
