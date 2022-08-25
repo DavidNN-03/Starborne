@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Starborne.Saving;
 using Starborne.UI;
+using Starborne.Core;
 
 namespace Starborne.GameResources
 {
@@ -22,10 +23,12 @@ namespace Starborne.GameResources
 
         void Start()
         {
-            Character characterStats = FindObjectOfType<CharacterHandler>().GetCharacterStats();
+            Character characterStats = EssentialObjects.instance.GetComponentInChildren<CharacterHandler>().GetCharacterStats();
 
             maxHealth = characterStats.maxHP;
             health = maxHealth;
+
+            Debug.Log(FindObjectsOfType<CharacterHandler>().Length);
         }
 
         void Update()
