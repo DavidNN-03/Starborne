@@ -126,9 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 0
-  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
   secondsBetweenShots: 1
+  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
 --- !u!1 &1004936199254490767
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,9 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 0
-  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
   secondsBetweenShots: 1
+  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
 --- !u!1 &4098349511449062357
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +261,7 @@ MonoBehaviour:
   maxSpeed: 1
   baseSpeed: 1
   dampeningSpeedChange: 1
-  changeSceneDelay: 1
+  changeSceneOnDeathDelay: 3
   speed: 0
   roll: 0
   pitch: 0
@@ -279,13 +277,14 @@ MonoBehaviour:
     shotsPerSecond: 0
     damagePerShot: 0
     enginePower: 0
+    dampeningSpeedChange: 0
     maxSpeed: 0
     baseSpeed: 0
-    dampeningSpeedChange: 0
     rollSensitivity: 0
     pitchSensitivity: 0
     yawSensitivity: 0
     meshFileName: 
+    materialFileName: 
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &4098349511449062352
 MonoBehaviour:

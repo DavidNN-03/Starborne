@@ -26,7 +26,7 @@ namespace Starborne.Control
 
         void Start()
         {
-            GetComponent<EnemyHealth>().onDeath += Die;
+            GetComponent<IHealth>().onDeath += Die;
 
             foreach (Gun gun in guns)
             {
@@ -67,7 +67,7 @@ namespace Starborne.Control
         void Die()
         {
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
-            FindObjectOfType<EnemyPointer>().EnemyDestroyed(gameObject);
+            if (gameObject.tag == "Enemy") FindObjectOfType<EnemyPointer>().EnemyDestroyed(gameObject);
             Destroy(gameObject);
         }
 

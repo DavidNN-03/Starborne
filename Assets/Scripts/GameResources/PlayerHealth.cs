@@ -27,8 +27,6 @@ namespace Starborne.GameResources
 
             maxHealth = characterStats.maxHP;
             health = maxHealth;
-
-            Debug.Log(FindObjectsOfType<CharacterHandler>().Length);
         }
 
         void Update()

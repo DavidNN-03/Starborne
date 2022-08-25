@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public interface IHealth
 {
+    public event Action onDeath;
     void TakeDamage(float damage);
 }
