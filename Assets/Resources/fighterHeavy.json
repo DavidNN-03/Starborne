@@ -4,12 +4,21 @@
   "shotsPerSecond": 2.0,
   "damagePerShot": 25.0,
   "enginePower": 1.0,
+  "dampeningSpeedChange": 1.0,
   "maxSpeed": 10.0,
   "baseSpeed": 2.0,
-  "dampeningSpeedChange": 1.0,
   "rollSensitivity": 3.0,
   "pitchSensitivity": 3.0,
-  "yawSensitivity": 1.0,
+  "yawSensitivity": 0.30000001192092898,
   "meshFileName": "StarSparrow1",
-  "materialFileName": "StarSparrow_Red"
+  "materialFileName": "StarSparrow_Red",
+  "meshScale": {
+    "x": 0.20000000298023225,
+    "y": 0.20000000298023225,
+    "z": 0.20000000298023225
+  },
+  "gunPositions": [
+    { "x": 0.4000000059604645, "y": 0.0, "z": 1.2000000476837159 },
+    { "x": -0.4000000059604645, "y": 0.0, "z": 1.2000000476837159 }
+  ]
 }

@@ -34,6 +34,8 @@ namespace Starborne.Control
 
         [Tooltip("-No dampening: The player's speed will stay constant when throttle is 0 \n-Dampening base speed: Player will accelerate to base speed when throttle is 0 \n-Dampening static speed: Player will accelerate to speed=0 when throttle is 0")]
         [SerializeField] MovementType movementType = MovementType.noDampening;
+        [SerializeField] Transform gunsParent;
+        [SerializeField] Gun gunPrefab;
         [SerializeField] Gun[] guns;
         [SerializeField] Character characterStats;
         [SerializeField] GameObject deathFX;
@@ -68,14 +70,19 @@ namespace Starborne.Control
             pitchSensitivity = characterStats.pitchSensitivity;
             yawSensitivity = characterStats.yawSensitivity;
 
-            foreach (Gun gun in guns)
+            guns = new Gun[characterStats.gunPositions.Length];
+
+            for (int i = 0; i < characterStats.gunPositions.Length; i++)
             {
+                Gun gun = Instantiate(gunPrefab, characterStats.gunPositions[i], Quaternion.identity, gunsParent);
+                guns[i] = gun;
                 gun.SetDamage(characterStats.damagePerShot);
                 gun.SetRateOfFire(characterStats.shotsPerSecond);
             }
 
             meshFilter.mesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
             meshRenderer.material = Resources.Load<Material>("Materials/" + characterStats.materialFileName);
+            meshFilter.transform.localScale = characterStats.meshScale;
 
             gameUI.UpdateDampeningText(movementType);
         }

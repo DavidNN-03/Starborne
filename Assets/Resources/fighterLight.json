@@ -11,5 +11,14 @@
   "pitchSensitivity": 5.0,
   "yawSensitivity": 0.30000001192092898,
   "meshFileName": "StarSparrow2",
-  "materialFileName": "StarSparrow_Blue"
+  "materialFileName": "StarSparrow_Blue",
+  "meshScale": {
+    "x": 0.20000000298023225,
+    "y": 0.20000000298023225,
+    "z": 0.20000000298023225
+  },
+  "gunPositions": [
+    { "x": 0.4000000059604645, "y": 0.0, "z": 1.2000000476837159 },
+    { "x": -0.4000000059604645, "y": 0.0, "z": 1.2000000476837159 }
+  ]
 }

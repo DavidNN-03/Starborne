@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Character
@@ -16,4 +17,6 @@ public class Character
     public float yawSensitivity;
     public string meshFileName;
     public string materialFileName;
+    public Vector3 meshScale;
+    public Vector3[] gunPositions;
 }
