@@ -15,6 +15,9 @@ public class Character
     public float rollSensitivity;
     public float pitchSensitivity;
     public float yawSensitivity;
+    public float rollEffectivenessAtMaxSpeed;
+    public float pitchEffectivenessAtMaxSpeed;
+    public float yawEffectivenessAtMaxSpeed;
     public string meshFileName;
     public string materialFileName;
     public Vector3 meshScale;

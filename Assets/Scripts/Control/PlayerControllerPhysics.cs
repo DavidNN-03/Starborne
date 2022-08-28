@@ -10,7 +10,7 @@ using Starborne.UI;
 
 namespace Starborne.Control
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerControllerPhysics : MonoBehaviour
     {
         [SerializeField] InputConfig inputConfig;
 
@@ -22,9 +22,6 @@ namespace Starborne.Control
         [SerializeField] float rollSensitivity = 1f;
         [SerializeField] float pitchSensitivity = 1f;
         [SerializeField] float yawSensitivity = 1f;
-        [SerializeField] float rollEffectivenessAtMaxSpeed;
-        [SerializeField] float pitchEffectivenessAtMaxSpeed;
-        [SerializeField] float yawEffectivenessAtMaxSpeed;
         [SerializeField] float maxSpeed = 1f;
         [SerializeField] float baseSpeed = 1f;
         [SerializeField] float dampeningSpeedChange = 1f;
@@ -72,15 +69,12 @@ namespace Starborne.Control
             rollSensitivity = characterStats.rollSensitivity;
             pitchSensitivity = characterStats.pitchSensitivity;
             yawSensitivity = characterStats.yawSensitivity;
-            rollEffectivenessAtMaxSpeed = characterStats.rollEffectivenessAtMaxSpeed;
-            pitchEffectivenessAtMaxSpeed = characterStats.pitchEffectivenessAtMaxSpeed;
-            yawEffectivenessAtMaxSpeed = characterStats.yawEffectivenessAtMaxSpeed;
 
             guns = new Gun[characterStats.gunPositions.Length];
 
             for (int i = 0; i < characterStats.gunPositions.Length; i++)
             {
-                Gun gun = Instantiate(gunPrefab, characterStats.gunPositions[i] + transform.position, Quaternion.identity, gunsParent);
+                Gun gun = Instantiate(gunPrefab, characterStats.gunPositions[i], Quaternion.identity, gunsParent);
                 guns[i] = gun;
                 gun.SetDamage(characterStats.damagePerShot);
                 gun.SetRateOfFire(characterStats.shotsPerSecond);
@@ -122,7 +116,7 @@ namespace Starborne.Control
                 }
             }
 
-            gameUI.UpdateSpeedText(speed, maxSpeed);
+            gameUI.UpdateSpeedText(rb.velocity.magnitude, maxSpeed);
         }
 
         private void CycleMovementType()
@@ -148,11 +142,11 @@ namespace Starborne.Control
 
             InvertInputs();
 
-            ClampInputs();
+            ClampInputs(); //values from Input.GetAxis() should alreadu be between -1 and 1 ?
 
-            //ApplySensitivity();
+            ApplySensitivity();
 
-            ControlVelocityDirection();
+            //ControlVelocityDirection();
 
             ControlThrottle();
 
@@ -245,29 +239,46 @@ namespace Starborne.Control
 
         private void CalculateTorque()
         {
-            //float rollEffectiveness = 1 - rollEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
-            //float pitchEffectiveness = 1 - pitchEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
-            //float yawEffectiveness = 1 - yawEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
+            float xRotate = pitch;
+            float yRotate = yaw;
+            float zRotate = roll;
 
-            float rollEffectiveness = Mathf.Lerp(1, rollEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
-            float pitchEffectiveness = Mathf.Lerp(1, pitchEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
-            float yawEffectiveness = Mathf.Lerp(1, yawEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
-
-
-            pitch *= pitchSensitivity * pitchEffectiveness;
-            yaw *= yawSensitivity * yawEffectiveness;
-            roll *= rollSensitivity * rollEffectiveness;
-
-            transform.Rotate(pitch, yaw, roll, Space.Self);
+            transform.Rotate(xRotate, yRotate, zRotate, Space.Self);
         }
 
         private void SetSpeed()
         {
+            /*
             speed += enginePower;
 
             speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
 
             rb.velocity = speed * transform.forward;
+            */
+
+            rb.AddForce(transform.forward * enginePower * 100);
+
+
+
+
+
+            Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+            float forwardSpeed = Mathf.Max(0, localVelocity.z);
+
+            //Vector3 liftForce = forwardSpeed * forwardSpeed * transform.up * 0.02f;
+            Vector3 liftForce = (rb.velocity.normalized - transform.forward);
+
+            rb.AddForce(liftForce);
+
+
+
+
+
+
+            if (rb.velocity.magnitude > maxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxSpeed;
+            }
         }
 
         private void ModifySpeed() //Consider refactoring
@@ -313,6 +324,10 @@ namespace Starborne.Control
                 {
                     speed += dampeningSpeedChange * Time.deltaTime;
                 }
+            }
+            else if (movementType == MovementType.namePending)
+            {
+
             }
         }
 

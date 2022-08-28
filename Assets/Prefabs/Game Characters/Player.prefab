@@ -57,7 +57,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -166,6 +166,9 @@ MonoBehaviour:
   rollSensitivity: 1
   pitchSensitivity: 1
   yawSensitivity: 1
+  rollEffectivenessAtMaxSpeed: 0.6
+  pitchEffectivenessAtMaxSpeed: 0.4
+  yawEffectivenessAtMaxSpeed: 0.4
   maxSpeed: 1
   baseSpeed: 1
   dampeningSpeedChange: 1

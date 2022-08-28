@@ -19,6 +19,9 @@ namespace Starborne.Saving
         [SerializeField] float rollSensitivity;
         [SerializeField] float pitchSensitivity;
         [SerializeField] float yawSensitivity;
+        [SerializeField] float rollEffectivenessAtMaxSpeed;
+        [SerializeField] float pitchEffectivenessAtMaxSpeed;
+        [SerializeField] float yawEffectivenessAtMaxSpeed;
         [SerializeField] string meshFileName;
         [SerializeField] string materialFileName;
         [SerializeField] Vector3 meshScale;
@@ -39,6 +42,9 @@ namespace Starborne.Saving
             currentCharacter.rollSensitivity = rollSensitivity;
             currentCharacter.pitchSensitivity = pitchSensitivity;
             currentCharacter.yawSensitivity = yawSensitivity;
+            currentCharacter.rollEffectivenessAtMaxSpeed = rollEffectivenessAtMaxSpeed;
+            currentCharacter.pitchEffectivenessAtMaxSpeed = pitchEffectivenessAtMaxSpeed;
+            currentCharacter.yawEffectivenessAtMaxSpeed = yawEffectivenessAtMaxSpeed;
             currentCharacter.meshFileName = meshFileName;
             currentCharacter.materialFileName = materialFileName;
             currentCharacter.meshScale = meshScale;
