@@ -10,6 +10,9 @@
   "rollSensitivity": 5.0,
   "pitchSensitivity": 5.0,
   "yawSensitivity": 0.30000001192092898,
+  "rollEffectivenessAtMaxSpeed": 0.5,
+  "pitchEffectivenessAtMaxSpeed": 0.5,
+  "yawEffectivenessAtMaxSpeed": 0.5,
   "meshFileName": "StarSparrow2",
   "materialFileName": "StarSparrow_Blue",
   "meshScale": {

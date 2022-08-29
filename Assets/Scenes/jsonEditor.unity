@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 484500899}
   - component: {fileID: 484500901}
+  - component: {fileID: 484500902}
   - component: {fileID: 484500900}
   m_Layer: 0
   m_Name: JSON Editor
@@ -179,6 +180,9 @@ MonoBehaviour:
   rollSensitivity: 3
   pitchSensitivity: 3
   yawSensitivity: 0.3
+  rollEffectivenessAtMaxSpeed: 0.4
+  pitchEffectivenessAtMaxSpeed: 0.4
+  yawEffectivenessAtMaxSpeed: 0.4
   meshFileName: StarSparrow1
   materialFileName: StarSparrow_Red
   meshScale: {x: 0.2, y: 0.2, z: 0.2}
@@ -200,6 +204,39 @@ MonoBehaviour:
   paths:
   - Assets/Resources/fighterLight.json
   - Assets/Resources/fighterHeavy.json
+--- !u!114 &484500902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484500898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acd7b2a87f1e594589437f5958384c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: fighterLight
+  charName: Light Fighter
+  maxHP: 100
+  shotsPerSecond: 10
+  damagePerShot: 3
+  enginePower: 2
+  dampeningSpeedChange: 2
+  maxSpeed: 20
+  baseSpeed: 4
+  rollSensitivity: 5
+  pitchSensitivity: 5
+  yawSensitivity: 0.3
+  rollEffectivenessAtMaxSpeed: 0.5
+  pitchEffectivenessAtMaxSpeed: 0.5
+  yawEffectivenessAtMaxSpeed: 0.5
+  meshFileName: StarSparrow2
+  materialFileName: StarSparrow_Blue
+  meshScale: {x: 0.2, y: 0.2, z: 0.2}
+  gunPositions:
+  - {x: 0.4, y: 0, z: 1.2}
+  - {x: -0.4, y: 0, z: 1.2}
 --- !u!1 &1972209536
 GameObject:
   m_ObjectHideFlags: 0
