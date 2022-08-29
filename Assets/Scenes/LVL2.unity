@@ -1894,6 +1894,9 @@ MonoBehaviour:
     rollSensitivity: 0
     pitchSensitivity: 0
     yawSensitivity: 0
+    rollEffectivenessAtMaxSpeed: 0
+    pitchEffectivenessAtMaxSpeed: 0
+    yawEffectivenessAtMaxSpeed: 0
     meshFileName: 
     materialFileName: 
     meshScale: {x: 0, y: 0, z: 0}

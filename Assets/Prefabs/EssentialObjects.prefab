@@ -43,14 +43,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f312c796c8e951841a0f94f53b2c1bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultCharacterPath: Assets/Resources/fighterLight.json
   characterStats:
     name: 
     maxHP: 0
     shotsPerSecond: 0
     damagePerShot: 0
     enginePower: 0
+    dampeningSpeedChange: 0
     maxSpeed: 0
-    turnSensitivity: 0
+    baseSpeed: 0
+    rollSensitivity: 0
+    pitchSensitivity: 0
+    yawSensitivity: 0
+    rollEffectivenessAtMaxSpeed: 0
+    pitchEffectivenessAtMaxSpeed: 0
+    yawEffectivenessAtMaxSpeed: 0
+    meshFileName: 
+    materialFileName: 
+    meshScale: {x: 0, y: 0, z: 0}
+    gunPositions: []
 --- !u!1 &9134824702039558288
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +110,8 @@ MonoBehaviour:
   charSelectSceneIndex: 1
   levelSelectSceneIndex: 3
   levelOneSceneIndex: 3
-  creditsSceneIndex: 4
+  levelTwoSceneIndex: 4
+  creditsSceneIndex: 5
 --- !u!1 &9134824703424921643
 GameObject:
   m_ObjectHideFlags: 0
