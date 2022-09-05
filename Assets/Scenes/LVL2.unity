@@ -1203,6 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capture: 0
   fileName: LVL2
+  skyboxPath: Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox.mat
   objectsToSaveWithParentName:
   - parentName: Asteroids
     prefabPath: Prefabs/Asteroid

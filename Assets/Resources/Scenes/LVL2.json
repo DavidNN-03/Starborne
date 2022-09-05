@@ -1,4 +1,5 @@
 {
+  "skyboxPath": "Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox",
   "objectContainers": [
     {
       "parentName": "Asteroids",

@@ -8,6 +8,7 @@ public class SceneCapturer : MonoBehaviour
 {
     [SerializeField] bool capture = false;
     [SerializeField] string fileName;
+    [SerializeField] string skyboxPath;
     [SerializeField] ObjectToSaveWithParentName[] objectsToSaveWithParentName;
     [SerializeField] ObjectToSaveWithObjectName[] objectsToSaveWithObjectName;
 
@@ -31,31 +32,29 @@ public class SceneCapturer : MonoBehaviour
 
         SceneData sceneData = new SceneData();
 
+        sceneData.skyboxPath = skyboxPath;
+
         sceneData.objectContainers = new ObjectsContainer[objectsToSaveWithParentName.Length + objectsToSaveWithObjectName.Length];
 
         for (int i = 0; i < objectsToSaveWithParentName.Length; i++)
         {
             sceneData.objectContainers[i] = GetNewObjectsContainerWithParentName(objectsToSaveWithParentName[i].parentName, objectsToSaveWithParentName[i].prefabPath);
-            //GetNewObjectsContainer(objectsToSave[i].objectsTag, objectsToSave[i].prefabPath);
         }
 
         for (int i = 0; i < objectsToSaveWithObjectName.Length; i++)
         {
-            Debug.Log("object container size: " + sceneData.objectContainers.Length + "    i: " + i);
             sceneData.objectContainers[i + objectsToSaveWithParentName.Length] = GetNewObjectsContainerWithObjectName(objectsToSaveWithObjectName[i].objectName, objectsToSaveWithObjectName[i].prefabPath);
-
-            string json = JsonUtility.ToJson(sceneData);
-
-            Debug.Log(json);
-
-            string path = "Assets/Resources/Scenes/" + fileName + ".json";
-
-            StreamWriter t = new StreamWriter(path, false);
-            t.Write(json);
-            t.Close();
-
-            capture = false;
         }
+
+        string json = JsonUtility.ToJson(sceneData);
+
+        string path = "Assets/Resources/Scenes/" + fileName + ".json";
+
+        StreamWriter t = new StreamWriter(path, false);
+        t.Write(json);
+        t.Close();
+
+        capture = false;
 
         ObjectsContainer GetNewObjectsContainerWithParentName(string parentName, string prefabPath)
         {
