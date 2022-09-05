@@ -703,6 +703,7 @@ GameObject:
   - component: {fileID: 6072287021199145903}
   - component: {fileID: 6072287021199145902}
   - component: {fileID: 240835032}
+  - component: {fileID: 1011387924}
   m_Layer: 0
   m_Name: Player UI
   m_TagString: Untagged
@@ -757,6 +758,18 @@ MonoBehaviour:
   pointersParent: {fileID: 1992687240}
   pointerPrefab: {fileID: 636427270542356845, guid: e3a5664c7cabe754e8eb78f3dd68505a, type: 3}
   enemies: []
+--- !u!114 &1011387924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072287021199145896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ddfbea394a5bb4ebc55e3dd19160e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6072287021206330851
 GameObject:
   m_ObjectHideFlags: 0

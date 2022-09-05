@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.IO;
 
 namespace Starborne.Saving
@@ -16,7 +15,7 @@ namespace Starborne.Saving
             arrayContainer.array = paths;
 
             string json = JsonUtility.ToJson(arrayContainer);
-            string path = "Assets/Resources/Paths.json";
+            string path = "Assets/Resources/CharPaths.json";
 
             StreamWriter t = new StreamWriter(path, false);
             t.Write(json);

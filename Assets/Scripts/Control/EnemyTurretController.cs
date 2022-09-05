@@ -8,7 +8,7 @@ using Starborne.UI;
 
 namespace Starborne.Control
 {
-    public class EnemyTurretController : MonoBehaviour
+    public class EnemyTurretController : MonoBehaviour, ILateInit
     {
         [SerializeField] float aimRange = 20f;
         [SerializeField] float projectileDamage = 5f;
@@ -18,13 +18,15 @@ namespace Starborne.Control
         GameObject target;
         Gun[] guns;
 
-        void Awake()
+        bool hasStarted = false;
+
+        public void LateAwake()
         {
             target = GameObject.FindWithTag("Player");
             guns = GetComponentsInChildren<Gun>();
         }
 
-        void Start()
+        public void LateStart()
         {
             GetComponent<IHealth>().onDeath += Die;
 
@@ -33,10 +35,14 @@ namespace Starborne.Control
                 gun.SetDamage(projectileDamage);
                 gun.SetRateOfFire(shotsPerSecond);
             }
+
+            hasStarted = true;
         }
 
         void Update()
         {
+            if (!hasStarted) return;
+
             if (Vector3.Distance(transform.position, target.transform.position) > aimRange) return;
             gunsParent.LookAt(target.transform.position);
             if (ClearShotToTarget())

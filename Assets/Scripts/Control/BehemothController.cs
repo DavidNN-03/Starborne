@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Starborne.Control
 {
-    public class BehemothController : MonoBehaviour
+    public class BehemothController : MonoBehaviour, ILateInit
     {
         [SerializeField] float speed;
         [SerializeField] float waypointTolerance;
@@ -13,19 +13,23 @@ namespace Starborne.Control
         [SerializeField] GameObject deathFX;
         Rigidbody rb;
         int patrolPathPointIndex;
+        bool hasStarted = false;
 
-        void Awake()
+        public void LateAwake()
         {
             rb = GetComponent<Rigidbody>();
         }
 
-        void Start()
+        public void LateStart()
         {
             GetComponent<IHealth>().onDeath += Die;
+            hasStarted = true;
         }
 
         void Update()
         {
+            if (!hasStarted) return;
+
             PatrolBehaviour();
         }
 

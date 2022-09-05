@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2808105876388724009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5933945906206468295}
+  - component: {fileID: 6550232093053180002}
+  m_Layer: 0
+  m_Name: Scene Data Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5933945906206468295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808105876388724009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9134824703424921640}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6550232093053180002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808105876388724009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3c43f19697dbf4096855fd309d4e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScenePath: Assets/Resources/Scenes/LVL2.json
 --- !u!1 &9134824701983477961
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f312c796c8e951841a0f94f53b2c1bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCharacterPath: Assets/Resources/fighterLight.json
+  defaultCharacterPath: Assets/Resources/Characters/fighterLight.json
   characterStats:
     name: 
     maxHP: 0
@@ -108,10 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuSceneIndex: 0
   charSelectSceneIndex: 1
-  levelSelectSceneIndex: 3
-  levelOneSceneIndex: 3
-  levelTwoSceneIndex: 4
-  creditsSceneIndex: 5
+  levelSelectSceneIndex: 2
+  levelSceneIndex: 3
+  creditsSceneIndex: 4
 --- !u!1 &9134824703424921643
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +185,7 @@ Transform:
   m_Children:
   - {fileID: 9134824701983477966}
   - {fileID: 9134824702039558289}
+  - {fileID: 5933945906206468295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

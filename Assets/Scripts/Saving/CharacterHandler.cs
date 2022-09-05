@@ -7,7 +7,7 @@ namespace Starborne.Saving
 {
     public class CharacterHandler : MonoBehaviour
     {
-        [SerializeField] string defaultCharacterPath = "Assets/Resources/fighterLight.json";
+        [SerializeField] string defaultCharacterPath = "Assets/Resources/Characters/fighterLight.json";
         public Character characterStats = null; //Unity automatically creates an empty character, so a null-check doesnt work?
         private bool characterAssigned = false;
 

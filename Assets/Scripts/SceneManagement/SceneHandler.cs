@@ -10,8 +10,7 @@ namespace Starborne.SceneHandling
         public int mainMenuSceneIndex;
         public int charSelectSceneIndex;
         public int levelSelectSceneIndex;
-        public int levelOneSceneIndex;
-        public int levelTwoSceneIndex;
+        public int levelSceneIndex;
         public int creditsSceneIndex;
 
         public void LoadScene(int index)

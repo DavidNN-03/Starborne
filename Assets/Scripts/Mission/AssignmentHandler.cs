@@ -7,7 +7,7 @@ using Starborne.SceneHandling;
 
 namespace Starborne.Mission
 {
-    public class AssignmentHandler : MonoBehaviour
+    public class AssignmentHandler : MonoBehaviour, ILateInit
     {
         [SerializeField] float changeSceneOnWinDelay = 1f;
         EnemyHealth[] enemies;
@@ -16,7 +16,7 @@ namespace Starborne.Mission
         int enemyCount;
         int enemiesKilled;
 
-        void Awake()
+        public void LateAwake()
         {
             gameUI = FindObjectOfType<GameUI>();
             enemies = GameObject.FindObjectsOfType<EnemyHealth>();
@@ -24,7 +24,7 @@ namespace Starborne.Mission
             enemiesKilled = 0;
         }
 
-        void Start()
+        public void LateStart()
         {
             foreach (EnemyHealth enemyHealth in enemies)
             {

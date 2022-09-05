@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Starborne.UI
 {
-    public class EnemyPointer : MonoBehaviour
+    public class EnemyPointer : MonoBehaviour, ILateInit
     {
         [SerializeField] Vector3 pointerOffset;
         [SerializeField] RectTransform pointersParent;
@@ -12,11 +12,12 @@ namespace Starborne.UI
         [SerializeField] List<GameObject> enemies;
         Dictionary<GameObject, GameObject> pointers;
         GameObject player;
+        bool hasStarted = false;
 
-        void Awake()
+        public void LateAwake()
         {
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
-            player = GameObject.Find("Player");
+            player = GameObject.FindWithTag("Player");
 
             enemies = new List<GameObject>();
             pointers = new Dictionary<GameObject, GameObject>();
@@ -28,8 +29,15 @@ namespace Starborne.UI
             }
         }
 
+        public void LateStart()
+        {
+            hasStarted = true;
+        }
+
         private void Update()
         {
+            if (!hasStarted) return;
+
             foreach (GameObject enemy in enemies)
             {
                 GameObject pointer = pointers[enemy];

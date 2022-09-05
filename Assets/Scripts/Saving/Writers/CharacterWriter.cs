@@ -51,7 +51,7 @@ namespace Starborne.Saving
             currentCharacter.gunPositions = gunPositions;
 
             string json = JsonUtility.ToJson(currentCharacter);
-            string path = "Assets/Resources/" + fileName + ".json";
+            string path = "Assets/Resources/Characters/" + fileName + ".json";
 
             StreamWriter t = new StreamWriter(path, false);
             t.Write(json);

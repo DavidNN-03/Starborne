@@ -29,7 +29,7 @@ namespace Starborne.Control
 
         void Start()
         {
-            string pathsPath = "Assets/Resources/Paths.json";
+            string pathsPath = "Assets/Resources/CharPaths.json";
             StreamReader streamReader = new StreamReader(pathsPath);
             string jPaths = streamReader.ReadToEnd();
             ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
