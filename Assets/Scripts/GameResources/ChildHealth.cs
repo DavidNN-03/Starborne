@@ -10,7 +10,6 @@ namespace Starborne.GameResources
         [SerializeField] private float health;
         EnemyHealth parentHealth;
         bool isDead = false;
-
         public event Action onDeath;
 
         void Awake()

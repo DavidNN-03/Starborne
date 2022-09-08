@@ -276,7 +276,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135864310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e71c12a166f625b4bb413640d26fd7c7, type: 3}
   m_Name: 
@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paths:
-  - lvl1
-  - lvl2
+  - Assets/Resources/Scenes/LVL1.json
+  - Assets/Resources/Scenes/LVL2.json
 --- !u!1 &1972209536
 GameObject:
   m_ObjectHideFlags: 0

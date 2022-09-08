@@ -17,6 +17,13 @@ namespace Starborne.Saving
             sceneAssigned = true;
         }
 
+        public void SetSceneData(string sceneDataPath)
+        {
+            sceneData = LoadSceneData(sceneDataPath);
+
+            sceneAssigned = true;
+        }
+
         public SceneData GetSceneData()
         {
             if (sceneAssigned)
@@ -26,7 +33,14 @@ namespace Starborne.Saving
             }
 
             //return default character
-            StreamReader reader = new StreamReader(defaultScenePath);
+            sceneData = LoadSceneData(defaultScenePath);
+
+            return sceneData;
+        }
+
+        private SceneData LoadSceneData(string path)
+        {
+            StreamReader reader = new StreamReader(path);
             string jscene = reader.ReadToEnd();
             sceneData = JsonUtility.FromJson<SceneData>(jscene);
             return sceneData;

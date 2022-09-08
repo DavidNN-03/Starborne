@@ -153,7 +153,7 @@ MonoBehaviour:
   mainMenuSceneIndex: 0
   charSelectSceneIndex: 1
   levelSelectSceneIndex: 2
-  levelSceneIndex: 3
+  gameSceneIndex: 3
   creditsSceneIndex: 4
 --- !u!1 &9134824703424921643
 GameObject:
