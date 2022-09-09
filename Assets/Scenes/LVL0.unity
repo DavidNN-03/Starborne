@@ -630,6 +630,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5086434509269662181, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
+      propertyPath: maxCamYOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086434509269662181, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
+      propertyPath: minCamYOffset
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086434509269662181, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
+      propertyPath: yOffsetPushback
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086434509269662181, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
+      propertyPath: yOffsetSensitivity
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7278bbf7ccc374c45b2e56b93c416861, type: 3}
 --- !u!1001 &5578244376831169371

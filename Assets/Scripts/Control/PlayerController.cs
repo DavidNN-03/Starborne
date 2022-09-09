@@ -76,6 +76,10 @@ namespace Starborne.Control
             pitchEffectivenessAtMaxSpeed = characterStats.pitchEffectivenessAtMaxSpeed;
             yawEffectivenessAtMaxSpeed = characterStats.yawEffectivenessAtMaxSpeed;
 
+            CameraController cc = GetComponentInChildren<CameraController>();
+            cc.maxSpeed = characterStats.maxSpeed;
+            cc.maxPitch = characterStats.pitchSensitivity;
+
             guns = new Gun[characterStats.gunPositions.Length];
 
             for (int i = 0; i < characterStats.gunPositions.Length; i++)

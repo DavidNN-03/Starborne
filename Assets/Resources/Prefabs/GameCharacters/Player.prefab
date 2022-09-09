@@ -96,7 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083451399cd77014ea1194680d2270a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topSpeedCamOffset: 1
+  maxSpeed: 0
+  maxPitch: 0
+  maxCamYOffset: 3
+  yOffsetPushback: 0
+  yOffsetSensitivity: 0.1
+  topSpeedCamZOffset: -2
   maxFOV: 60
   minFOV: 40
   targetTransform: {fileID: 4098349511449062358}
