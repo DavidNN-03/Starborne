@@ -25,7 +25,7 @@ namespace Starborne.Control
         [SerializeField] float rollEffectivenessAtMaxSpeed;
         [SerializeField] float pitchEffectivenessAtMaxSpeed;
         [SerializeField] float yawEffectivenessAtMaxSpeed;
-        [SerializeField] float maxSpeed = 1f;
+        public float maxSpeed = 1f;
         [SerializeField] float baseSpeed = 1f;
         [SerializeField] float dampeningSpeedChange = 1f;
         [SerializeField] float changeSceneOnDeathDelay = 1f;

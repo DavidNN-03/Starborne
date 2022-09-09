@@ -18,7 +18,7 @@ public class SceneBuilder : MonoBehaviour
         sceneData = FindObjectOfType<SceneDataHandler>().GetSceneData();
 
         Material skybox = Resources.Load<Material>(sceneData.skyboxPath);
-        Debug.Log(skybox == null);
+
         RenderSettings.skybox = skybox;
 
         foreach (ObjectsContainer objectsContainer in sceneData.objectContainers)
