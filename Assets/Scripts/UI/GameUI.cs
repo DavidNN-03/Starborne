@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace Starborne.UI
 {
@@ -28,17 +29,66 @@ namespace Starborne.UI
 
         public void UpdateHealthText(float hp, float maxHP)
         {
-            healthText.text = RoundToDecimal(hp, 2) + "/" + RoundToDecimal(maxHP, 2) + " HP";
+            healthText.text = RoundToDecimal(hp, 2, true) + "/" + RoundToDecimal(maxHP, 2, true) + " HP";
         }
 
         public void UpdateSpeedText(float speed, float maxSpeed)
         {
-            speedText.text = (Mathf.Round(speed * 100f) / 100f) + "/" + (Mathf.Round(maxSpeed * 100f) / 100f);
+            speedText.text = (RoundToDecimal(speed, 2, true) + "/" + RoundToDecimal(maxSpeed, 2, true));
         }
 
-        private float RoundToDecimal(float value, int decimalPlaces)
+        private string RoundToDecimal(float value, int decimalPlaces, bool addZeros)
         {
-            return Mathf.Round(value * Mathf.Pow(10f, decimalPlaces)) / Mathf.Pow(10f, decimalPlaces);
+            float fResult = Mathf.Round(value * Mathf.Pow(10f, decimalPlaces)) / Mathf.Pow(10f, decimalPlaces);
+            string sResult = fResult.ToString();
+
+            if (addZeros)
+            {
+                bool hasComma = GetHasComma(sResult);
+
+                if (!hasComma)
+                {
+                    sResult += ',';
+                }
+
+                int decimals = GetDecimals(sResult);
+
+                for (int i = 0; i < decimalPlaces - decimals; i++)
+                {
+                    sResult += "0";
+                }
+            }
+
+            return sResult;
+        }
+
+        private bool GetHasComma(string s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == ',')
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private int GetDecimals(string s)
+        {
+            int d = 0;
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                if (s[i] != ',')
+                {
+                    d++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return d;
         }
     }
 }
