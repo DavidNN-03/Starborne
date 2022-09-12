@@ -79,6 +79,7 @@ namespace Starborne.Control
             CameraController cc = GetComponentInChildren<CameraController>();
             cc.maxSpeed = characterStats.maxSpeed;
             cc.maxPitch = characterStats.pitchSensitivity;
+            cc.maxRoll = characterStats.rollSensitivity;
 
             guns = new Gun[characterStats.gunPositions.Length];
 

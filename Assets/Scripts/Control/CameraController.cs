@@ -9,17 +9,28 @@ namespace Starborne.Control
     {
         public float maxSpeed;
         public float maxPitch;
+        public float maxRoll;
         float speed;
         float pitch;
+        float roll;
         Vector3 camOffset;
+        Vector3 camRotation;
 
+        [Header("Y offset")]
         [SerializeField] float maxCamYOffset;
         [SerializeField] float minCamYOffset;
         [SerializeField] float yOffsetPushback;
         [SerializeField] float yOffsetSensitivity;
+        [Header("Z offset")]
         [SerializeField] float topSpeedCamZOffset;
+        [Header("Field of view")]
         [SerializeField] float maxFOV;
         [SerializeField] float minFOV;
+        [Header("Z roll")]
+        [SerializeField] float maxCamRoll;
+        [SerializeField] float rollPushback;
+        [SerializeField] float rollSensitivity;
+
         [SerializeField] Transform targetTransform;
         PlayerController playerController;
         Camera cam;
@@ -40,6 +51,7 @@ namespace Starborne.Control
         {
             speed = playerController.speed;
             pitch = playerController.pitch;
+            roll = playerController.roll;
 
             if (!Input.GetMouseButton(1))
             {
@@ -54,8 +66,10 @@ namespace Starborne.Control
 
             ApplySpeedCamOffset();
             ApplyPitchCamOffset();
+            ApplyCamRotation();
 
             transform.localPosition = startPos + camOffset;
+            transform.localEulerAngles = camRotation;
         }
 
         private void ApplySpeedCamOffset()
@@ -74,7 +88,6 @@ namespace Starborne.Control
         private void ApplyPitchCamOffset()
         {
             float currentYOffset = transform.localPosition.y - startPos.y;
-            float newOffYset = currentYOffset;
 
             if (Mathf.Abs(currentYOffset) < yOffsetPushback)
             {
@@ -94,6 +107,40 @@ namespace Starborne.Control
             currentYOffset = Mathf.Clamp(currentYOffset, minCamYOffset, maxCamYOffset);
 
             camOffset.y = currentYOffset;
+        }
+
+        private void ApplyCamRotation()
+        {
+            camRotation = transform.localEulerAngles;
+
+            bool leftSide = transform.localEulerAngles.z > 0 && transform.localEulerAngles.z <= 180;
+            bool rightSide = transform.localEulerAngles.z > 180 && transform.localEulerAngles.z < 360;
+
+            if (Mathf.Abs(camRotation.z) < rollPushback)
+            {
+                camRotation.z = 0;
+            }
+            else if (leftSide)
+            {
+                camRotation.z -= rollPushback;
+            }
+            else if (rightSide)
+            {
+                camRotation.z += rollPushback;
+            }
+
+            camRotation.z += -1 * roll * rollSensitivity;
+
+            if (leftSide)
+            {
+                camRotation.z = Mathf.Clamp(camRotation.z, 0, maxCamRoll);
+            }
+            else if (rightSide)
+            {
+                camRotation.z = Mathf.Clamp(camRotation.z, 360 - maxCamRoll, 360);
+            }
+
+            if (camRotation.z == 360) camRotation.z = 0;
         }
     }
 }
