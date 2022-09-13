@@ -8,6 +8,7 @@ public class SceneCapturer : MonoBehaviour
 {
     [SerializeField] bool capture = false;
     [SerializeField] string fileName;
+    [SerializeField] string sceneName;
     [SerializeField] string skyboxPath;
     [SerializeField] ObjectToSaveWithParentName[] objectsToSaveWithParentName;
     [SerializeField] ObjectToSaveWithObjectName[] objectsToSaveWithObjectName;
@@ -31,6 +32,8 @@ public class SceneCapturer : MonoBehaviour
         if (!capture) return;
 
         SceneData sceneData = new SceneData();
+
+        sceneData.sceneName = sceneName;
 
         sceneData.skyboxPath = skyboxPath;
 

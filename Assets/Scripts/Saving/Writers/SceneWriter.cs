@@ -8,6 +8,7 @@ namespace Starborne.Saving
     public class SceneWriter : MonoBehaviour
     {
         [SerializeField] string fileName;
+        [SerializeField] string sceneName;
         [SerializeField] TransformContainer playerTransform;
         [SerializeField] TransformContainer[] asteroidTransforms;
         [SerializeField] TransformContainer[] dreadnoughtTransforms;
@@ -19,6 +20,7 @@ namespace Starborne.Saving
             //sceneData.playerTransform = playerTransform;
             //sceneData.asteroidTransforms = asteroidTransforms;
             //sceneData.dreadnoughtTransforms = dreadnoughtTransforms;
+            //sceneData.sceneName = sceneName; 
 
             string json = JsonUtility.ToJson(sceneData);
             string path = "Assets/Resources/Scenes/" + fileName + ".json";

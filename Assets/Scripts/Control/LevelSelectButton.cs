@@ -9,27 +9,6 @@ namespace Starborne.Control
 {
     public class LevelSelectButton : MonoBehaviour
     {
-        /*
-        int levelIndex;
-        SceneHandler sceneHandler;
-
-        void Awake()
-        {
-            sceneHandler = FindObjectOfType<SceneHandler>();
-        }
-
-        public void SetLevelIndex(int i)
-        {
-            levelIndex = i;
-        }
-
-        void Press()
-        {
-            sceneHandler = FindObjectOfType<SceneHandler>();
-
-            //sceneHandler.
-        }*/
-
         string scenePath;
 
         public void SetScenePath(string newScenePath)
