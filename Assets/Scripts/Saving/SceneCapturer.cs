@@ -34,9 +34,8 @@ public class SceneCapturer : MonoBehaviour
         SceneData sceneData = new SceneData();
 
         sceneData.sceneName = sceneName;
-
+        sceneData.stars = 0;
         sceneData.skyboxPath = skyboxPath;
-
         sceneData.objectContainers = new ObjectsContainer[objectsToSaveWithParentName.Length + objectsToSaveWithObjectName.Length];
 
         for (int i = 0; i < objectsToSaveWithParentName.Length; i++)

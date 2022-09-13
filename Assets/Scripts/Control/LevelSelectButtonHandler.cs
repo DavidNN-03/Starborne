@@ -22,7 +22,7 @@ namespace Starborne.Control
             string jPaths = streamReader.ReadToEnd();
             ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
 
-            Debug.Log(arrayContainer.array.Length);
+            SceneData previousSceneData = null;
 
             for (int i = 0; i < arrayContainer.array.Length; i++)
             {
@@ -30,10 +30,17 @@ namespace Starborne.Control
                 string jscene = reader.ReadToEnd();
                 SceneData sceneData = JsonUtility.FromJson<SceneData>(jscene);
 
+                int stars = sceneData.stars;
+                bool isUnlocked = i == 0 || previousSceneData.stars > 0;
+
                 Vector3 spawnPos = new Vector3(startXPos + widthBetweenButtons * i, Random.Range(minHeight, maxHeight), 0);
                 GameObject g = Instantiate(buttonPrefab, spawnPos, Quaternion.identity, buttonsParent);
-                g.GetComponent<LevelSelectButton>().SetScenePath(arrayContainer.array[i]);
+                LevelSelectButton levelSelectButton = g.GetComponent<LevelSelectButton>();
+                levelSelectButton.SetScenePath(arrayContainer.array[i]);
+                levelSelectButton.SetStarCount(sceneData.stars);
+                levelSelectButton.SetUnlocked(isUnlocked);
                 g.GetComponentInChildren<TextMeshProUGUI>().text = sceneData.sceneName;
+                previousSceneData = sceneData;
             }
         }
     }

@@ -8,13 +8,15 @@ namespace Starborne.Saving
     public class SceneDataHandler : MonoBehaviour
     {
         [SerializeField] string defaultScenePath = "Assets/Resources/Scenes/LVL2.json";
-        public SceneData sceneData = null;
+        string sceneDataPath;
+        SceneData sceneData = null;
         private bool sceneAssigned = false;
 
-        public void SetSceneData(SceneData newSceneData)
+        public void SetSceneData(SceneData newSceneData, string path)
         {
             sceneData = newSceneData;
             sceneAssigned = true;
+            sceneDataPath = path;
         }
 
         public void SetSceneData(string sceneDataPath)
@@ -36,6 +38,31 @@ namespace Starborne.Saving
             sceneData = LoadSceneData(defaultScenePath);
 
             return sceneData;
+        }
+
+        public void SetStars(int count)
+        {
+            sceneData.stars = count;
+            SaveSceneData();
+        }
+
+        private void SaveSceneData()
+        {
+            string json = JsonUtility.ToJson(sceneData);
+            string path = "";
+
+            if (sceneAssigned)
+            {
+                path = sceneDataPath;
+            }
+            else
+            {
+                path = defaultScenePath;
+            }
+
+            StreamWriter t = new StreamWriter(path, false);
+            t.Write(json);
+            t.Close();
         }
 
         private SceneData LoadSceneData(string path)

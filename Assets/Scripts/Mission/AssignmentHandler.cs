@@ -4,6 +4,7 @@ using Starborne.GameResources;
 using Starborne.UI;
 using UnityEngine;
 using Starborne.SceneHandling;
+using Starborne.Saving;
 
 namespace Starborne.Mission
 {
@@ -55,9 +56,15 @@ namespace Starborne.Mission
 
         private void Win()
         {
+            FindObjectOfType<SceneDataHandler>().SetStars(CalculateStars());
             Cursor.lockState = CursorLockMode.None;
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
             sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneOnWinDelay);
+        }
+
+        private int CalculateStars()
+        {
+            return 3;
         }
     }
 }
