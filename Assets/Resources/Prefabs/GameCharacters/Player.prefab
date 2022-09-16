@@ -103,13 +103,13 @@ MonoBehaviour:
   maxCamYOffset: 3
   minCamYOffset: 0
   yOffsetPushback: 0
-  yOffsetSensitivity: 0.1
+  yOffsetSensitivity: 0.01
   topSpeedCamZOffset: -2
   maxFOV: 60
   minFOV: 40
-  maxCamRoll: 0
-  rollPushback: 0
-  rollSensitivity: 0
+  maxCamRoll: 45
+  rollPushback: 0.1
+  rollSensitivity: 0.1
   targetTransform: {fileID: 4098349511449062358}
 --- !u!114 &8229907774509593630
 MonoBehaviour:
