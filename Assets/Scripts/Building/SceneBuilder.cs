@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Starborne.Core;
 using Starborne.Saving;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Starborne.Building
 
         void Awake()
         {
-            sceneData = FindObjectOfType<SceneDataHandler>().GetSceneData();
+            sceneData = EssentialObjects.instance.GetComponentInChildren<SceneDataHandler>().GetSceneData();
 
             Material skybox = Resources.Load<Material>(sceneData.skyboxPath);
 

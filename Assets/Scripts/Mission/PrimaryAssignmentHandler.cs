@@ -8,7 +8,7 @@ using Starborne.Saving;
 
 namespace Starborne.Mission
 {
-    public class AssignmentHandler : MonoBehaviour, ILateInit
+    public class PrimaryAssignmentHandler : MonoBehaviour, ILateInit
     {
         [SerializeField] float changeSceneOnWinDelay = 1f;
         EnemyHealth[] enemies;
@@ -56,15 +56,12 @@ namespace Starborne.Mission
 
         private void Win()
         {
-            FindObjectOfType<SceneDataHandler>().SetStars(CalculateStars());
+            OptionalAssignmentHandler optionalAssignmentHandler = FindObjectOfType<OptionalAssignmentHandler>();
+            optionalAssignmentHandler.CaptureData();
+            optionalAssignmentHandler.SetLevelWon(true);
             Cursor.lockState = CursorLockMode.None;
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
-            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneOnWinDelay);
-        }
-
-        private int CalculateStars()
-        {
-            return 3;
+            sceneHandler.LoadScene(sceneHandler.gameOverSceneIndex, changeSceneOnWinDelay);
         }
     }
 }

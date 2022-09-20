@@ -5,17 +5,17 @@ using System.IO;
 
 namespace Starborne.Saving
 {
-    public class CharacterPathsWriter : MonoBehaviour
+    public class ArrayWriter : MonoBehaviour
     {
-        [SerializeField] string[] paths;
+        [SerializeField] string path;
+        [SerializeField] string[] elements;
 
         void Start()
         {
             ArrayContainer arrayContainer = new ArrayContainer();
-            arrayContainer.array = paths;
+            arrayContainer.array = elements;
 
             string json = JsonUtility.ToJson(arrayContainer);
-            string path = "Assets/Resources/CharPaths.json";
 
             StreamWriter t = new StreamWriter(path, false);
             t.Write(json);

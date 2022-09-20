@@ -10,6 +10,7 @@ public class SceneCapturer : MonoBehaviour
     [SerializeField] string fileName;
     [SerializeField] string sceneName;
     [SerializeField] string skyboxPath;
+    [SerializeField] AssignmentsContainer assignments;
     [SerializeField] ObjectToSaveWithParentName[] objectsToSaveWithParentName;
     [SerializeField] ObjectToSaveWithObjectName[] objectsToSaveWithObjectName;
 
@@ -34,8 +35,18 @@ public class SceneCapturer : MonoBehaviour
         SceneData sceneData = new SceneData();
 
         sceneData.sceneName = sceneName;
-        sceneData.stars = 0;
+
+        sceneData.assignments = new AssignmentsContainer();
+        sceneData.assignments.x = new SecondaryAssignment();
+        sceneData.assignments.y = new SecondaryAssignment();
+        sceneData.assignments.z = new SecondaryAssignment();
+
+        sceneData.assignments.x.completed = false;
+        sceneData.assignments.y.completed = false;
+        sceneData.assignments.z.completed = false;
+
         sceneData.skyboxPath = skyboxPath;
+        sceneData.assignments = assignments;
         sceneData.objectContainers = new ObjectsContainer[objectsToSaveWithParentName.Length + objectsToSaveWithObjectName.Length];
 
         for (int i = 0; i < objectsToSaveWithParentName.Length; i++)

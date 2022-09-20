@@ -12,15 +12,10 @@ namespace Starborne.Saving
         SceneData sceneData = null;
         private bool sceneAssigned = false;
 
-        public void SetSceneData(SceneData newSceneData, string path)
+        public void SetSceneData(string newSceneDataPath)
         {
-            sceneData = newSceneData;
-            sceneAssigned = true;
-            sceneDataPath = path;
-        }
+            sceneDataPath = newSceneDataPath;
 
-        public void SetSceneData(string sceneDataPath)
-        {
             sceneData = LoadSceneData(sceneDataPath);
 
             sceneAssigned = true;
@@ -40,13 +35,7 @@ namespace Starborne.Saving
             return sceneData;
         }
 
-        public void SetStars(int count)
-        {
-            sceneData.stars = count;
-            SaveSceneData();
-        }
-
-        private void SaveSceneData()
+        public void SaveSceneData()
         {
             string json = JsonUtility.ToJson(sceneData);
             string path = "";

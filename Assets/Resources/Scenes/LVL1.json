@@ -1,7 +1,11 @@
 {
   "sceneName": "LVL 1",
-  "stars": 0,
   "skyboxPath": "Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox",
+  "assignments": {
+    "x": { "assignmentType": 0, "value": 0.5, "completed": false },
+    "y": { "assignmentType": 1, "value": 120.0, "completed": false },
+    "z": { "assignmentType": 0, "value": 0.75, "completed": false }
+  },
   "objectContainers": [
     {
       "parentName": "Asteroids",

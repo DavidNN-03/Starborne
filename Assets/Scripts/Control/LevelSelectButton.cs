@@ -67,7 +67,7 @@ namespace Starborne.Control
         {
             FindObjectOfType<SceneDataHandler>().SetSceneData(scenePath);
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
-            sceneHandler.LoadScene(sceneHandler.gameSceneIndex);
+            sceneHandler.LoadScene(sceneHandler.loadingSceneIndex);
         }
     }
 }

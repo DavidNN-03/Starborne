@@ -7,6 +7,7 @@ using Starborne.Core;
 using Starborne.GameResources;
 using Starborne.SceneHandling;
 using Starborne.UI;
+using Starborne.Mission;
 
 namespace Starborne.Control
 {
@@ -330,9 +331,12 @@ namespace Starborne.Control
         private void Die()
         {
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+            OptionalAssignmentHandler optionalAssignmentHandler = FindObjectOfType<OptionalAssignmentHandler>();
+            optionalAssignmentHandler.CaptureData();
+            optionalAssignmentHandler.SetLevelWon(false);
             Cursor.lockState = CursorLockMode.None;
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
-            sceneHandler.LoadScene(sceneHandler.charSelectSceneIndex, changeSceneOnDeathDelay);
+            sceneHandler.LoadScene(sceneHandler.gameOverSceneIndex, changeSceneOnDeathDelay);
         }
     }
 }

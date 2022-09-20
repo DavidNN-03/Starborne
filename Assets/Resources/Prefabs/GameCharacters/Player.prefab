@@ -100,16 +100,16 @@ MonoBehaviour:
   maxSpeed: 0
   maxPitch: 0
   maxRoll: 0
-  maxCamYOffset: 3
-  minCamYOffset: 0
-  yOffsetPushback: 0
+  maxCamYOffset: 1.5
+  minCamYOffset: -0.5
+  yOffsetPushback: 0.01
   yOffsetSensitivity: 0.01
   topSpeedCamZOffset: -2
   maxFOV: 60
   minFOV: 40
   maxCamRoll: 45
   rollPushback: 0.1
-  rollSensitivity: 0.1
+  rollSensitivity: 0.2
   targetTransform: {fileID: 4098349511449062358}
 --- !u!114 &8229907774509593630
 MonoBehaviour:
@@ -235,8 +235,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1, y: 0.4, z: 1}
+  m_Center: {x: 0, y: -0.05, z: 0}
 --- !u!114 &4098349511449062359
 MonoBehaviour:
   m_ObjectHideFlags: 0
