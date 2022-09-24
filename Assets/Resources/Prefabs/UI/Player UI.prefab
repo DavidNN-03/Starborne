@@ -754,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e710d21403d05374faee836f232300e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 6072287021163747261}
   pointerOffset: {x: 0, y: 100, z: 0}
   pointersParent: {fileID: 1992687240}
   pointerPrefab: {fileID: 636427270542356845, guid: e3a5664c7cabe754e8eb78f3dd68505a, type: 3}

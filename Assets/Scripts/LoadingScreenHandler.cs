@@ -19,7 +19,7 @@ public class LoadingScreenHandler : MonoBehaviour
         string jPaths = streamReader.ReadToEnd();
         ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
 
-        text.text = arrayContainer.array[Random.Range(0, arrayContainer.array.Length + 1)];
+        text.text = arrayContainer.array[Random.Range(0, arrayContainer.array.Length)];
 
         SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();
 

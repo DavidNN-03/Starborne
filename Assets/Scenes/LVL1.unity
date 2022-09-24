@@ -436,6 +436,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550878161784588054, guid: fd781c38edd91684c8039cefe07a7ef0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd781c38edd91684c8039cefe07a7ef0, type: 3}
 --- !u!4 &730998877 stripped
@@ -641,6 +645,10 @@ PrefabInstance:
     - target: {fileID: 7550878161784588054, guid: fd781c38edd91684c8039cefe07a7ef0, type: 3}
       propertyPath: m_Name
       value: Asteroid (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550878161784588054, guid: fd781c38edd91684c8039cefe07a7ef0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd781c38edd91684c8039cefe07a7ef0, type: 3}
@@ -920,7 +928,7 @@ MonoBehaviour:
       completed: 0
   objectsToSaveWithParentName:
   - parentName: Asteroids
-    prefabPath: Prefabs/Asteroid
+    prefabPath: Prefabs/Asteroid1
   objectsToSaveWithObjectName:
   - objectName: Player
     prefabPath: Prefabs/GameCharacters/Player

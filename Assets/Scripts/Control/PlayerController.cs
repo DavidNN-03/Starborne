@@ -54,7 +54,7 @@ namespace Starborne.Control
         {
             gameUI = FindObjectOfType<GameUI>();
             rb = GetComponent<Rigidbody>();
-            health = GetComponent<PlayerHealth>();
+            health = GetComponentInChildren<PlayerHealth>();
             meshFilter = GetComponentInChildren<MeshFilter>();
             meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
@@ -92,9 +92,13 @@ namespace Starborne.Control
                 gun.SetRateOfFire(characterStats.shotsPerSecond);
             }
 
-            meshFilter.mesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
+            Mesh playerMesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
+            meshFilter.mesh = playerMesh;
             meshRenderer.material = Resources.Load<Material>("Materials/" + characterStats.materialFileName);
             meshFilter.transform.localScale = characterStats.meshScale;
+            MeshCollider playerCollider = meshRenderer.gameObject.AddComponent<MeshCollider>();
+            playerCollider.convex = true;
+            playerCollider.sharedMesh = playerMesh;
 
             gameUI.UpdateDampeningText(movementType);
         }

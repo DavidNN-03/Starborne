@@ -365,8 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpread: 1
   secondsBetweenShots: 2
-  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
+  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
 --- !u!1 &6811309416355034304
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +381,7 @@ GameObject:
   - component: {fileID: 6811309416355034306}
   - component: {fileID: 6811309416355034308}
   m_Layer: 0
-  m_Name: Enemy Turret
+  m_Name: Laser Turret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,8 +430,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimRange: 100
-  projectileDamage: 5
-  shotsPerSecond: 0.5
+  projectileDamage: 2
+  shotsPerSecond: 5
   gunsParent: {fileID: 6811309416792363902}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &6811309416355034308
@@ -617,8 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpread: 1
   secondsBetweenShots: 2
-  prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
+  prefab: {fileID: 911043795715184161, guid: c2daff7f7b2108b4199d52113379a647, type: 3}
 --- !u!1 &6811309417420943560
 GameObject:
   m_ObjectHideFlags: 0

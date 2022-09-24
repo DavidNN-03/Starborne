@@ -13,7 +13,7 @@
   "objectContainers": [
     {
       "parentName": "Asteroids",
-      "prefabPath": "Prefabs/Asteroid",
+      "prefabPath": "Prefabs/Asteroid1",
       "transformContainers": [
         {
           "position": { "x": 25.0, "y": -20.0, "z": 50.0 },

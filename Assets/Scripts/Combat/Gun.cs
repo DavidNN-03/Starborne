@@ -6,6 +6,7 @@ namespace Starborne.Combat
 {
     public class Gun : MonoBehaviour
     {
+        [SerializeField] float maxSpread;
         float projectileDamage;
         public float secondsBetweenShots = 1f;
 
@@ -35,7 +36,14 @@ namespace Starborne.Combat
 
         private void Fire()
         {
-            Projectile projectile = Instantiate(prefab, transform.position, transform.rotation, GameObject.Find("Shots Parent").transform);
+            Vector2 spreadDirection = Random.insideUnitCircle.normalized; //Get a random direction for the spread
+            Vector3 offsetDirection = new Vector3(transform.right.x * spreadDirection.x, transform.up.y * spreadDirection.y, 0); //Align direction with fps cam direction
+
+            float offsetMagnitude = Random.Range(0f, maxSpread); //Get a random offset amount
+            offsetMagnitude = Mathf.Tan(offsetMagnitude); //Convert to segment length so we get desired degrees value
+            Vector3 bulletTrajectory = transform.eulerAngles + (offsetDirection * offsetMagnitude); //Add our offset to our forward vector
+
+            Projectile projectile = Instantiate(prefab, transform.position, Quaternion.Euler(bulletTrajectory), GameObject.Find("Shots Parent").transform);
             projectile.SetDamage(projectileDamage);
             projectile.SetOwner(gameObject);
         }
