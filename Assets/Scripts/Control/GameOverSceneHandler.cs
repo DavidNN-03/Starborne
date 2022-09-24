@@ -41,7 +41,16 @@ namespace Starborne.Control
 
             bool levelWon = optionalAssignmentHandler.GetLevelWon();
 
-            if (!levelWon) return;
+            if (!levelWon)
+            {
+                for (int i = 0; i < texts.Length; i++)
+                {
+                    starsImages[i].gameObject.SetActive(false);
+                    texts[i].gameObject.SetActive(false);
+                }
+
+                return;
+            }
 
             CheckMission(assignments.x, starsImages[0], texts[0], maxHealth, endHealth, sceneDuration);
             CheckMission(assignments.y, starsImages[1], texts[1], maxHealth, endHealth, sceneDuration);

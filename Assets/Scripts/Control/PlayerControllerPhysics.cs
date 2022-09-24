@@ -258,10 +258,6 @@ namespace Starborne.Control
 
             rb.AddForce(transform.forward * enginePower * 100);
 
-
-
-
-
             Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
             float forwardSpeed = Mathf.Max(0, localVelocity.z);
 
@@ -269,11 +265,6 @@ namespace Starborne.Control
             Vector3 liftForce = (rb.velocity.normalized - transform.forward);
 
             rb.AddForce(liftForce);
-
-
-
-
-
 
             if (rb.velocity.magnitude > maxSpeed)
             {

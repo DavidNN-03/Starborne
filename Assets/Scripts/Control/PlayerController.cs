@@ -328,7 +328,7 @@ namespace Starborne.Control
 
         void OnCollisionEnter(Collision collision)
         {
-            Die();
+            GetComponentInChildren<PlayerHealth>().Collision();
             enabled = false;
         }
 

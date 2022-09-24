@@ -34,6 +34,12 @@ namespace Starborne.GameResources
             gameUI.UpdateHealthText(health, maxHealth);
         }
 
+        public void Collision()
+        {
+            health = 0f;
+            onDeath();
+        }
+
         public void TakeDamage(float damage)
         {
             health = Mathf.Max(0f, health - damage);
