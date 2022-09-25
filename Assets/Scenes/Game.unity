@@ -362,10 +362,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 240835032, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
-      propertyPath: offset
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 6072287021199145896, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
       propertyPath: m_Name
       value: Player UI
