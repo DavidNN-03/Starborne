@@ -1,0 +1,876 @@
+
+
+
+
+
+========================================
+class LoadingScreenHandler : MonoBehaviour 
+----------------------------------------
+float minDelay;
+float maxDelay;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class LateInitObject : MonoBehaviour 
+----------------------------------------
+----------------------------------------
+void LateAwake()
+void LateStart()
+========================================
+
+
+
+
+
+========================================
+class SceneBuilder : MonoBehaviour 
+----------------------------------------
+SceneData sceneData;
+----------------------------------------
+void Awake()
+========================================
+
+
+
+
+
+========================================
+class DummyTarget : MonoBehaviour 
+----------------------------------------
+GameObject deathFX;
+----------------------------------------
+void Start()
+void Die()
+========================================
+
+
+
+
+
+========================================
+class Gun : MonoBehaviour 
+----------------------------------------
+float maxSpread;
+float projectileDamage;
+float secondsBetweenShots
+Projectile prefab;
+----------------------------------------
+void SetDamage(float newDamage)
+void SetRateOfFire(float shotsPerSecond)
+void AttemptFire()
+void Fire()
+========================================
+
+
+
+
+
+========================================
+class Projectile : MonoBehaviour 
+----------------------------------------
+float speed
+float damage;
+GameObject deathFXPrefab;
+GameObject owner;
+----------------------------------------
+void Awake()
+void SetDamage(float newDamage)
+void SetOwner(GameObject newOwner)
+void OnTriggerEnter(Collider other)
+========================================
+
+
+
+
+
+========================================
+class BehemothController : MonoBehaviour, ILateInit 
+----------------------------------------
+float speed;
+float waypointTolerance;
+PatrolPath patrolPath;
+GameObject deathFX;
+Rigidbody rb;
+int patrolPathPointIndex;
+----------------------------------------
+void LateAwake()
+void LateStart()
+void Update()
+void PatrolBehaviour()
+void CycleWaypoint()
+void Die()
+========================================
+
+
+
+
+
+========================================
+class CameraController : MonoBehaviour 
+----------------------------------------
+float maxSpeed;
+float maxPitch;
+float maxRoll;
+float speed;
+float pitch;
+float roll;
+Vector3 camOffset;
+Vector3 camRotation;
+float maxCamYOffset;
+float minCamYOffset;
+float yOffsetPushback;
+float yOffsetSensitivity;
+float topSpeedCamZOffset;
+float maxFOV;
+float minFOV;
+float maxCamRoll;
+float rollPushback;
+float rollSensitivity;
+PlayerController playerController;
+Vector3 startPos;
+----------------------------------------
+void Awake()
+void Start()
+void Update()
+void ApplySpeedCamOffset()
+void ApplyPitchCamOffset()
+void ApplyCamRotation()
+========================================
+
+
+
+
+
+========================================
+class CharacterSelect : MonoBehaviour 
+----------------------------------------
+int index
+Character[] characters;
+Mesh[] meshes;
+Material[] materials;
+----------------------------------------
+void Start()
+Character GetCharacter(string path)
+void Update()
+void nextChar()
+void previousChar()
+void UpdateUI()
+void SelectCharacter()
+========================================
+
+
+
+
+
+========================================
+class EnemyTurretController : MonoBehaviour, ILateInit 
+----------------------------------------
+float aimRange
+float projectileDamage
+float shotsPerSecond;
+GameObject deathFX;
+GameObject target;
+Gun[] guns;
+----------------------------------------
+void LateAwake()
+void LateStart()
+void Update()
+void Die()
+void OnDrawGizmosSelected()
+========================================
+
+
+
+
+
+========================================
+class GameOverSceneHandler : MonoBehaviour 
+----------------------------------------
+SceneData sceneData;
+OptionalAssignmentHandler optionalAssignmentHandler;
+----------------------------------------
+void Awake()
+void Start()
+void CheckMission(SecondaryAssignment assignment, Image image, TextMeshProUGUI text, float maxHealth, float endHealth, float sceneDuration)
+========================================
+
+
+
+
+
+========================================
+class InputConfig : ScriptableObject 
+----------------------------------------
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class LevelSelectButton : MonoBehaviour 
+----------------------------------------
+string scenePath;
+int stars;
+GameObject[] starsImages;
+----------------------------------------
+void SetScenePath(string newScenePath)
+void SetStarCount(int starCount)
+void SetUnlocked(bool state)
+string GetScenePath()
+void AttemptSubmit()
+void SendPathToSceneDataHandler()
+========================================
+
+
+
+
+
+========================================
+class LevelSelectButtonHandler : MonoBehaviour 
+----------------------------------------
+GameObject buttonPrefab;
+float widthBetweenButtons;
+float startXPos;
+float minHeight;
+float maxHeight;
+----------------------------------------
+void Start()
+int GetStars(SceneData sceneData)
+========================================
+
+
+
+
+
+========================================
+class MenuHandler : MonoBehaviour 
+----------------------------------------
+GameObject menu;
+----------------------------------------
+void Start()
+void Update()
+void Quit()
+========================================
+
+
+
+
+
+========================================
+class PatrolPath : MonoBehaviour 
+----------------------------------------
+float waypointGizmoRadius
+----------------------------------------
+void OnDrawGizmos()
+int GetNextIndex(int i)
+Vector3 GetWaypoint(int i)
+========================================
+
+
+
+
+
+========================================
+class PlayerController : MonoBehaviour 
+----------------------------------------
+InputConfig inputConfig;
+float maxEnginePower
+float enginePower
+float rollSensitivity
+float pitchSensitivity
+float yawSensitivity
+float rollEffectivenessAtMaxSpeed;
+float pitchEffectivenessAtMaxSpeed;
+float yawEffectivenessAtMaxSpeed;
+float maxSpeed
+float baseSpeed
+float dampeningSpeedChange
+float changeSceneOnDeathDelay
+float speed;
+float roll;
+float pitch;
+float yaw;
+float throttle;
+Gun gunPrefab;
+Gun[] guns;
+Character characterStats;
+GameObject deathFX;
+GameUI gameUI;
+Rigidbody rb;
+PlayerHealth health;
+----------------------------------------
+void Awake()
+void Start()
+void FixedUpdate()
+void CycleMovementType()
+void Move()
+void GetInputs()
+float GetInputFromInputSet(InputSet inputSet)
+void InvertInputs()
+void ClampInputs()
+void ApplySensitivity()
+void ControlVelocityDirection()
+void ControlThrottle()
+void CalculateTorque()
+void SetSpeed()
+void ModifySpeed()
+void OnCollisionEnter(Collision collision)
+void Die()
+========================================
+
+
+
+
+
+========================================
+class PlayerControllerPhysics : MonoBehaviour 
+----------------------------------------
+InputConfig inputConfig;
+float maxEnginePower
+float enginePower
+float rollSensitivity
+float pitchSensitivity
+float yawSensitivity
+float maxSpeed
+float baseSpeed
+float dampeningSpeedChange
+float changeSceneOnDeathDelay
+float speed;
+float roll;
+float pitch;
+float yaw;
+float throttle;
+Gun gunPrefab;
+Gun[] guns;
+Character characterStats;
+GameObject deathFX;
+GameUI gameUI;
+Rigidbody rb;
+PlayerHealth health;
+----------------------------------------
+void Awake()
+void Start()
+void FixedUpdate()
+void CycleMovementType()
+void Move()
+void GetInputs()
+float GetInputFromInputSet(InputSet inputSet)
+void InvertInputs()
+void ClampInputs()
+void ApplySensitivity()
+void ControlVelocityDirection()
+void ControlThrottle()
+void CalculateTorque()
+void SetSpeed()
+void ModifySpeed()
+void OnCollisionEnter(Collision collision)
+void Die()
+========================================
+
+
+
+
+
+========================================
+class SceneChangeButton : MonoBehaviour 
+----------------------------------------
+----------------------------------------
+void LoadScene(int sceneBuildIndex)
+========================================
+
+
+
+
+
+========================================
+class CreditsTextMover : MonoBehaviour 
+----------------------------------------
+Vector2 velocity;
+----------------------------------------
+void Awake()
+void Start()
+========================================
+
+
+
+
+
+========================================
+class DestroyAfterSeconds : MonoBehaviour 
+----------------------------------------
+float delay
+----------------------------------------
+void Start()
+========================================
+
+
+
+
+
+========================================
+class EssentialObjects : MonoBehaviour 
+----------------------------------------
+EssentialObjects instance;
+----------------------------------------
+void Awake()
+========================================
+
+
+
+
+
+========================================
+class PreviewRotater : MonoBehaviour 
+----------------------------------------
+float degreesPerFrame;
+----------------------------------------
+void Update()
+========================================
+
+
+
+
+
+========================================
+class ChildHealth : MonoBehaviour, IHealth 
+----------------------------------------
+float health;
+EnemyHealth parentHealth;
+----------------------------------------
+void Awake()
+void TakeDamage(float damage)
+========================================
+
+
+
+
+
+========================================
+class EnemyHealth : MonoBehaviour, IHealth 
+----------------------------------------
+float health;
+----------------------------------------
+void TakeDamage(float damage)
+========================================
+
+
+
+
+
+========================================
+class PlayerHealth : MonoBehaviour, IHealth 
+----------------------------------------
+float health;
+float maxHealth;
+GameUI gameUI;
+----------------------------------------
+void Awake()
+void Start()
+void Update()
+void Collision()
+void TakeDamage(float damage)
+float GetHealth()
+float GetMaxHealth()
+========================================
+
+
+
+
+
+========================================
+class OptionalAssignmentHandler : MonoBehaviour, ILateInit 
+----------------------------------------
+float maxHealth;
+float endHealth;
+float startTime;
+float winTime;
+AssignmentsContainer assignments;
+----------------------------------------
+void LateAwake()
+void LateStart()
+void CaptureData()
+float GetMaxHealth()
+float GetHealth()
+float GetSceneDuration()
+AssignmentsContainer GetAssignments()
+void SetLevelWon(bool state)
+========================================
+
+
+
+
+
+========================================
+class PrimaryAssignmentHandler : MonoBehaviour, ILateInit 
+----------------------------------------
+float changeSceneOnWinDelay
+EnemyHealth[] enemies;
+GameUI gameUI;
+int enemyCount;
+int enemiesKilled;
+----------------------------------------
+void LateAwake()
+void LateStart()
+void EnemyDestroyed()
+void CheckWin()
+void UpdateUI()
+void Win()
+========================================
+
+
+
+
+
+========================================
+class CharacterHandler : MonoBehaviour 
+----------------------------------------
+string defaultCharacterPath
+Character characterStats
+----------------------------------------
+void SetCharacterStats(Character character)
+Character GetCharacterStats()
+========================================
+
+
+
+
+
+========================================
+class CharacterReader : MonoBehaviour 
+----------------------------------------
+----------------------------------------
+Character GetCharacter(string path)
+========================================
+
+
+
+
+
+========================================
+class ProgressionReseter : MonoBehaviour 
+----------------------------------------
+SceneData sceneData;
+ArrayContainer arrayContainer;
+----------------------------------------
+void Start()
+========================================
+
+
+
+
+
+========================================
+class SceneCapturer : MonoBehaviour class ObjectToSaveWithParentName class ObjectToSaveWithObjectName 
+----------------------------------------
+string fileName;
+string sceneName;
+string skyboxPath;
+AssignmentsContainer assignments;
+ObjectToSaveWithParentName[] objectsToSaveWithParentName;
+ObjectToSaveWithObjectName[] objectsToSaveWithObjectName;
+string parentName;
+string prefabPath;
+string objectName;
+string prefabPath;
+----------------------------------------
+void Update()
+ObjectsContainer GetNewObjectsContainerWithParentName(string parentName, string prefabPath)
+ObjectsContainer GetNewObjectsContainerWithObjectName(string objectName, string prefabPath)
+========================================
+
+
+
+
+
+========================================
+class SceneDataHandler : MonoBehaviour 
+----------------------------------------
+string defaultScenePath
+string sceneDataPath;
+SceneData sceneData
+----------------------------------------
+void SetSceneData(string newSceneDataPath)
+SceneData GetSceneData()
+void SaveSceneData()
+SceneData LoadSceneData(string path)
+========================================
+
+
+
+
+
+========================================
+class ArrayContainer 
+----------------------------------------
+string[] array;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class AssignmentsContainer 
+----------------------------------------
+SecondaryAssignment x;
+SecondaryAssignment y;
+SecondaryAssignment z;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class Character 
+----------------------------------------
+string name;
+float maxHP;
+float shotsPerSecond;
+float damagePerShot;
+float enginePower;
+float dampeningSpeedChange;
+float maxSpeed;
+float baseSpeed;
+float rollSensitivity;
+float pitchSensitivity;
+float yawSensitivity;
+float rollEffectivenessAtMaxSpeed;
+float pitchEffectivenessAtMaxSpeed;
+float yawEffectivenessAtMaxSpeed;
+string meshFileName;
+string materialFileName;
+Vector3 meshScale;
+Vector3[] gunPositions;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class ObjectsContainer 
+----------------------------------------
+string parentName;
+string prefabPath;
+TransformContainer[] transformContainers;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class SceneData 
+----------------------------------------
+string sceneName;
+string skyboxPath;
+AssignmentsContainer assignments;
+ObjectsContainer[] objectContainers;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class SecondaryAssignment 
+----------------------------------------
+float value;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class TransformContainer 
+----------------------------------------
+Vector3 position;
+Vector3 rotation;
+Vector3 scale;
+----------------------------------------
+========================================
+
+
+
+
+
+========================================
+class ArrayWriter : MonoBehaviour 
+----------------------------------------
+string path;
+string[] elements;
+----------------------------------------
+void Start()
+========================================
+
+
+
+
+
+========================================
+class CharacterWriter : MonoBehaviour 
+----------------------------------------
+string fileName;
+string charName;
+float maxHP;
+float shotsPerSecond;
+float damagePerShot;
+float enginePower;
+float dampeningSpeedChange;
+float maxSpeed;
+float baseSpeed;
+float rollSensitivity;
+float pitchSensitivity;
+float yawSensitivity;
+float rollEffectivenessAtMaxSpeed;
+float pitchEffectivenessAtMaxSpeed;
+float yawEffectivenessAtMaxSpeed;
+string meshFileName;
+string materialFileName;
+Vector3 meshScale;
+Vector3[] gunPositions;
+Character currentCharacter
+----------------------------------------
+void Start()
+========================================
+
+
+
+
+
+========================================
+class SceneWriter : MonoBehaviour 
+----------------------------------------
+string fileName;
+string sceneName;
+TransformContainer playerTransform;
+TransformContainer[] asteroidTransforms;
+TransformContainer[] dreadnoughtTransforms;
+SceneData sceneData
+----------------------------------------
+void Start()
+========================================
+
+
+
+
+
+========================================
+class CreditsSceneEnder : MonoBehaviour 
+----------------------------------------
+----------------------------------------
+void Update()
+void OnTriggerEnter2D()
+void EndScene()
+========================================
+
+
+
+
+
+========================================
+class SceneHandler : MonoBehaviour 
+----------------------------------------
+int mainMenuSceneIndex;
+int charSelectSceneIndex;
+int levelSelectSceneIndex;
+int loadingSceneIndex;
+int gameSceneIndex;
+int gameOverSceneIndex;
+int creditsSceneIndex;
+----------------------------------------
+void LoadScene(int index)
+void LoadScene(int index, float delay)
+void QuitGame()
+========================================
+
+
+
+
+
+========================================
+class StartScreenButton : MonoBehaviour 
+----------------------------------------
+float invokeDelay
+----------------------------------------
+void Hit()
+========================================
+
+
+
+
+
+========================================
+class StartScreenProjectile : MonoBehaviour 
+----------------------------------------
+GameObject deathFXPrefab;
+float explosionForce
+float explosionRange
+float speed
+----------------------------------------
+void SetTarget(Vector3 targetPos)
+void OnTriggerEnter(Collider other)
+========================================
+
+
+
+
+
+========================================
+class StartScreenShooter : MonoBehaviour 
+----------------------------------------
+float maxRaycastDistance
+StartScreenProjectile[] prefabs;
+----------------------------------------
+void Update()
+========================================
+
+
+
+
+
+========================================
+class EnemyPointer : MonoBehaviour, ILateInit 
+----------------------------------------
+float offset;
+Vector3 pointerOffset;
+GameObject player;
+Vector3 canvasCenter;
+----------------------------------------
+void LateAwake()
+void LateStart()
+void Update()
+Vector3 OutOfRangePos(Vector3 pointerPos)
+void EnemyDestroyed(GameObject enemy)
+========================================
+
+
+
+
+
+========================================
+class GameUI : MonoBehaviour 
+----------------------------------------
+----------------------------------------
+void UpdateMissionText(int enemiesKilled, int enemiesCount)
+void UpdateDampeningText(MovementType movementType)
+void UpdateHealthText(float hp, float maxHP)
+void UpdateSpeedText(float speed, float maxSpeed)
+string RoundToDecimal(float value, int decimalPlaces, bool addZeros)
+int GetDecimals(string s)
+========================================

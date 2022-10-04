@@ -10,10 +10,12 @@ namespace Starborne.Building
     public class SceneBuilder : MonoBehaviour
     {
         SceneData sceneData;
-        List<GameObject> gameObjectsInstantiated = new List<GameObject>();
+        List<GameObject> gameObjectsInstantiated;
 
         void Awake()
         {
+            gameObjectsInstantiated = new List<GameObject>();
+
             sceneData = EssentialObjects.instance.GetComponentInChildren<SceneDataHandler>().GetSceneData();
 
             Material skybox = Resources.Load<Material>(sceneData.skyboxPath);

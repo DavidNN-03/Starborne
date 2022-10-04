@@ -6,7 +6,7 @@ namespace Starborne.Core
 {
     public class CreditsTextMover : MonoBehaviour
     {
-        [SerializeField] Vector2 velocity = new Vector2(0, 0);
+        [SerializeField] Vector2 velocity;
 
         Rigidbody2D rb = null;
 
@@ -17,6 +17,11 @@ namespace Starborne.Core
 
         void Start()
         {
+            if (velocity == null)
+            {
+                velocity = new Vector2(0, 0);
+            }
+
             rb.velocity = velocity;
         }
     }
