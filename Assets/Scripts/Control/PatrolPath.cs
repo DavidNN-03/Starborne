@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace  Starborne.Control
+namespace Starborne.Control
 {
     public class PatrolPath : MonoBehaviour
     {

@@ -316,10 +316,6 @@ namespace Starborne.Control
                     speed += dampeningSpeedChange * Time.deltaTime;
                 }
             }
-            else if (movementType == MovementType.namePending)
-            {
-
-            }
         }
 
         void OnCollisionEnter(Collision collision)

@@ -19,15 +19,14 @@ namespace Starborne.Control
         [SerializeField] TextMeshProUGUI shotsPerSecondText;
         [SerializeField] TextMeshProUGUI speedText;
         [SerializeField] TextMeshProUGUI agilityText;
-        //[SerializeField] Image characterImage;
         [SerializeField] MeshFilter meshFilter;
         [SerializeField] MeshRenderer meshRenderer;
 
-        Character[] characters;
+        Character[] characters; /*Array of all the found characters*/
         Mesh[] meshes;
         Material[] materials;
 
-        void Start()
+        void Start() /*this is the start function*/
         {
             string pathsPath = "Assets/Resources/CharPaths.json";
             StreamReader streamReader = new StreamReader(pathsPath);
@@ -71,7 +70,7 @@ namespace Starborne.Control
             }
         }
 
-        public void nextChar()
+        public void nextChar() /*Increments to the next character*/
         {
             index++;
             if (index >= characters.Length)
