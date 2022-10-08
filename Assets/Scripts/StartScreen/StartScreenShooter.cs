@@ -9,7 +9,6 @@ public class StartScreenShooter : MonoBehaviour
     [SerializeField] StartScreenProjectile[] prefabs;
     [SerializeField] Transform[] shooterOriginPoints;
 
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

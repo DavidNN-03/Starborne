@@ -14,20 +14,6 @@ public class SceneCapturer : MonoBehaviour
     [SerializeField] ObjectToSaveWithParentName[] objectsToSaveWithParentName;
     [SerializeField] ObjectToSaveWithObjectName[] objectsToSaveWithObjectName;
 
-    [System.Serializable]
-    public class ObjectToSaveWithParentName
-    {
-        public string parentName;
-        public string prefabPath;
-    }
-
-    [System.Serializable]
-    public class ObjectToSaveWithObjectName
-    {
-        public string objectName;
-        public string prefabPath;
-    }
-
     private void Update()
     {
         if (!capture) return;

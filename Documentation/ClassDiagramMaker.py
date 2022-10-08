@@ -1,4 +1,4 @@
-#what about actions/events, interfaces, enums, scriptable objects, classes defined in other classes
+#what about actions/events, dictionaries, 
 
 #names of all variable types must be added to 'types', 
 #this does not include types defined in the files that are being documented
@@ -19,7 +19,7 @@ import os
 
 projectName = "Starborne"
 
-types = ["void", "int", "float", "string", "Vector2", "Vector3", "Mesh", "Material", "Sprite" "Transform", "GameObject", "Rigidbody", "Collider", "MonoBehaviour"]
+types = ["void", "bool", "int", "float", "string", "Vector2", "Vector3", "Mesh", "Material", "Sprite", "Transform", "RectTransform", "GameObject", "Rigidbody", "Collider", "MonoBehaviour", "ScriptableObject", "UnityEvent", "IEnumerator", "Ray", "TextMeshProUGUI"]
 
 allInterfaces = []
 allNamespaces = []

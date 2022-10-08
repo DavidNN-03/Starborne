@@ -14,10 +14,6 @@ namespace Starborne.Control
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] InputConfig inputConfig;
-
-        //roll = z-axis
-        //pitch = x-axis
-        //yaw = y-axis
         [SerializeField] float maxEnginePower = 5f;
         [SerializeField] float enginePower = 1;
         [SerializeField] float rollSensitivity = 1f;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InputConfig", menuName = "ScriptbleObjects/InputConfig")]
-public class InputConfig : ScriptableObject
+public class InputConfig : ScriptableObject /*Configure input keybinds*/
 {
     public InputSet throttleInputSet;
     public bool inverThrottle = false;
