@@ -8,7 +8,7 @@ namespace Starborne.Core
     {
         public static EssentialObjects instance;
 
-        void Awake()
+        private void Awake()
         {
             if (instance == null)
             {

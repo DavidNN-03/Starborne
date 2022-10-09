@@ -1,4 +1,5 @@
-#what about actions/events, dictionaries, 
+#what about actions/events, dictionaries
+#this script needs renaming
 
 #names of all variable types must be added to 'types', 
 #this does not include types defined in the files that are being documented
@@ -19,7 +20,12 @@ import os
 
 projectName = "Starborne"
 
-types = ["void", "bool", "int", "float", "string", "Vector2", "Vector3", "Mesh", "Material", "Sprite", "Transform", "RectTransform", "GameObject", "Rigidbody", "Collider", "MonoBehaviour", "ScriptableObject", "UnityEvent", "IEnumerator", "Ray", "TextMeshProUGUI"]
+types = ["void", "bool", "int", "float", "string", "Vector2", 
+        "Vector3", "Mesh", "Material", "Sprite", "Transform", 
+        "RectTransform", "GameObject", "Rigidbody", "Collider", 
+        "MonoBehaviour", "ScriptableObject", "UnityEvent", 
+        "IEnumerator", "Ray", "TextMeshProUGUI"]
+modifiers = ["private", "public", "static", "event", "async"]
 
 allInterfaces = []
 allNamespaces = []
@@ -27,19 +33,22 @@ allNamespaces = []
 allPaths = [] #array of paths to every file
 
 class FunctionObject:
-    def __init__(self, returnType, functionName, description):
+    def __init__(self, functionModifiers, returnType, functionName, description):
+        self.functionModifiers = functionModifiers
         self.returnType = returnType
         self.functionName = functionName
         self.description = description
 
 class VariableObject:
-    def __init__(self, variableType, variableName, description):
+    def __init__(self, variableModifiers, variableType, variableName, description):
+        self.variableModifiers = variableModifiers
         self.variableType = variableType
         self.variableName = variableName
         self.description = description
 
 class ClassElement:
-    def __init__(self, className, namespace, parentClass, interfaces, description, variables, functions):
+    def __init__(self, classModifiers, className, namespace, parentClass, interfaces, description, variables, functions):
+        self.classModifiers = classModifiers
         self.className = className
         self.namespace = namespace
         self.parentClass = parentClass
@@ -49,12 +58,15 @@ class ClassElement:
         self.description = description
 
 class InterfaceElement:
-    def __init__(self, interfaceName, description):
+    def __init__(self, interfaceModifiers, interfaceName, description, interfaceFunctions):
+        self.interfaceModifiers = interfaceModifiers
         self.interfaceName = interfaceName
         self.description = description
+        self.interfaceFunctions = interfaceFunctions
 
 class EnumObject:
-    def __init__(self, enumName, options, description):
+    def __init__(self, enumModifiers, enumName, options, description):
+        self.enumModifiers = enumModifiers
         self.enumName = enumName
         self.options = options
         self.description = description
@@ -163,7 +175,12 @@ def CreateClassSite(classObject):
     #----------------------------------------------------------------------------------
 
     #add header
-    pageHeader = classObject.className
+    pageHeader = ""
+
+    for i in range(len(classObject.classModifiers)):
+        pageHeader += classObject.classModifiers[i] + " "
+
+    pageHeader += "class " + classObject.className
     splitIndex = s.find("main-text-container") + 21
     mainDivText = CreateTag("h1", "", pageHeader)
     mainDivText += "<br>" * 1
@@ -194,7 +211,13 @@ def CreateClassSite(classObject):
         tableText = ""
 
         for i in range(len(classObject.variables)):
-            tableRowText = CreateTag("td", "", classObject.variables[i].variableType) 
+            modifiersText = ""
+
+            for j in classObject.variables[i].variableModifiers:
+                modifiersText += j + " "
+
+            tableRowText = CreateTag("td", "", modifiersText) 
+            tableRowText += CreateTag("td", "", classObject.variables[i].variableType) 
             tableRowText += CreateTag("td", "",  classObject.variables[i].variableName)
             tableRowText += CreateTag("td", "",  classObject.variables[i].description)
                         
@@ -212,7 +235,13 @@ def CreateClassSite(classObject):
         tableText = ""
 
         for i in range(len(classObject.functions)):
-            tableRowText = CreateTag("td", "", classObject.functions[i].returnType) 
+            modifiersText = ""
+
+            for j in classObject.functions[i].functionModifiers:
+                modifiersText += j + " "
+
+            tableRowText = CreateTag("td", "", modifiersText) 
+            tableRowText += CreateTag("td", "", classObject.functions[i].returnType) 
             tableRowText += CreateTag("td", "", classObject.functions[i].functionName)
             tableRowText += CreateTag("td", "", classObject.functions[i].description)
 
@@ -246,7 +275,6 @@ def CreateInterfaceSite(interfaceObject):
     splitIndex = s.find("<title>") + 7
     s = s[:splitIndex] + pageTitle + s[splitIndex:]
 
-    
     #----------------------------------------------------------------------------------
     #Add text in topnav div
     #----------------------------------------------------------------------------------
@@ -266,13 +294,37 @@ def CreateInterfaceSite(interfaceObject):
     #----------------------------------------------------------------------------------
 
     #add header
-    pageHeader = interfaceObject.interfaceName
+    pageHeader = ""
+
+    for i in range(len(interfaceObject.interfaceModifiers)):
+        pageHeader += interfaceObject.interfaceModifiers[i] + " "
+
+    pageHeader += "interface " + interfaceObject.interfaceName
     splitIndex = s.find("main-text-container") + 21
     mainDivText = CreateTag("h1", "", pageHeader)
     mainDivText += "<br>" * 1
     
     mainDivText += "<br>" + interfaceObject.description + "<br>" * 2
 
+    if not interfaceObject.interfaceFunctions == None and len(interfaceObject.interfaceFunctions) > 0:
+        tableText = ""
+
+        for i in range(len(interfaceObject.interfaceFunctions)):
+            modifiersText = ""
+
+            for j in interfaceObject.interfaceFunctions[i].functionModifiers:
+                modifiersText += j + " "
+
+            tableRowText = CreateTag("td", "", modifiersText) 
+            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].returnType) 
+            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].functionName)
+            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].description)
+
+            tableRowText = "<tr>" + tableRowText + "</tr>"
+
+            tableText += tableRowText
+        tableText = CreateTag("table", "class=\"myTable\"", tableText)
+        mainDivText += tableText
     #concatinate strings
     s = s[:splitIndex] + mainDivText + "<br>" * 5 + s[splitIndex:]
     
@@ -316,12 +368,28 @@ def CreateEnumSite(enumObject):
     #----------------------------------------------------------------------------------
 
     #add header
-    pageHeader = enumObject.enumName
+    pageHeader = " "
+
+    for i in range(len(enumObject.enumModifiers)):
+        pageHeader += enumObject.enumModifiers[i] + " "
+
+    pageHeader += "enum " + enumObject.enumName
     splitIndex = s.find("main-text-container") + 21
     mainDivText = CreateTag("h1", "", pageHeader)
     mainDivText += "<br>" * 1
     
     mainDivText += "<br>" + enumObject.description + "<br>" * 2
+
+    tableText = ""
+
+    for i in range(len(enumObject.options)):
+        tableRowText = CreateTag("td", "", enumObject.options[i].optionName)
+        tableRowText += CreateTag("td", "", enumObject.options[i].description)
+
+        tableText += "<tr>" + tableRowText + "</tr>"
+
+    tableText = CreateTag("table", "class=\"myTable\"", tableText)
+    mainDivText += tableText
 
     #concatinate strings
     s = s[:splitIndex] + mainDivText + "<br>" * 5 + s[splitIndex:]
@@ -384,6 +452,7 @@ def CreateClassObject(words):
 
     variablesSection = words[startIndex:endIndex]
 
+    classModifiers = []
     className = ""
     namespace = ""
     parentClass = ""
@@ -397,8 +466,19 @@ def CreateClassObject(words):
         if words[i] == "namespace" and namespace == "":
             namespace = words[i+1]
         elif words[i] == "class" and className == "":
+            #find class name
             className = words[i+1]
 
+            #find modifiers
+            for j in range(i-1, -1, -1):
+                if words[j] in modifiers:
+                    classModifiers.append(words[j])
+                else:
+                    break
+
+            classModifiers.reverse()
+
+            #find parent class and interfaces
             if not words[i+2] == ":":
                 break
             
@@ -431,35 +511,62 @@ def CreateClassObject(words):
 
     for i in range(1, len(variablesSection)-1): #find variables
         if variablesSection[i] in types and not variablesSection[i-1] == "class": #Basic variables
+            variableModifiers = []
             variableType = variablesSection[i]
             variableName = variablesSection[i+1]
             variableDescription = ""
 
+            for j in range(i-1, -1, -1):
+                if variablesSection[j] in modifiers:
+                    variableModifiers.append(variablesSection[j])
+                else:
+                    break
+            
+            variableModifiers.reverse()
+
             if variableName[-1:] == ';':
                 variableName = variableName[:-1] #remove the semi-colon
 
             variableDescription = FindComment(i, variablesSection, ';')
 
-            newVariable = VariableObject(variableType, variableName, variableDescription)
+            newVariable = VariableObject(variableModifiers, variableType, variableName, variableDescription)
             variables.append(newVariable)
 
         elif variablesSection[i][:-2] in types and variablesSection[i][-2:] == "[]": #Arrays
+            variableModifiers = []
             variableName = variablesSection[i+1]
+
+            for j in range(i-1, -1, -1):
+                if variablesSection[j] in modifiers:
+                    variableModifiers.append(variablesSection[j])
+                else:
+                    break
+            
+            variableModifiers.reverse()
 
             if variableName[-1:] == ';':
                 variableName = variableName[:-1] #remove the semi-colon
 
             variableDescription = FindComment(i, variablesSection, ';')
 
-            newVariable = VariableObject(variablesSection[i], variableName, variableDescription)
+            newVariable = VariableObject(variableModifiers, variablesSection[i], variableName, variableDescription)
             variables.append(newVariable)
         
         elif variablesSection[i][0:5] == "List<":
+            variableModifiers = []
             variableName = variablesSection[i+1]
+
+            for j in range(i-1, -1, -1):
+                if variablesSection[j] in modifiers:
+                    variableModifiers.append(variablesSection[j])
+                else:
+                    break
+            
+            variableModifiers.reverse()
 
             variableDescription = FindComment(i, variablesSection, ';')
 
-            newVariable = VariableObject(variablesSection[i], variableName, variableDescription)
+            newVariable = VariableObject(variableModifiers, variablesSection[i], variableName, variableDescription)
             variables.append(newVariable)
 
     for i in range(len(words)): #find functions
@@ -469,9 +576,18 @@ def CreateClassObject(words):
         if not isFunction:
             continue
         
+        functionModifiers = []
         returnType = words[i]
         functionName = words[i+1]
         comment = ""
+
+        for j in range(i-1, -1, -1):
+            if words[j] in modifiers:
+                functionModifiers.append(words[j])
+            else:
+                break
+            
+            functionModifiers.reverse()
 
         if not ')' in words[i+1]: 
             for j in range(i+2, len(words)):
@@ -481,45 +597,108 @@ def CreateClassObject(words):
 
         comment = FindComment(i, words, ')')
 
-        functionObject = FunctionObject(returnType, functionName, comment)
+        functionObject = FunctionObject(functionModifiers, returnType, functionName, comment)
 
         functions.append(functionObject)
 
-    classObject = ClassElement(className, namespace, parentClass, interfaces, description, variables, functions)
+    classObject = ClassElement(classModifiers, className, namespace, parentClass, interfaces, description, variables, functions)
     return classObject
 
 def CreateInterfaceObject(words):
+    interfaceModifiers = []
     interfaceName = ""
     description = ""
+    interfaceFunctions = []
 
     for i in range(len(words)):
         if words[i] == "interface":
             interfaceName = words[i+1]
+
+            for j in range(i-1, -1, -1):
+                if words[j] in modifiers:
+                    interfaceModifiers.append(words[j])
+                else:
+                    break
+            
+                interfaceModifiers.reverse()
             break
     
     description = FindComment(0, words, interfaceName)
 
-    interfaceObject = InterfaceElement(interfaceName, description)
+    for i in range(len(words)): #find functions
+        if not words[i] in types:
+            continue
+        isFunction = '(' in words[i+1]
+        if not isFunction:
+            continue
+        
+        functionModifiers = []
+        returnType = words[i]
+        functionName = words[i+1]
+        comment = ""
+
+        for j in range(i-1, -1, -1):
+            if words[j] in modifiers:
+                functionModifiers.append(words[j])
+            else:
+                break
+            
+            functionModifiers.reverse()
+
+        if not ')' in words[i+1]: 
+            for j in range(i+2, len(words)):
+                 functionName += " " + words[j]
+                 if ')' in words[j]:
+                    break
+
+        comment = FindComment(i, words, ')')
+
+        functionObject = FunctionObject(functionModifiers, returnType, functionName, comment)
+
+        interfaceFunctions.append(functionObject)    
+
+    interfaceObject = InterfaceElement(interfaceModifiers, interfaceName, description, interfaceFunctions)
     return interfaceObject
 
 def CreateEnumObject(words):
+    enumModifiers = []
     enumName = ""
     options = []
-    description = ""
+    enumDescription = ""
 
     startIndex = GetIndexOfWord('{', words, "") + 1
     endIndex = GetIndexOfWord('}', words, "")
 
     optionsSection = words[startIndex:endIndex]
 
-    #find enumName
+    #find enumName and modifiers
     for i in range(len(words)):
         if words[i] == "enum":
             enumName = words[i+1]
+
+            for j in range(i-1, -1, -1):
+                if words[j] in modifiers:
+                    enumModifiers.append(words[j])
+                else:
+                    break
+            
+            enumModifiers.reverse()
+
             break
 
     #find enum options
+    isComment = False
+
     for i in range(len(optionsSection)):
+        if "/*" in optionsSection[i]:
+            isComment = True
+        elif "*/" in optionsSection[i]:
+            isComment = False
+            continue
+
+        if isComment:
+            continue
+
         optionName = ""
         optionDescription = ""
 
@@ -528,14 +707,14 @@ def CreateEnumObject(words):
         else:
             optionName = optionsSection[i]
         
-        #find option comment
+        optionDescription = FindComment(i, optionsSection, optionsSection[i])
 
-        option = EnumOption(enumName, description)
+        option = EnumOption(optionName, optionDescription)
         options.append(option)
 
-    description = FindComment(0, words, enumName)
+    enumDescription = FindComment(0, words, enumName)
 
-    enumObject = EnumObject(enumName, options, description)
+    enumObject = EnumObject(enumModifiers, enumName, options, enumDescription)
     return enumObject
 
 def SortClassObjects(arr):
