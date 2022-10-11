@@ -6,9 +6,14 @@ body {
 }
 
 p,
-h1 {
+h1,
+h2,
+h3,
+pre,
+td {
   color: #000000;
   line-height: 1.5;
+  font-family: Arial, Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .topnav {
@@ -51,10 +56,11 @@ h1 {
   /*white-space: nowrap;*/
   position: fixed;
   display: inline-block;
-  margin-top: 4vh;
+  margin-top: 10vh;
   margin-right: 0px;
-  height: 96vh;
-  width: 15vw;
+  margin-bottom: 10vh;
+  height: 90vh;
+  width: 12vw;
   padding-left: 2vw;
   padding-right: 3vw;
 }
@@ -66,16 +72,17 @@ h1 {
 }
 
 .main-text-container {
-  width: 80vw;
-  margin-left: 20vw;
+  width: 75vw;
+  margin-left: 17vw;
   padding-left: 3vw;
   padding-top: 10vh;
   background-color: #ffffff;
   color: #000000;
+  font-size: 16px;
 }
 
 .myTable {
-  width: 80%;
+  width: 95%;
   border-collapse: collapse;
 }
 

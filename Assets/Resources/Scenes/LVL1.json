@@ -1,1 +1,47 @@
-{"sceneName":"LVL 1","skyboxPath":"Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox","assignments":{"x":{"assignmentType":0,"value":0.5,"completed":true},"y":{"assignmentType":1,"value":120.0,"completed":true},"z":{"assignmentType":0,"value":0.75,"completed":true}},"objectContainers":[{"parentName":"Asteroids","prefabPath":"Prefabs/Asteroid1","transformContainers":[{"position":{"x":25.0,"y":-20.0,"z":50.0},"rotation":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},{"position":{"x":112.0,"y":-2.0,"z":161.5},"rotation":{"x":315.0000305175781,"y":180.0,"z":180.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},{"position":{"x":45.599998474121097,"y":62.0,"z":114.69999694824219},"rotation":{"x":315.0000305175781,"y":180.0,"z":180.0},"scale":{"x":1.0,"y":1.0,"z":1.0}}]},{"parentName":"","prefabPath":"Prefabs/GameCharacters/Player","transformContainers":[{"position":{"x":0.0,"y":0.0,"z":0.0},"rotation":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}}]}]}
+{
+  "sceneName": "LVL 1",
+  "skyboxPath": "Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox",
+  "assignments": {
+    "x": { "assignmentType": 0, "value": 0.5, "completed": true },
+    "y": { "assignmentType": 1, "value": 120.0, "completed": true },
+    "z": { "assignmentType": 0, "value": 0.75, "completed": true }
+  },
+  "objectContainers": [
+    {
+      "parentName": "Asteroids",
+      "prefabPath": "Prefabs/Asteroid1",
+      "transformContainers": [
+        {
+          "position": { "x": 25.0, "y": -20.0, "z": 50.0 },
+          "rotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+          "scale": { "x": 1.0, "y": 1.0, "z": 1.0 }
+        },
+        {
+          "position": { "x": 112.0, "y": -2.0, "z": 161.5 },
+          "rotation": { "x": 315.0000305175781, "y": 180.0, "z": 180.0 },
+          "scale": { "x": 1.0, "y": 1.0, "z": 1.0 }
+        },
+        {
+          "position": {
+            "x": 45.599998474121097,
+            "y": 62.0,
+            "z": 114.69999694824219
+          },
+          "rotation": { "x": 315.0000305175781, "y": 180.0, "z": 180.0 },
+          "scale": { "x": 1.0, "y": 1.0, "z": 1.0 }
+        }
+      ]
+    },
+    {
+      "parentName": "",
+      "prefabPath": "Prefabs/GameCharacters/Player",
+      "transformContainers": [
+        {
+          "position": { "x": 0.0, "y": 0.0, "z": 0.0 },
+          "rotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+          "scale": { "x": 1.0, "y": 1.0, "z": 1.0 }
+        }
+      ]
+    }
+  ]
+}

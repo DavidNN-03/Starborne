@@ -1,6 +1,4 @@
-#what about actions/events, dictionaries
-#this script needs renaming
-
+#README
 #names of all variable types must be added to 'types', 
 #this does not include types defined in the files that are being documented
 
@@ -143,6 +141,8 @@ def CreateSidebar():
         sideBarTags += CreateTag("a", "href=\"" + sitePath + "\"", i.enumName)
         sideBarTags += "<br>" * 2
     
+    
+
     return sideBarTags
 
 def CreateClassSite(classObject):
@@ -192,7 +192,6 @@ def CreateClassSite(classObject):
     #add parent-class
     if not classObject.parentClass == None and not classObject.parentClass == "":
         mainDivText += CreateTag("p", "", "Inherits from: " + classObject.parentClass)
-    #print(classObject.className + " inherits from " + classObject.parentClass)
     
     #add implemented interfaces
     if not classObject.interfaces == None and len(classObject.interfaces) > 0:
@@ -204,7 +203,7 @@ def CreateClassSite(classObject):
 
         mainDivText += CreateTag("p", "", "Implements interfaces: " + interfacesText)
 
-    mainDivText += "<br>" + classObject.description + "<br>" * 2
+    mainDivText += "<br>" + CreateTag("p","",classObject.description) + "<br>" * 2
 
     #create variables table
     if not classObject.variables == None and len(classObject.variables) > 0:
@@ -216,10 +215,10 @@ def CreateClassSite(classObject):
             for j in classObject.variables[i].variableModifiers:
                 modifiersText += j + " "
 
-            tableRowText = CreateTag("td", "", modifiersText) 
-            tableRowText += CreateTag("td", "", classObject.variables[i].variableType) 
-            tableRowText += CreateTag("td", "",  classObject.variables[i].variableName)
-            tableRowText += CreateTag("td", "",  classObject.variables[i].description)
+            tableRowText = CreateTag("td", "style=\"width:25%\"", modifiersText) 
+            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.variables[i].variableType) 
+            tableRowText += CreateTag("td", "style=\"width:25%\"",  classObject.variables[i].variableName)
+            tableRowText += CreateTag("td", "style=\"width:25%\"",  classObject.variables[i].description)
                         
             tableRowText = "<tr>" + tableRowText + "</tr>"
 
@@ -240,10 +239,10 @@ def CreateClassSite(classObject):
             for j in classObject.functions[i].functionModifiers:
                 modifiersText += j + " "
 
-            tableRowText = CreateTag("td", "", modifiersText) 
-            tableRowText += CreateTag("td", "", classObject.functions[i].returnType) 
-            tableRowText += CreateTag("td", "", classObject.functions[i].functionName)
-            tableRowText += CreateTag("td", "", classObject.functions[i].description)
+            tableRowText = CreateTag("td", "style=\"width:25%\"", modifiersText) 
+            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].returnType) 
+            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].functionName)
+            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].description)
 
             tableRowText = "<tr>" + tableRowText + "</tr>"
 
@@ -304,7 +303,7 @@ def CreateInterfaceSite(interfaceObject):
     mainDivText = CreateTag("h1", "", pageHeader)
     mainDivText += "<br>" * 1
     
-    mainDivText += "<br>" + interfaceObject.description + "<br>" * 2
+    mainDivText += "<br>" + CreateTag("p","",interfaceObject.description) + "<br>" * 2
 
     if not interfaceObject.interfaceFunctions == None and len(interfaceObject.interfaceFunctions) > 0:
         tableText = ""
@@ -378,7 +377,7 @@ def CreateEnumSite(enumObject):
     mainDivText = CreateTag("h1", "", pageHeader)
     mainDivText += "<br>" * 1
     
-    mainDivText += "<br>" + enumObject.description + "<br>" * 2
+    mainDivText += "<br>" + CreateTag("p","",enumObject.description) + "<br>" * 2
 
     tableText = ""
 
@@ -556,6 +555,9 @@ def CreateClassObject(words):
             variableModifiers = []
             variableName = variablesSection[i+1]
 
+            if variableName[-1:] == ';':
+                variableName = variableName[:-1] #remove the semi-colon
+
             for j in range(i-1, -1, -1):
                 if variablesSection[j] in modifiers:
                     variableModifiers.append(variablesSection[j])
@@ -567,6 +569,38 @@ def CreateClassObject(words):
             variableDescription = FindComment(i, variablesSection, ';')
 
             newVariable = VariableObject(variableModifiers, variablesSection[i], variableName, variableDescription)
+            variables.append(newVariable)
+        
+        elif variablesSection[i][0:11] == "Dictionary<":
+            variableModifiers = []
+            variableType = ""
+            variableName = ""
+
+            #if variablesSection[i][:-1] == '>':
+            #    variableType = variablesSection[i]
+            #else:
+            for j in range(i, len(variablesSection)):
+                variableType += variablesSection[j] + " "
+                if ">" in variablesSection[j]:
+                    variableName = variablesSection[j+1]
+                    break
+
+            variableType = variableType.replace("<", "&lt;")
+            variableType =  variableType.replace(">", "&gt;")
+
+            if variableName[-1:] == ';':
+                variableName = variableName[:-1] #remove the semi-colon
+
+            for j in range(i-1, -1, -1):
+                if variablesSection[j] in modifiers:
+                    variableModifiers.append(variablesSection[j])
+                else:
+                    break
+            
+            variableModifiers.reverse()
+
+            variableDescription = FindComment(i, variablesSection, ';')
+            newVariable = VariableObject(variableModifiers, variableType, variableName, variableDescription)
             variables.append(newVariable)
 
     for i in range(len(words)): #find functions
@@ -782,21 +816,34 @@ def CreateClassDiagram(rootFolderPath):
     AddAllChildFilesToArray(rootFolderPath, allPaths) #adds all files under the given folder to the allPaths array
     FindAllTypes(allPaths) #adds all classes/types to the types array
 
+    classCount = 0
+    interfaceCount = 0
+    enumCount = 0
+
     #Add data from classes and interfaces to objects in classObjects and interfaceObjects
     for filePath in allPaths:
         file = open(filePath)
         words = file.read().split()  
 
+
         if "class" in words:
+            classCount += 1
             classObject = CreateClassObject(words)
             classObjects.append(classObject)
         elif "interface" in words:
+            interfaceCount += 1
             interfaceObject = CreateInterfaceObject(words)
             interfaceObjects.append(interfaceObject)
         elif "enum" in words:
+            enumCount += 1
             enumObject = CreateEnumObject(words)
             enumObjects.append(enumObject)
     
+    print("paths count: " + str(len(allPaths)))
+    print("class count: " + str(classCount))
+    print("interface count: " + str(interfaceCount))
+    print("enum count: " + str(enumCount))
+
     SortClassObjects(classObjects)
     SortInterfaceObjects(interfaceObjects)
 
