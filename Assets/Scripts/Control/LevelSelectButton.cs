@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Starborne.SceneHandling;
-using System.IO;
 using Starborne.Saving;
 using UnityEngine.UI;
 
