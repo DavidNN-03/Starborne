@@ -857,7 +857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061842824}
   m_Layer: 0
-  m_Name: Asteroids
+  m_Name: Laser Asteroids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,25 +910,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capture: 0
-  fileName: LVL1
-  sceneName: LVL 1
+  fileName: LVL2
+  sceneName: LVL 2
   skyboxPath: Materials/Skyboxes/SkyBox Volume 2/Stars01/StarSkyBox
   assignments:
     x:
-      assignmentType: 0
-      value: 0.5
-      completed: 0
-    y:
       assignmentType: 1
       value: 120
       completed: 0
-    z:
+    y:
       assignmentType: 0
-      value: 0.75
+      value: 0.8
+      completed: 0
+    z:
+      assignmentType: 1
+      value: 80
       completed: 0
   objectsToSaveWithParentName:
-  - parentName: Asteroids
+  - parentName: Laser Asteroids
     prefabPath: Prefabs/Asteroid1
+  - parentName: Dreadnoughts
+    prefabPath: Prefabs/GameCharacters/Dreadnought
   objectsToSaveWithObjectName:
   - objectName: Player
     prefabPath: Prefabs/GameCharacters/Player
@@ -1003,6 +1005,7 @@ MonoBehaviour:
   maxSpeed: 1
   baseSpeed: 1
   dampeningSpeedChange: 1
+  gunMaxSpreadDegrees: 0
   changeSceneOnDeathDelay: 1
   speed: 0
   roll: 0

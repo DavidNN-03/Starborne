@@ -5226,6 +5226,7 @@ MonoBehaviour:
   speed: 12
   damage: 5
   deathFXPrefab: {fileID: 4713105505141901339, guid: 654e4b831b6c73d4489f4c273abc87c2, type: 3}
+  destructibleByProjectiles: 1
 --- !u!1 &2613111729046553236
 GameObject:
   m_ObjectHideFlags: 0
