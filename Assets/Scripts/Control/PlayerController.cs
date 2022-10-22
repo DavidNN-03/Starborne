@@ -25,6 +25,7 @@ namespace Starborne.Control
         public float maxSpeed = 1f;
         [SerializeField] float baseSpeed = 1f;
         [SerializeField] float dampeningSpeedChange = 1f;
+        [SerializeField] float gunMaxSpreadDegrees;
         [SerializeField] float changeSceneOnDeathDelay = 1f;
         public float speed;
         public float roll;
@@ -78,16 +79,6 @@ namespace Starborne.Control
             cc.maxPitch = characterStats.pitchSensitivity;
             cc.maxRoll = characterStats.rollSensitivity;
 
-            guns = new Gun[characterStats.gunPositions.Length];
-
-            for (int i = 0; i < characterStats.gunPositions.Length; i++)
-            {
-                Gun gun = Instantiate(gunPrefab, characterStats.gunPositions[i] + transform.position, Quaternion.identity, gunsParent);
-                guns[i] = gun;
-                gun.SetDamage(characterStats.damagePerShot);
-                gun.SetRateOfFire(characterStats.shotsPerSecond);
-            }
-
             Mesh playerMesh = Resources.Load<Mesh>("Meshes/" + characterStats.meshFileName);
             meshFilter.mesh = playerMesh;
             meshRenderer.material = Resources.Load<Material>("Materials/" + characterStats.materialFileName);
@@ -97,6 +88,18 @@ namespace Starborne.Control
             playerCollider.sharedMesh = playerMesh;
 
             gameUI.UpdateDampeningText(movementType);
+
+            guns = new Gun[characterStats.gunPositions.Length];
+
+            for (int i = 0; i < characterStats.gunPositions.Length; i++)
+            {
+                Gun gun = Instantiate(gunPrefab, characterStats.gunPositions[i] + transform.position, Quaternion.identity, gunsParent);
+                guns[i] = gun;
+                gun.SetDamage(characterStats.damagePerShot);
+                gun.SetRateOfFire(characterStats.shotsPerSecond);
+                gun.SetMaxSpreadDegrees(gunMaxSpreadDegrees);
+                gun.SetProjectileParentObject(playerCollider.gameObject);
+            }
         }
 
         private void FixedUpdate() //consider using Update() for better responsiveness or check the set framerate for FixedUpdate()

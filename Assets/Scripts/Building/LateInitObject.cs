@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Starborne.Building
 {
-    public class LateInitObject : MonoBehaviour
+    public class LateInitObject : MonoBehaviour /*All GameObjects with components that implement ILateInit must also have a component of this type or be descendants of one that does.*/
     {
-        public void LateAwake()
+        public void LateAwake() /*Iterate through all implementations of ILateInit in the GameObject or its descendants and call LateAwale*/
         {
             foreach (ILateInit li in GetComponentsInChildren<ILateInit>())
             {
@@ -14,7 +14,7 @@ namespace Starborne.Building
             }
         }
 
-        public void LateStart()
+        public void LateStart() /*Iterate through all implementations of ILateInit in the GameObject or its descendants and call LateAwale*/
         {
             foreach (ILateInit li in GetComponentsInChildren<ILateInit>())
             {

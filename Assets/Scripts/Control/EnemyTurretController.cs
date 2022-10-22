@@ -13,6 +13,7 @@ namespace Starborne.Control
         [SerializeField] float aimRange = 20f;
         [SerializeField] float projectileDamage = 5f;
         [SerializeField] float shotsPerSecond;
+        [SerializeField] float gunMaxSpreadDegrees;
         [SerializeField] Transform gunsParent;
         [SerializeField] GameObject deathFX;
         GameObject target;
@@ -34,6 +35,7 @@ namespace Starborne.Control
             {
                 gun.SetDamage(projectileDamage);
                 gun.SetRateOfFire(shotsPerSecond);
+                gun.SetMaxSpreadDegrees(gunMaxSpreadDegrees);
             }
 
             hasStarted = true;
