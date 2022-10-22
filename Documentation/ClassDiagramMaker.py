@@ -2,19 +2,27 @@
 #names of all variable types must be added to 'types', 
 #this does not include types defined in the files that are being documented
 
+#only comments made with /**/ will be documented
+#as a rule of thumb, dont use paranthesis in comments
+
 #This program supports arrays and lists
 
 #each file can only include 1 class, enum, or interface declaration
 #multiple declarations will result in missing documentation
 
-
 #sites are created before all SiteObjects are created
+
+#when a class-/interface-/enumObject is created, it checks if its namespace has a namespaceObject. 
+#if it does, the new object is added to the namespaceObject
+#otherwise, a new namespaceObject is created
+
+
+import os
 
 classObjects = []
 interfaceObjects = []
 enumObjects = []
-
-import os
+namespaceObjects = []
 
 projectName = "Starborne"
 
@@ -74,6 +82,11 @@ class EnumOption:
         self.optionName = optionName
         self.description = description
 
+class NamespaceObject:
+    def __init__(self, namespaceName, namespaceClassObjects):
+        self.namespaceName = namespaceName
+        self.classObjects = namespaceClassObjects
+
 def AddAllChildFilesToArray(path, arr):
     files = os.listdir(path)
     folders = []
@@ -90,6 +103,15 @@ def AddAllChildFilesToArray(path, arr):
     
     for folder in folders:
         AddAllChildFilesToArray(path + "/" + folder, arr)
+
+def GetNamespaceObject(namespaceName):
+    for ns in namespaceObjects:
+        if ns.namespaceName == namespaceName:
+            return ns
+    
+    newNamespaceObject = NamespaceObject(namespaceName, [])
+    namespaceObjects.append(newNamespaceObject)
+    return newNamespaceObject
 
 def FindAllTypes(paths):
     for path in paths:
@@ -116,17 +138,24 @@ def CreateTag(tagType, argumentsText, inbetweenText):
     return tag
 
 def CreateSidebar():
-    sideBarTags = CreateTag("h2", "", "Documentation")
+    sideBarTags = CreateTag("h1", "", "Documentation")
     sideBarTags += "<br>" * 2
-    sideBarTags += CreateTag("h3", "", "Classes")
+    sideBarTags += CreateTag("h2", "", "Classes")
 
-    for c in classObjects:
-        sitePath = "./" + c.className + ".html"
-        sideBarTags += CreateTag("a", "href=\"" + sitePath + "\"", c.className)
-        sideBarTags += "<br>" * 2
+    #for c in classObjects:
+    #    sitePath = "./" + c.className + ".html"
+    #    sideBarTags += CreateTag("a", "href=\"" + sitePath + "\"", c.className)
+    #    sideBarTags += "<br>" * 2
+
+    for ns in namespaceObjects:
+        sideBarTags += CreateTag("h4", "", ns.namespaceName)
+        for co in ns.classObjects:
+            sitePath = "./" + co.className + ".html"
+            sideBarTags += CreateTag("a", "href=\"" + sitePath + "\"", co.className)
+            sideBarTags += "<br>" * 2
 
     sideBarTags += "<br>"
-    sideBarTags += CreateTag("h3", "", "Interfaces")
+    sideBarTags += CreateTag("h4", "", "Interfaces")
 
     for i in interfaceObjects:
         sitePath = "./" + i.interfaceName + ".html"
@@ -134,15 +163,13 @@ def CreateSidebar():
         sideBarTags += "<br>" * 2
 
     sideBarTags += "<br>"
-    sideBarTags += CreateTag("h3", "", "Enums")
+    sideBarTags += CreateTag("h4", "", "Enums")
 
     for i in enumObjects:
         sitePath = "./" + i.enumName + ".html"
         sideBarTags += CreateTag("a", "href=\"" + sitePath + "\"", i.enumName)
         sideBarTags += "<br>" * 2
     
-    
-
     return sideBarTags
 
 def CreateClassSite(classObject):
@@ -508,7 +535,18 @@ def CreateClassObject(words):
     else:
         description = FindComment(0, words, className)
 
+    isComment = False
+    
     for i in range(1, len(variablesSection)-1): #find variables
+        if "/*" in variablesSection[i]:
+            isComment = True
+            continue
+        if "*/" in variablesSection[i]:
+            isComment = False
+            continue
+        if isComment:
+            continue
+
         if variablesSection[i] in types and not variablesSection[i-1] == "class": #Basic variables
             variableModifiers = []
             variableType = variablesSection[i]
@@ -830,6 +868,8 @@ def CreateClassDiagram(rootFolderPath):
             classCount += 1
             classObject = CreateClassObject(words)
             classObjects.append(classObject)
+            namespaceObject = GetNamespaceObject(classObject.namespace)
+            namespaceObject.classObjects.append(classObject)
         elif "interface" in words:
             interfaceCount += 1
             interfaceObject = CreateInterfaceObject(words)
@@ -839,10 +879,10 @@ def CreateClassDiagram(rootFolderPath):
             enumObject = CreateEnumObject(words)
             enumObjects.append(enumObject)
     
-    print("paths count: " + str(len(allPaths)))
-    print("class count: " + str(classCount))
-    print("interface count: " + str(interfaceCount))
-    print("enum count: " + str(enumCount))
+    #print("paths count: " + str(len(allPaths)))
+    #print("class count: " + str(classCount))
+    #print("interface count: " + str(interfaceCount))
+    #print("enum count: " + str(enumCount))
 
     SortClassObjects(classObjects)
     SortInterfaceObjects(interfaceObjects)
