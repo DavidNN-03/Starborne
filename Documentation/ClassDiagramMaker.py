@@ -30,8 +30,9 @@ types = ["void", "bool", "int", "float", "string", "Vector2",
         "Vector3", "Mesh", "Material", "Sprite", "Transform", 
         "RectTransform", "GameObject", "Rigidbody", "Collider", 
         "MonoBehaviour", "ScriptableObject", "UnityEvent", 
-        "IEnumerator", "Ray", "TextMeshProUGUI"]
-modifiers = ["private", "public", "static", "event", "async"]
+        "IEnumerator", "Ray", "TextMeshProUGUI", "Action"]
+modifiers = ["private", "public", "static", "event", "async", "const"]
+enums = []
 
 allInterfaces = []
 allNamespaces = []
@@ -64,10 +65,11 @@ class ClassElement:
         self.description = description
 
 class InterfaceElement:
-    def __init__(self, interfaceModifiers, interfaceName, description, interfaceFunctions):
+    def __init__(self, interfaceModifiers, interfaceName, description, interfaceProperties, interfaceFunctions):
         self.interfaceModifiers = interfaceModifiers
         self.interfaceName = interfaceName
         self.description = description
+        self.interfaceProperties = interfaceProperties
         self.interfaceFunctions = interfaceFunctions
 
 class EnumObject:
@@ -118,7 +120,17 @@ def FindAllTypes(paths):
             file = open(path)
             words = file.read().split()
 
+            isComment = False
             for i in range(len(words)):
+                if "/*" in words[i]:
+                    isComment = True
+                if "*/" in words[i]:
+                    isComment = False
+                    continue
+
+                if isComment:
+                    continue
+
                 if words[i] == "namespace" and not words[i+1] in allNamespaces:
                     allNamespaces.append(words[i+1])
 
@@ -126,6 +138,8 @@ def FindAllTypes(paths):
                     types.append(words[i+1])
                 elif words[i] == "interface":
                     allInterfaces.append(words[i+1])
+                elif words[i] == "enum":
+                    enums.append(words[i+1])
 
 def GetIndexOfWord(word, arr, exceptionChar):
     for i in range(len(arr)):
@@ -242,10 +256,10 @@ def CreateClassSite(classObject):
             for j in classObject.variables[i].variableModifiers:
                 modifiersText += j + " "
 
-            tableRowText = CreateTag("td", "style=\"width:25%\"", modifiersText) 
-            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.variables[i].variableType) 
-            tableRowText += CreateTag("td", "style=\"width:25%\"",  classObject.variables[i].variableName)
-            tableRowText += CreateTag("td", "style=\"width:25%\"",  classObject.variables[i].description)
+            tableRowText = CreateTag("td", "style=\"width:20%\"", modifiersText) 
+            tableRowText += CreateTag("td", "style=\"width:20%\"", classObject.variables[i].variableType) 
+            tableRowText += CreateTag("td", "style=\"width:30%\"",  classObject.variables[i].variableName)
+            tableRowText += CreateTag("td", "style=\"width:30%\"",  classObject.variables[i].description)
                         
             tableRowText = "<tr>" + tableRowText + "</tr>"
 
@@ -266,10 +280,10 @@ def CreateClassSite(classObject):
             for j in classObject.functions[i].functionModifiers:
                 modifiersText += j + " "
 
-            tableRowText = CreateTag("td", "style=\"width:25%\"", modifiersText) 
-            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].returnType) 
-            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].functionName)
-            tableRowText += CreateTag("td", "style=\"width:25%\"", classObject.functions[i].description)
+            tableRowText = CreateTag("td", "style=\"width:20%\"", modifiersText) 
+            tableRowText += CreateTag("td", "style=\"width:20%\"", classObject.functions[i].returnType) 
+            tableRowText += CreateTag("td", "style=\"width:30%\"", classObject.functions[i].functionName)
+            tableRowText += CreateTag("td", "style=\"width:30%\"", classObject.functions[i].description)
 
             tableRowText = "<tr>" + tableRowText + "</tr>"
 
@@ -332,6 +346,28 @@ def CreateInterfaceSite(interfaceObject):
     
     mainDivText += "<br>" + CreateTag("p","",interfaceObject.description) + "<br>" * 2
 
+    if not interfaceObject.interfaceProperties == None and len(interfaceObject.interfaceProperties) > 0:
+        tableText = ""
+
+        for i in range(len(interfaceObject.interfaceProperties)):
+            modifiersText = ""
+
+            for j in interfaceObject.interfaceProperties[i].variableModifiers:
+                modifiersText += j + " "
+            
+            tableRowText = CreateTag("td", "style=\"width:20%\"", modifiersText)
+            tableRowText += CreateTag("td", "style=\"width:20%\"", interfaceObject.interfaceProperties[i].variableType)
+            tableRowText += CreateTag("td", "style=\"width:30%\"", interfaceObject.interfaceProperties[i].variableName)
+            tableRowText += CreateTag("td", "style=\"width:30%\"", interfaceObject.interfaceProperties[i].description)
+            
+            tableRowText = "<tr>" + tableRowText + "</tr>"
+
+            tableText += tableRowText
+        tableText = CreateTag("table", "class=\"myTable\"", tableText)
+        mainDivText += tableText
+
+    mainDivText += "<br>" * 2
+
     if not interfaceObject.interfaceFunctions == None and len(interfaceObject.interfaceFunctions) > 0:
         tableText = ""
 
@@ -341,10 +377,10 @@ def CreateInterfaceSite(interfaceObject):
             for j in interfaceObject.interfaceFunctions[i].functionModifiers:
                 modifiersText += j + " "
 
-            tableRowText = CreateTag("td", "", modifiersText) 
-            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].returnType) 
-            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].functionName)
-            tableRowText += CreateTag("td", "", interfaceObject.interfaceFunctions[i].description)
+            tableRowText = CreateTag("td", "style=\"width:20%\"", modifiersText) 
+            tableRowText += CreateTag("td", "style=\"width:20%\"", interfaceObject.interfaceFunctions[i].returnType) 
+            tableRowText += CreateTag("td", "style=\"width:30%\"", interfaceObject.interfaceFunctions[i].functionName)
+            tableRowText += CreateTag("td", "style=\"width:30%\"", interfaceObject.interfaceFunctions[i].description)
 
             tableRowText = "<tr>" + tableRowText + "</tr>"
 
@@ -409,8 +445,8 @@ def CreateEnumSite(enumObject):
     tableText = ""
 
     for i in range(len(enumObject.options)):
-        tableRowText = CreateTag("td", "", enumObject.options[i].optionName)
-        tableRowText += CreateTag("td", "", enumObject.options[i].description)
+        tableRowText = CreateTag("td", "style=\"width:30%\"", enumObject.options[i].optionName)
+        tableRowText += CreateTag("td", "style=\"width:70%\"", enumObject.options[i].description)
 
         tableText += "<tr>" + tableRowText + "</tr>"
 
@@ -448,7 +484,9 @@ def FindComment(index , section, commentAfterString):
     
     if startIndex < len(section) and "/*" in section[startIndex]:
         comment = section[startIndex][2:]
-        if i+3 < len(section):
+        if "*/" in comment:
+            comment = comment[0:len(comment)-2]
+        elif i+3 < len(section) and not "*/" in section[startIndex]:
             for j in range(startIndex+1, len(section)):
                 if "*/" in section[j]:
                     comment += " " + section[j][:-2]
@@ -540,14 +578,13 @@ def CreateClassObject(words):
     for i in range(1, len(variablesSection)-1): #find variables
         if "/*" in variablesSection[i]:
             isComment = True
-            continue
         if "*/" in variablesSection[i]:
             isComment = False
             continue
         if isComment:
             continue
 
-        if variablesSection[i] in types and not variablesSection[i-1] == "class": #Basic variables
+        if (variablesSection[i] in types or variablesSection[i] in enums) and not variablesSection[i-1] == "class": #Basic variables
             variableModifiers = []
             variableType = variablesSection[i]
             variableName = variablesSection[i+1]
@@ -680,9 +717,10 @@ def CreateInterfaceObject(words):
     interfaceModifiers = []
     interfaceName = ""
     description = ""
+    interfaceProperties = []
     interfaceFunctions = []
 
-    for i in range(len(words)):
+    for i in range(len(words)): #find interface name, modifiers, and description
         if words[i] == "interface":
             interfaceName = words[i+1]
 
@@ -697,39 +735,66 @@ def CreateInterfaceObject(words):
     
     description = FindComment(0, words, interfaceName)
 
-    for i in range(len(words)): #find functions
+    isComment = False
+
+    for i in range(len(words)): #find functions and properties
+        if "/*" in words[i]:
+            isComment = True
+        if "*/" in words[i]:
+            isComment = False
+            continue
+        if isComment:
+            continue
+
         if not words[i] in types:
             continue
+
         isFunction = '(' in words[i+1]
         if not isFunction:
-            continue
-        
-        functionModifiers = []
-        returnType = words[i]
-        functionName = words[i+1]
-        comment = ""
+            propertyModifiers = []
+            propertyType = words[i]
+            propertyName = words[i+1][:-1]
+            comment = ""
 
-        for j in range(i-1, -1, -1):
-            if words[j] in modifiers:
-                functionModifiers.append(words[j])
-            else:
-                break
-            
+            for j in range(i-1, -1, -1):
+                if words[j] in modifiers:
+                    propertyModifiers.append(words[j])
+                else:
+                    break
+            propertyModifiers.reverse()
+
+            comment = FindComment(i, words, propertyName)
+
+            propertyObject = VariableObject(propertyModifiers, propertyType, propertyName, comment)
+
+            interfaceProperties.append(propertyObject)
+        else:
+            functionModifiers = []
+            returnType = words[i]
+            functionName = words[i+1]
+            comment = ""
+
+            for j in range(i-1, -1, -1):
+                if words[j] in modifiers:
+                    functionModifiers.append(words[j])
+                else:
+                    break
+                
             functionModifiers.reverse()
 
-        if not ')' in words[i+1]: 
-            for j in range(i+2, len(words)):
-                 functionName += " " + words[j]
-                 if ')' in words[j]:
-                    break
+            if not ')' in words[i+1]: 
+                for j in range(i+2, len(words)):
+                    functionName += " " + words[j]
+                    if ')' in words[j]:
+                        break
 
-        comment = FindComment(i, words, ')')
+            comment = FindComment(i, words, ')')
 
-        functionObject = FunctionObject(functionModifiers, returnType, functionName, comment)
+            functionObject = FunctionObject(functionModifiers, returnType, functionName, comment)
 
-        interfaceFunctions.append(functionObject)    
+            interfaceFunctions.append(functionObject)    
 
-    interfaceObject = InterfaceElement(interfaceModifiers, interfaceName, description, interfaceFunctions)
+    interfaceObject = InterfaceElement(interfaceModifiers, interfaceName, description, interfaceProperties, interfaceFunctions)
     return interfaceObject
 
 def CreateEnumObject(words):
@@ -764,7 +829,7 @@ def CreateEnumObject(words):
     for i in range(len(optionsSection)):
         if "/*" in optionsSection[i]:
             isComment = True
-        elif "*/" in optionsSection[i]:
+        if "*/" in optionsSection[i]:
             isComment = False
             continue
 
@@ -879,11 +944,6 @@ def CreateClassDiagram(rootFolderPath):
             enumObject = CreateEnumObject(words)
             enumObjects.append(enumObject)
     
-    #print("paths count: " + str(len(allPaths)))
-    #print("class count: " + str(classCount))
-    #print("interface count: " + str(interfaceCount))
-    #print("enum count: " + str(enumCount))
-
     SortClassObjects(classObjects)
     SortInterfaceObjects(interfaceObjects)
 
@@ -895,9 +955,6 @@ def CreateClassDiagram(rootFolderPath):
 
     for enumObject in enumObjects:
         CreateEnumSite(enumObject)
-
-    for namespace in allNamespaces:
-        print()
 
     CreateIndexSite()
 

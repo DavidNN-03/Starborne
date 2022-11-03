@@ -1,15 +1,12 @@
 using System;
 
-[Serializable]
-public class SecondaryAssignment
+namespace Starborne.Saving
 {
-    public enum AssignmentType
+    [Serializable]
+    public class SecondaryAssignment /*Class that stores the data for optional assignments.*/
     {
-        completeWithHealth,
-        completeWithinSeconds
+        public AssignmentType assignmentType; /*The type of assignment.*/
+        public float value; /*The value that the must or must not meet or exceed.*/
+        public bool completed; /*Whether or not the assignment has been completed.*/
     }
-
-    public AssignmentType assignmentType;
-    public float value;
-    public bool completed;
 }

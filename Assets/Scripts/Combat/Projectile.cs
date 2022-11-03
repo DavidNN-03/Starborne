@@ -33,9 +33,9 @@ namespace Starborne.Combat
                                                     Otherwise, it will search for a component that implements IHealth 
                                                     on the other GameObject. If a component is found, it takes damage. 
                                                     The projectile is then set to be destroyed if the other gameObject's tag is not "DDP"
-                                                     and if the other GameObject is not a projectile. 
-                                                     The projectile will also be destroyed if it can be destroyed by projectiles 
-                                                     and the other GameObject is a projectile*/
+                                                    and if the other GameObject is not a projectile. 
+                                                    The projectile will also be destroyed if it can be destroyed by projectiles 
+                                                    and the other GameObject is a projectile*/
         {
             if (other.gameObject == owner)
             {

@@ -1,9 +1,12 @@
 using System;
 
-[Serializable]
-public class AssignmentsContainer
+namespace Starborne.Saving
 {
-    public SecondaryAssignment x;
-    public SecondaryAssignment y;
-    public SecondaryAssignment z;
+    [Serializable]
+    public class AssignmentsContainer /*Stores 3 variables of type SecondaryAssignment.*/
+    {
+        public SecondaryAssignment x;
+        public SecondaryAssignment y;
+        public SecondaryAssignment z;
+    }
 }

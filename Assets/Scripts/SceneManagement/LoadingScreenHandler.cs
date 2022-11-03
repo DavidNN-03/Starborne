@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+using Starborne.Containers;
 
 namespace Starborne.SceneHandling
 {
-    public class LoadingScreenHandler : MonoBehaviour
+    public class LoadingScreenHandler : MonoBehaviour /*Class that manages the Loading Screen scene.*/
     {
-        [SerializeField] float minDelay;
-        [SerializeField] float maxDelay;
+        [SerializeField] private float minDelay; /*The Loading Screen scene will last for minimum this amount of seconds.*/
+        [SerializeField] private float maxDelay; /*The Loading Screen scene will last for maximum this amount of seconds.*/
 
-        IEnumerator Start()
+        private IEnumerator Start() /*Adds some text the screen, and loads the Game scene after a random number of seconds between minDelay and maxDelay.*/
         {
             TextMeshProUGUI text = FindObjectOfType<TextMeshProUGUI>();
 

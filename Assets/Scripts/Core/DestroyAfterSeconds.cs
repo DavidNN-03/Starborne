@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Starborne.Core
 {
-    public class DestroyAfterSeconds : MonoBehaviour
+    public class DestroyAfterSeconds : MonoBehaviour /*Class that destroys the GameObject it is on after a number of seconds.*/
     {
-        [SerializeField] float delay = 5f;
+        [SerializeField] private float delay = 5f; /*The amount of seconds before the GameObject should be destroyed.*/
 
-        void Start()
+        private void Start() /*Start DestroyGameObject.*/
         {
             StartCoroutine(DestroyGameObject());
         }
 
-        private IEnumerator DestroyGameObject()
+        private IEnumerator DestroyGameObject() /*Destroyd the GameObject after a delay.*/
         {
             yield return new WaitForSeconds(delay);
             Destroy(gameObject);

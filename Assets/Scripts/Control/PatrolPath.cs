@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Starborne.Control
 {
-    public class PatrolPath : MonoBehaviour
+    public class PatrolPath : MonoBehaviour /*Class that defines the path for behemoths to follow. The waypoints themselves should be empty child GameObjects.*/
     {
-        const float waypointGizmoRadius = 0.3f;
+        private const float waypointGizmoRadius = 0.3f; /*Radius of the Gizmos drawn in the Unity Editor.*/
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmos() /*Draw the Gizmos.*/
         {
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -18,7 +18,7 @@ namespace Starborne.Control
             }
         }
 
-        public int GetNextIndex(int i)
+        public int GetNextIndex(int i) /*Get index of the next waypoint.*/
         {
             if (i + 1 == transform.childCount)
             {
@@ -27,7 +27,7 @@ namespace Starborne.Control
             return i + 1;
         }
 
-        public Vector3 GetWaypoint(int i)
+        public Vector3 GetWaypoint(int i) /*Get position of the waypoint of a given index.*/
         {
             return transform.GetChild(i).position;
         }

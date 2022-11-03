@@ -5,31 +5,31 @@ using System.IO;
 
 namespace Starborne.Saving
 {
-    public class CharacterWriter : MonoBehaviour
+    public class CharacterWriter : MonoBehaviour /*Class that writes a JSON-file with data for a playable character.*/
     {
-        [SerializeField] string fileName;
-        [SerializeField] string charName;
-        [SerializeField] float maxHP;
-        [SerializeField] float shotsPerSecond;
-        [SerializeField] float damagePerShot;
-        [SerializeField] float enginePower;
-        [SerializeField] float dampeningSpeedChange;
-        [SerializeField] float maxSpeed;
-        [SerializeField] float baseSpeed;
-        [SerializeField] float rollSensitivity;
-        [SerializeField] float pitchSensitivity;
-        [SerializeField] float yawSensitivity;
-        [SerializeField] float rollEffectivenessAtMaxSpeed;
-        [SerializeField] float pitchEffectivenessAtMaxSpeed;
-        [SerializeField] float yawEffectivenessAtMaxSpeed;
-        [SerializeField] string meshFileName;
-        [SerializeField] string materialFileName;
-        [SerializeField] Vector3 meshScale;
-        [SerializeField] Vector3[] gunPositions;
+        [SerializeField] private string fileName; /*Name of the file to be created.*/
+        [SerializeField] private string charName; /*Name of the character*/
+        [SerializeField] private float maxHP; /*Max health of the character*/
+        [SerializeField] private float shotsPerSecond; /*Amount of shots each gun can fire per second.*/
+        [SerializeField] private float damagePerShot; /*Amount of damage each projectile deals.*/
+        [SerializeField] private float enginePower; /*Max amount of engine power of the character.*/
+        [SerializeField] private float dampeningSpeedChange; /*How quickly the character's speed will change due to dampening.*/
+        [SerializeField] private float maxSpeed; /*Max speed of the character.*/
+        [SerializeField] private float baseSpeed; /*The speed that the character will accelerate towards when its MovementType is MovementType.dampenedBaseSpeed.*/
+        [SerializeField] private float rollSensitivity; /*The sensitivity with which the player rolls on its Z-axis.*/
+        [SerializeField] private float pitchSensitivity; /*The sensitivity with which the player rolls on its X-axis.*/
+        [SerializeField] private float yawSensitivity; /*The sensitivity with which the player rolls on its Y-axis.*/
+        [SerializeField] private float rollEffectivenessAtMaxSpeed; /*How effectively the character can rotate on its Z-axis when moving at top speed. If this value is between 0 and 1, the character will rotate more slowly at higher speeds.*/
+        [SerializeField] private float pitchEffectivenessAtMaxSpeed; /*How effectively the character can rotate on its X-axis when moving at top speed. If this value is between 0 and 1, the character will rotate more slowly at higher speeds.*/
+        [SerializeField] private float yawEffectivenessAtMaxSpeed; /*How effectively the character can rotate on its Y-axis when moving at top speed. If this value is between 0 and 1, the character will rotate more slowly at higher speeds.*/
+        [SerializeField] private string meshFileName; /*Name of the mesh file.*/
+        [SerializeField] private string materialFileName; /*Name of the material file.*/
+        [SerializeField] private Vector3 meshScale; /*How the mesh should be scaled.*/
+        [SerializeField] private Vector3[] gunPositions; /*The local position where the guns will be instantiated.*/
 
-        Character currentCharacter = new Character();
+        private Character currentCharacter = new Character(); /*The object that will contain the data. This object will be converted to JSON and saved to a file.*/
 
-        void Start()
+        private void Start() /*Add the data to currentCharacter, convert it to JSON, and save it to a file.*/
         {
             currentCharacter.name = charName;
             currentCharacter.maxHP = maxHP;

@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Starborne.SceneHandling;
 
-public class MenuHandler : MonoBehaviour
+namespace Starborne.Control
 {
-    [SerializeField] GameObject menu;
-
-    void Start()
+    public class MenuHandler : MonoBehaviour /*Class that handles the game's menu. this menu allows the player to leave the game.*/
     {
-        menu.SetActive(false);
-    }
+        [SerializeField] private GameObject menu; /*The parent GameObject of the menu.*/
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private void Start() /*Disactivate the menu.*/
         {
-            menu.SetActive(!menu.activeInHierarchy);
+            menu.SetActive(false);
         }
-    }
 
-    public void Quit()
-    {
-        FindObjectOfType<SceneHandler>().QuitGame();
+        private void Update() /*If the player pushes the escape key, toggle the menu.*/
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                menu.SetActive(!menu.activeInHierarchy);
+            }
+        }
+
+        public void Quit() /*Close the game. This function is called when clicking the in-game buton.*/
+        {
+            FindObjectOfType<SceneHandler>().QuitGame();
+        }
     }
 }

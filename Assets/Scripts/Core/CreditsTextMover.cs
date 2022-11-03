@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace Starborne.Core
 {
-    public class CreditsTextMover : MonoBehaviour
+    public class CreditsTextMover : MonoBehaviour /*Class that moves the credits along the screen.*/
     {
-        [SerializeField] Vector2 velocity;
+        [SerializeField] private Vector2 velocity; /*The velocity the GameObject should move with.*/
 
-        Rigidbody2D rb = null;
+        private Rigidbody2D rb = null; /*The Rigidbody of the GameObject that should move.*/
 
-        void Awake()
+        private void Awake() /*Get the Rigidbody.*/
         {
             rb = GetComponent<Rigidbody2D>();
         }
 
-        void Start()
+        private void Start() /*If the Rigidbody is not null, set its velocity to the variable velocity.*/
         {
             if (velocity == null)
             {

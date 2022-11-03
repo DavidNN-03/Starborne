@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
+using Starborne.Containers;
+using Starborne.Saving;
 
 namespace Starborne.Control
 {
-    public class LevelSelectButtonHandler : MonoBehaviour
+    public class LevelSelectButtonHandler : MonoBehaviour /*Instantiates and gives the level select buttons their values.*/
     {
-        [SerializeField] Transform buttonsParent;
-        [SerializeField] GameObject buttonPrefab;
-        [SerializeField] float widthBetweenButtons;
-        [SerializeField] float startXPos;
-        [SerializeField] float minHeight;
-        [SerializeField] float maxHeight;
+        [SerializeField] private Transform buttonsParent; /*The parent of the instantiated level select buttons.*/
+        [SerializeField] private GameObject buttonPrefab; /*Prefab of the level select button.*/
+        [SerializeField] private float widthBetweenButtons; /*The distance between the centers of consecutive level select buttons on the X-axis.*/
+        [SerializeField] private float startXPos; /*The position of the X-axis of the first level select button.*/
+        [SerializeField] private float minHeight; /*The min value of the level select buttons' position on the Y-axis.*/
+        [SerializeField] private float maxHeight; /*The max value of the level select buttons' position on the Y-axis.*/
 
-        void Start()
+        private void Start() /*Get all the paths to the scenes' JSON-files, get all the scenes' JSON-files, instantiate the level select buttons, and set their values.*/
         {
             string pathsPath = "Assets/Resources/ScenePaths.json";
             StreamReader streamReader = new StreamReader(pathsPath);
@@ -44,7 +46,7 @@ namespace Starborne.Control
             }
         }
 
-        private int GetStars(SceneData sceneData)
+        private int GetStars(SceneData sceneData) /*Get the amount of stars unlocked in a given scene.*/
         {
             int stars = 0;
 

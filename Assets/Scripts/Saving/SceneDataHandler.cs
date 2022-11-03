@@ -5,23 +5,23 @@ using System.IO;
 
 namespace Starborne.Saving
 {
-    public class SceneDataHandler : MonoBehaviour
+    public class SceneDataHandler : MonoBehaviour /*Class that stores the selected level.*/
     {
-        [SerializeField] string defaultScenePath = "Assets/Resources/Scenes/LVL2.json";
-        string sceneDataPath;
-        SceneData sceneData = null;
-        private bool sceneAssigned = false;
+        [SerializeField] private string defaultScenePath = "Assets/Resources/Scenes/LVL2.json"; /*Path of the level that will be loaded if a level isn't assigned*/
+        private string sceneDataPath; /*Path to the selected level.*/
+        private SceneData sceneData = null; /*SceneData of the selected level.*/
+        private bool sceneAssigned = false; /*Whether or not a level has been selected.*/
 
-        public void SetSceneData(string newSceneDataPath)
+        public void SetSceneData(string newSceneDataPath) /*Sets sceneDataPath to a given value.*/
         {
             sceneDataPath = newSceneDataPath;
 
-            sceneData = LoadSceneData(sceneDataPath);
+            LoadSceneData(sceneDataPath);
 
             sceneAssigned = true;
         }
 
-        public SceneData GetSceneData()
+        public SceneData GetSceneData() /*Returns sceneData if it has been assigned a value. Otherwise, returns the default scene data.*/
         {
             if (sceneAssigned)
             {
@@ -30,12 +30,12 @@ namespace Starborne.Saving
             }
 
             //return default character
-            sceneData = LoadSceneData(defaultScenePath);
+            LoadSceneData(defaultScenePath);
 
             return sceneData;
         }
 
-        public void SaveSceneData()
+        public void SaveSceneData() /*Saves the changes made to the scene data to the file it came from.*/
         {
             string json = JsonUtility.ToJson(sceneData);
             string path = "";
@@ -54,12 +54,11 @@ namespace Starborne.Saving
             t.Close();
         }
 
-        private SceneData LoadSceneData(string path)
+        private void LoadSceneData(string path) /*Sets sceneData to a the value of a JSON-file at the given path.*/
         {
             StreamReader reader = new StreamReader(path);
             string jscene = reader.ReadToEnd();
             sceneData = JsonUtility.FromJson<SceneData>(jscene);
-            return sceneData;
         }
     }
 }

@@ -5,19 +5,19 @@ using System.IO;
 
 namespace Starborne.Saving
 {
-    public class CharacterHandler : MonoBehaviour
+    public class CharacterHandler : MonoBehaviour /*Class that stores the selected character. This component should be placed on the EssentialObjects.instance GameObject or one of its children.*/
     {
-        [SerializeField] string defaultCharacterPath = "Assets/Resources/Characters/fighterLight.json";
-        public Character characterStats = null; //Unity automatically creates an empty character, so a null-check doesnt work?
-        private bool characterAssigned = false;
+        [SerializeField] private string defaultCharacterPath = "Assets/Resources/Characters/fighterLight.json"; /*This character will be returned if no character has been assigned by the player.*/
+        public Character characterStats = null; /*Stores the player's selected character.*/
+        private bool characterAssigned = false; /*Whether or not the player has selected a character.*/
 
-        public void SetCharacterStats(Character character)
+        public void SetCharacterStats(Character character) /*Set characterStats to a given value.*/
         {
             characterStats = character;
             characterAssigned = true;
         }
 
-        public Character GetCharacterStats()
+        public Character GetCharacterStats() /*Returns characterStats it has been assigned. Otherwise, returns the default character.*/
         {
             if (characterAssigned)
             {

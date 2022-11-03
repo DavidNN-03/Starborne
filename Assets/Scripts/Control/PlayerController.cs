@@ -11,43 +11,43 @@ using Starborne.Mission;
 
 namespace Starborne.Control
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour /*Controls the player character.*/
     {
-        [SerializeField] InputConfig inputConfig;
-        [SerializeField] float maxEnginePower = 5f;
-        [SerializeField] float enginePower = 1;
-        [SerializeField] float rollSensitivity = 1f;
-        [SerializeField] float pitchSensitivity = 1f;
-        [SerializeField] float yawSensitivity = 1f;
-        [SerializeField] float rollEffectivenessAtMaxSpeed;
-        [SerializeField] float pitchEffectivenessAtMaxSpeed;
-        [SerializeField] float yawEffectivenessAtMaxSpeed;
-        public float maxSpeed = 1f;
-        [SerializeField] float baseSpeed = 1f;
-        [SerializeField] float dampeningSpeedChange = 1f;
-        [SerializeField] float gunMaxSpreadDegrees;
-        [SerializeField] float changeSceneOnDeathDelay = 1f;
-        public float speed;
-        public float roll;
-        public float pitch;
-        public float yaw;
-        public float throttle;
+        [SerializeField] private InputConfig inputConfig; /*How the player character should take input.*/
+        [SerializeField] private float maxEnginePower = 5f; /*How much power can be applied to the player character.*/
+        [SerializeField] private float enginePower; /*The amount of power currrently being applied to the player character.*/
+        [SerializeField] private float rollSensitivity = 1f; /*Sensitivity for rotating the player character on its Z-axis.*/
+        [SerializeField] private float pitchSensitivity = 1f; /*Sensitivity for rotating the player character on its X-axis.*/
+        [SerializeField] private float yawSensitivity = 1f; /*Sensitivity for rotating the player character on its Y-axis.*/
+        [SerializeField] private float rollEffectivenessAtMaxSpeed; /*How effectively the player can rotate on its Z-axis when moving at max speed. The faster the player moves, the slower the player rotates - assuming that this value is between higher than 0 and lower than 1.*/
+        [SerializeField] private float pitchEffectivenessAtMaxSpeed; /*How effectively the player can rotate on its X-axis when moving at max speed. The faster the player moves, the slower the player rotates - assuming that this value is between higher than 0 and lower than 1.*/
+        [SerializeField] private float yawEffectivenessAtMaxSpeed; /*How effectively the player can rotate on its Y-axis when moving at max speed. The faster the player moves, the slower the player rotates - assuming that this value is between higher than 0 and lower than 1.*/
+        public float maxSpeed = 1f; /*The max speed at which the player can move.*/
+        [SerializeField] private float baseSpeed = 1f; /*The speed the player will accelerate towards if movementType is set to MovementType.dampenedBaseSpeed.*/
+        [SerializeField] private float dampeningSpeedChange = 1f; /*How quickly the character's speed changes due to dampening.*/
+        [SerializeField] private float gunMaxSpreadDegrees; /*Max amount of spread in degrees when firing the guns.*/
+        [SerializeField] private float changeSceneOnDeathDelay = 1f; /*Amount of seconds between the player dying and loading the game over scene.*/
+        public float speed; /*Player's current speed.*/
+        public float roll; /*Rotation to be applied on the player's Z-axis.*/
+        public float pitch; /*Rotation to be applied on the player's X-axis.*/
+        public float yaw; /*Rotation to be applied on the player's Y-axis.*/
+        public float throttle; /*Input from the player on if and how they want to accelerate.*/
 
         [Tooltip("-No dampening: The player's speed will stay constant when throttle is 0 \n-Dampening base speed: Player will accelerate to base speed when throttle is 0 \n-Dampening static speed: Player will accelerate to speed=0 when throttle is 0")]
-        [SerializeField] MovementType movementType = MovementType.noDampening;
-        [SerializeField] Transform gunsParent;
-        [SerializeField] Gun gunPrefab;
-        [SerializeField] Gun[] guns;
-        [SerializeField] Character characterStats;
-        [SerializeField] GameObject deathFX;
+        [SerializeField] private MovementType movementType = MovementType.noDampening; /*How the player's speed should change when no buttons for acceleration are being pushed.*/
+        [SerializeField] private Transform gunsParent; /*The GameObject that will be the parent of the guns.*/
+        [SerializeField] private Gun gunPrefab; /*The gun prefab that will be instantiated.*/
+        [SerializeField] private Gun[] guns; /*Array of all the instantiated guns.*/
+        [SerializeField] private Character characterStats; /*The chosen character's stats.*/
+        [SerializeField] private GameObject deathFX; /*The GameObject to be instantiated when the player dies.*/
 
-        GameUI gameUI;
-        Rigidbody rb;
-        PlayerHealth health;
-        MeshFilter meshFilter;
-        MeshRenderer meshRenderer;
+        private GameUI gameUI; /*The component that controls the player's UI.*/
+        private Rigidbody rb; /*The player GameObject's Rigidbody.*/
+        private PlayerHealth health; /*The player's health component.*/
+        private MeshFilter meshFilter; /*The player GameObject's MeshFilter.*/
+        private MeshRenderer meshRenderer; /*The player GameObject's MeshRenderer.*/
 
-        void Awake()
+        private void Awake() /*Find values for gameUI, rb, health, meshFilter, and meshRenderer.*/
         {
             gameUI = FindObjectOfType<GameUI>();
             rb = GetComponent<Rigidbody>();
@@ -56,7 +56,7 @@ namespace Starborne.Control
             meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
 
-        void Start()
+        private void Start() /*Lock the mouse, get the character stats, add the Die funtion to health's onDeath event, set values in the CameraController, MeshFilter, MeshFilter, and MeshCollider, update the UI, and the guns are instantiated and their values are set.*/
         {
             Cursor.lockState = CursorLockMode.Locked;
             characterStats = EssentialObjects.instance.GetComponentInChildren<CharacterHandler>().GetCharacterStats();
@@ -102,24 +102,9 @@ namespace Starborne.Control
             }
         }
 
-        private void FixedUpdate() //consider using Update() for better responsiveness or check the set framerate for FixedUpdate()
+        private void FixedUpdate() /*Check if the Z key is pressed, if so, call CycleMovementType. If the left mouse button is down, call AttemptFire on all Guns in guns. Update speedometer by calling UpdateSpeedText on gameUI.*/
         {
             if (Input.GetKeyDown("z")) CycleMovementType();
-            /*if (Input.GetKeyDown("1"))
-            {
-                movementType = MovementType.noDampening;
-                gameUI.UpdateDampeningText(movementType);
-            }
-            else if (Input.GetKeyDown("2"))
-            {
-                movementType = MovementType.dampenedBaseSpeed;
-                gameUI.UpdateDampeningText(movementType);
-            }
-            else if (Input.GetKeyDown("3"))
-            {
-                movementType = MovementType.dampenedStatic;
-                gameUI.UpdateDampeningText(movementType);
-            }*/
 
             Move();
 
@@ -134,7 +119,7 @@ namespace Starborne.Control
             gameUI.UpdateSpeedText(speed, maxSpeed);
         }
 
-        private void CycleMovementType()
+        private void CycleMovementType() /*Change the MovementType and update the UI accordingly.*/
         {
             if (movementType == MovementType.noDampening)
             {
@@ -151,15 +136,13 @@ namespace Starborne.Control
             gameUI.UpdateDampeningText(movementType);
         }
 
-        private void Move()
+        private void Move() /*Get input from the player, invert it if necessary, clamp it, set the movement to be forwards, and calculaate and add acceleration.*/
         {
             GetInputs();
 
             InvertInputs();
 
             ClampInputs();
-
-            //ApplySensitivity();
 
             ControlVelocityDirection();
 
@@ -172,7 +155,7 @@ namespace Starborne.Control
             ModifySpeed();
         }
 
-        private void GetInputs()
+        private void GetInputs() /*Get input with GetInputFromInputSet based on the inputConfig.*/
         {
             roll = GetInputFromInputSet(inputConfig.rollInputSet);
             pitch = GetInputFromInputSet(inputConfig.pitchInputSet);
@@ -180,7 +163,7 @@ namespace Starborne.Control
             throttle = GetInputFromInputSet(inputConfig.throttleInputSet);
         }
 
-        float GetInputFromInputSet(InputSet inputSet)
+        private float GetInputFromInputSet(InputSet inputSet) /*Return input of a given InputSet.*/
         {
             if (inputSet == InputSet.mouseX)
             {
@@ -206,9 +189,9 @@ namespace Starborne.Control
             return 0f;
         }
 
-        void InvertInputs()
+        private void InvertInputs() /*Invert the inputs if defined by the inputConfig.*/
         {
-            if (inputConfig.inverThrottle)
+            if (inputConfig.invertThrottle)
             {
                 throttle *= -1f;
             }
@@ -226,7 +209,7 @@ namespace Starborne.Control
             }
         }
 
-        private void ClampInputs()
+        private void ClampInputs() /*Clamp the inputs between -1 and 1.*/
         {
             roll = Mathf.Clamp(roll, -1, 1);
             pitch = Mathf.Clamp(pitch, -1, 1);
@@ -234,30 +217,19 @@ namespace Starborne.Control
             throttle = Mathf.Clamp(throttle, -1, 1);
         }
 
-        void ApplySensitivity()
-        {
-            roll *= rollSensitivity;
-            pitch *= pitchSensitivity;
-            yaw *= yawSensitivity;
-        }
-
-        private void ControlVelocityDirection()
+        private void ControlVelocityDirection() /*Set the velocity to be completely along its local Z-axis.*/
         {
             float speed = rb.velocity.magnitude;
             rb.velocity = transform.forward * speed;
         }
 
-        private void ControlThrottle()
+        private void ControlThrottle() /*Calcluate enginePower.*/
         {
             enginePower = throttle * maxEnginePower * Time.deltaTime;
         }
 
-        private void CalculateTorque()
+        private void CalculateTorque() /*Calculate and apply rotation.*/
         {
-            //float rollEffectiveness = 1 - rollEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
-            //float pitchEffectiveness = 1 - pitchEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
-            //float yawEffectiveness = 1 - yawEffectivenessAtMaxSpeed * (Mathf.Abs(speed) / maxSpeed);
-
             float rollEffectiveness = Mathf.Lerp(1, rollEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
             float pitchEffectiveness = Mathf.Lerp(1, pitchEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
             float yawEffectiveness = Mathf.Lerp(1, yawEffectivenessAtMaxSpeed, Mathf.Abs(speed) / maxSpeed);
@@ -270,7 +242,7 @@ namespace Starborne.Control
             transform.Rotate(pitch, yaw, roll, Space.Self);
         }
 
-        private void SetSpeed()
+        private void SetSpeed() /*Add engine power to speed, clamp the speed and set the velocity.*/
         {
             speed += enginePower;
 
@@ -279,7 +251,7 @@ namespace Starborne.Control
             rb.velocity = speed * transform.forward;
         }
 
-        private void ModifySpeed() //Consider refactoring
+        private void ModifySpeed() /*Accelerate depending on the throttle and movementType.*/
         {
             if (movementType == MovementType.noDampening || throttle != 0)
             {
@@ -325,13 +297,13 @@ namespace Starborne.Control
             }
         }
 
-        void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision) /*When the player collides with anything, the player dies immediatly. The player finds PlayerHealth and calls Collision.*/
         {
             GetComponentInChildren<PlayerHealth>().Collision();
             enabled = false;
         }
 
-        private void Die()
+        private void Die() /*Instantiate the deathFX if it isnt null, find the OptionalAssignmentHandler and call CaptureData and SetLevelWon(false). Also, unlock the mouse and load the game-over scene.*/
         {
             if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
             OptionalAssignmentHandler optionalAssignmentHandler = FindObjectOfType<OptionalAssignmentHandler>();

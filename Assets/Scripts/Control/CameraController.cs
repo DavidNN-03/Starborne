@@ -5,49 +5,50 @@ using UnityEngine;
 
 namespace Starborne.Control
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour /*Controls the camera the player sees through.*/
     {
-        public float maxSpeed;
-        public float maxPitch;
-        public float maxRoll;
-        float speed;
-        float pitch;
-        float roll;
-        Vector3 camOffset;
-        Vector3 camRotation;
+        public float maxSpeed; /*The max speed the player can move with.*/
+        public float maxPitch; /*The max value the player can rotate around its X-axis per frame.*/
+        public float maxRoll; /*The max value the player can rotate around its Z-axis per frame.*/
+        private float speed; /*The current speed of the player.*/
+        private float pitch; /*The current pitch of the player.*/
+        private float roll; /*The current roll of the player.*/
+        private Vector3 camOffset; /*The amount of offset from the player to the camera.*/
+        private Vector3 camRotation; /*The new rotation for the camera.*/
 
         [Header("Y offset")]
-        [SerializeField] float maxCamYOffset;
-        [SerializeField] float minCamYOffset;
-        [SerializeField] float yOffsetPushback;
-        [SerializeField] float yOffsetSensitivity;
+        [SerializeField] private float maxCamYOffset; /*The max amount of offset on its Y-axis. When the camera moves upwards relative to the player.*/
+        [SerializeField] private float minCamYOffset; /*The min ammount of offset on its Y-axis. When the camera moves downward relative to the player.*/
+        [SerializeField] private float yOffsetPushback; /*The amount of units the camera moves back towards its starting value on its Y-axis.*/
+        [SerializeField] private float yOffsetSensitivity; /*The amount of units the camera moves along its Y-axis per frame is equal to this value multiplied by the current value of pitch.*/
         [Header("Z offset")]
-        [SerializeField] float topSpeedCamZOffset;
+        [SerializeField] private float topSpeedCamZOffset; /*The offset that will be applied to the camera's Z-axis at top speed. The faster the player moves, the closer the offset is set to this value.*/
         [Header("Field of view")]
-        [SerializeField] float maxFOV;
-        [SerializeField] float minFOV;
+        [SerializeField] private float maxFOV; /*The max value of the camera's field of view. The higher the speed, the larger the field of view.*/
+        [SerializeField] private float minFOV; /*The min value of the camera's field of view. The lower the speed, the smaller the field of view.*/
+        [SerializeField] private float zoomFOV; /*The value of the camera's field of view when zooming.*/
         [Header("Z roll")]
-        [SerializeField] float maxCamRoll;
-        [SerializeField] float rollPushback;
-        [SerializeField] float rollSensitivity;
+        [SerializeField] private float maxCamRoll; /*The max amount of rotation that can be applied to the camera's local Z-axis both positively and negatively.*/
+        [SerializeField] private float rollPushback; /*The amount that the camera rotates back to its original rotation on its local Z-axis.*/
+        [SerializeField] private float rollSensitivity; /*The amount that the camera rotates is equal to this value multiplied by roll.*/
 
-        [SerializeField] Transform targetTransform;
-        PlayerController playerController;
-        Camera cam;
-        Vector3 startPos;
+        [SerializeField] private Transform targetTransform; /*The player's Transform.*/
+        private PlayerController playerController; /*The PlayerController.*/
+        private Camera cam; /*The camera.*/
+        private Vector3 startPos; /*The position of the camera relative to the player at start.*/
 
-        void Awake()
+        private void Awake() /*Find a reference for playerController and cam.*/
         {
             playerController = targetTransform.GetComponent<PlayerController>();
             cam = GetComponent<Camera>();
         }
 
-        void Start()
+        private void Start() /*Assign startPos to the position of the camera at start.*/
         {
             startPos = transform.localPosition;
         }
 
-        void Update()
+        private void Update() /*First, gets the current values of speed, pitch, and roll from playerController. Secondly, determine the field of view based on whetner or not the right mouse button is down and how fast the player is moving. Lastly, calculate and apply new offset and rotation.*/
         {
             speed = playerController.speed;
             pitch = playerController.pitch;
@@ -61,9 +62,10 @@ namespace Starborne.Control
             }
             else
             {
-                cam.fieldOfView = 25;
+                cam.fieldOfView = zoomFOV;
             }
 
+            camOffset = new Vector3();
             ApplySpeedCamOffset();
             ApplyPitchCamOffset();
             ApplyCamRotation();
@@ -72,9 +74,8 @@ namespace Starborne.Control
             transform.localEulerAngles = camRotation;
         }
 
-        private void ApplySpeedCamOffset()
+        private void ApplySpeedCamOffset() /*Calculate the offset on the local Z-axis based on the player's speed.*/
         {
-            camOffset = new Vector3();
             if (speed > 0)
             {
                 camOffset.z = Mathf.Lerp(0f, topSpeedCamZOffset, Mathf.Abs(speed) / maxSpeed);
@@ -85,7 +86,7 @@ namespace Starborne.Control
             }
         }
 
-        private void ApplyPitchCamOffset()
+        private void ApplyPitchCamOffset() /*Calculate the offset on the local Y-axis based on the player's pitch.*/
         {
             float currentYOffset = transform.localPosition.y - startPos.y;
 
@@ -109,7 +110,7 @@ namespace Starborne.Control
             camOffset.y = currentYOffset;
         }
 
-        private void ApplyCamRotation()
+        private void ApplyCamRotation() /*Calculate the rotation of the camera.*/
         {
             camRotation = transform.localEulerAngles;
 

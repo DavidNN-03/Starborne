@@ -107,6 +107,7 @@ MonoBehaviour:
   topSpeedCamZOffset: -2
   maxFOV: 60
   minFOV: 40
+  zoomFOV: 25
   maxCamRoll: 45
   rollPushback: 0.1
   rollSensitivity: 0.2
@@ -246,6 +247,7 @@ MonoBehaviour:
   maxSpeed: 1
   baseSpeed: 1
   dampeningSpeedChange: 1
+  gunMaxSpreadDegrees: 0
   changeSceneOnDeathDelay: 3
   speed: 0
   roll: 0
