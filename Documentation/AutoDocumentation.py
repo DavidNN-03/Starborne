@@ -5,7 +5,7 @@
 #only comments made with /**/ will be documented
 #as a rule of thumb, dont use paranthesis in comments
 
-#This program supports arrays and lists
+#This program supports arrays, lists, and dictionaries
 
 #each file can only include 1 class, enum, or interface declaration
 #multiple declarations will result in missing documentation
@@ -16,6 +16,8 @@
 #if it does, the new object is added to the namespaceObject
 #otherwise, a new namespaceObject is created
 
+#Note: there might be inconsistencies when writing names of types in comments. 
+#These words might be confused with parent class names or other important info. 
 
 import os
 
@@ -169,7 +171,7 @@ def CreateSidebar():
             sideBarTags += "<br>" * 2
 
     sideBarTags += "<br>"
-    sideBarTags += CreateTag("h4", "", "Interfaces")
+    sideBarTags += CreateTag("h2", "", "Interfaces")
 
     for i in interfaceObjects:
         sitePath = "./" + i.interfaceName + ".html"
@@ -177,7 +179,7 @@ def CreateSidebar():
         sideBarTags += "<br>" * 2
 
     sideBarTags += "<br>"
-    sideBarTags += CreateTag("h4", "", "Enums")
+    sideBarTags += CreateTag("h2", "", "Enums")
 
     for i in enumObjects:
         sitePath = "./" + i.enumName + ".html"
@@ -546,8 +548,17 @@ def CreateClassObject(words):
             if not words[i+2] == ":":
                 break
             
+            isComment = False
             for j in range(i+3,len(words)-1):
                 word = words[j]
+
+                if "/*" in word:
+                    isComment = True
+                if "*/" in word:
+                    isComment = False
+                    continue
+                if isComment:
+                    continue
 
                 if '{' in word:
                     break
@@ -754,6 +765,7 @@ def CreateInterfaceObject(words):
             propertyModifiers = []
             propertyType = words[i]
             propertyName = words[i+1][:-1]
+
             comment = ""
 
             for j in range(i-1, -1, -1):
@@ -787,6 +799,9 @@ def CreateInterfaceObject(words):
                     functionName += " " + words[j]
                     if ')' in words[j]:
                         break
+
+            if functionName[-1:] == ';':
+                functionName = functionName[:-1]
 
             comment = FindComment(i, words, ')')
 
@@ -919,10 +934,6 @@ def CreateClassDiagram(rootFolderPath):
     AddAllChildFilesToArray(rootFolderPath, allPaths) #adds all files under the given folder to the allPaths array
     FindAllTypes(allPaths) #adds all classes/types to the types array
 
-    classCount = 0
-    interfaceCount = 0
-    enumCount = 0
-
     #Add data from classes and interfaces to objects in classObjects and interfaceObjects
     for filePath in allPaths:
         file = open(filePath)
@@ -930,17 +941,14 @@ def CreateClassDiagram(rootFolderPath):
 
 
         if "class" in words:
-            classCount += 1
             classObject = CreateClassObject(words)
             classObjects.append(classObject)
             namespaceObject = GetNamespaceObject(classObject.namespace)
             namespaceObject.classObjects.append(classObject)
         elif "interface" in words:
-            interfaceCount += 1
             interfaceObject = CreateInterfaceObject(words)
             interfaceObjects.append(interfaceObject)
         elif "enum" in words:
-            enumCount += 1
             enumObject = CreateEnumObject(words)
             enumObjects.append(enumObject)
     
