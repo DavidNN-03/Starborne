@@ -11,7 +11,7 @@ namespace Starborne.Saving
         [SerializeField] private string path; /*The path of the file that should be created.*/
         [SerializeField] private string[] elements; /*The array of strings that should be saved.*/
 
-        void Start() /*Create an ArrayContainer and add the elements array. Convert the object to JSON and write it to the new file.*/
+        private void Start() /*Create an ArrayContainer and add the elements array. Convert the object to JSON and write it to the new file.*/
         {
             ArrayContainer arrayContainer = new ArrayContainer();
             arrayContainer.array = elements;
