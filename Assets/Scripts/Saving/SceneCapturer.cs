@@ -17,7 +17,7 @@ namespace Starborne.Saving
         [SerializeField] private ObjectToSaveWithParentName[] objectsToSaveWithParentName; /*Children of this GameObjects will be saved.*/
         [SerializeField] private ObjectToSaveWithObjectName[] objectsToSaveWithObjectName; /*These GameObjects will be saved.*/
 
-        private void Update() /*If caprute is true, save the given data in the scene, and write it to a file.*/
+        private void Update() /*If capture is true, save the given data in the scene, and write it to a file.*/
         {
             if (!capture) return;
 
@@ -59,7 +59,7 @@ namespace Starborne.Saving
             capture = false;
         }
 
-        ObjectsContainer GetNewObjectsContainerWithParentName(string parentName, string prefabPath) /*Returns an ObjectContainer containing the data for children of a given GameObject.*/
+        private ObjectsContainer GetNewObjectsContainerWithParentName(string parentName, string prefabPath) /*Returns an ObjectContainer containing the data for children of a given GameObject.*/
         {
             Transform parent = GameObject.Find(parentName).transform;
             ObjectsContainer objectsContainer = new ObjectsContainer();
@@ -84,7 +84,7 @@ namespace Starborne.Saving
             return objectsContainer;
         }
 
-        ObjectsContainer GetNewObjectsContainerWithObjectName(string objectName, string prefabPath) /*Returns an ObjectContainer containing the data of a given GameObject.*/
+        private ObjectsContainer GetNewObjectsContainerWithObjectName(string objectName, string prefabPath) /*Returns an ObjectContainer containing the data of a given GameObject.*/
         {
             ObjectsContainer objectsContainer = new ObjectsContainer();
             objectsContainer.prefabPath = prefabPath;
