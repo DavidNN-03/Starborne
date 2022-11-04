@@ -470,6 +470,33 @@ def CreateEnumSite(enumObject):
 def CreateIndexSite():
     s = open("./Documentation/Templates/ClassSiteTemplate.html").read()
 
+    #Add text in <head>
+    #----------------------------------------------------------------------------------
+
+    #add title
+    pageTitle = projectName + " - Home"
+    splitIndex = s.find("<title>") + 7
+    s = s[:splitIndex] + pageTitle + s[splitIndex:]
+
+    #----------------------------------------------------------------------------------
+    #Add text in topnav div
+    #----------------------------------------------------------------------------------
+    splitIndex = s.find("class=\"topnav\"") + 15
+
+    s = s[:splitIndex] + CreateTag("a", "href=#", "Starborne") + s[splitIndex:]
+    #----------------------------------------------------------------------------------
+    #Add text and links in sidebar
+    #----------------------------------------------------------------------------------
+    splitIndex = s.find("class=\"sidebar\"") + 16
+              
+    sideBarTags = CreateSidebar()
+
+    s = s[:splitIndex] + sideBarTags + s[splitIndex:]
+    
+    #----------------------------------------------------------------------------------
+    #save file
+    #----------------------------------------------------------------------------------
+
     path = "./Documentation/HTML/index.html"
     file = open(path, "w")
     file.write(s)
