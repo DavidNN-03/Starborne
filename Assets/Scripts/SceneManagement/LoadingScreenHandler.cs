@@ -21,6 +21,12 @@ namespace Starborne.SceneHandling
             string jPaths = streamReader.ReadToEnd();
             ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
 
+            /*
+            string pathsPath = "Tips";
+            var jPaths = Resources.Load<TextAsset>(pathsPath);
+            ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths.text);
+            */
+
             text.text = arrayContainer.array[Random.Range(0, arrayContainer.array.Length)];
 
             SceneHandler sceneHandler = FindObjectOfType<SceneHandler>();

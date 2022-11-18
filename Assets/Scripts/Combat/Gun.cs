@@ -9,7 +9,7 @@ namespace Starborne.Combat
         [SerializeField] private float maxSpreadDegrees; /*Sets the max value of the angle between the direction the gun is facing and the direction the projectiles are fired.*/
         private float projectileDamage; /*The damage dealt when the projectile hits.*/
         [SerializeField] private float secondsBetweenShots = 1f; /*The delay between shots.*/
-        [SerializeField] private Projectile prefab; /*The GameObject to be instantiated when the gun is fired.*/
+        [SerializeField] public Projectile prefab; /*The GameObject to be instantiated when the gun is fired.*/
         private GameObject projectileParentObject; /*This GameObject will be set as the owner of all instantiated projectiles. This GameObject should be the GameObject with the collider.*/
 
         private bool canFire = true; /*Defines whether or not the gun is ready to fire.*/

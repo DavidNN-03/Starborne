@@ -32,6 +32,10 @@ namespace Starborne.Control
 
             foreach (Gun gun in guns)
             {
+                if (gun.prefab == null)
+                {
+                    Destroy(gun.transform.parent.parent.parent);
+                }
                 gun.SetDamage(projectileDamage);
                 gun.SetRateOfFire(shotsPerSecond);
                 gun.SetMaxSpreadDegrees(gunMaxSpreadDegrees);

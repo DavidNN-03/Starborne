@@ -23,14 +23,24 @@ namespace Starborne.Control
             StreamReader streamReader = new StreamReader(pathsPath);
             string jPaths = streamReader.ReadToEnd();
             ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
-
+            /*
+            string pathsPath = "ScenePaths";
+            var jsonTextFile = Resources.Load<TextAsset>(pathsPath);
+            ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jsonTextFile.text);
+            */
             int previousStarCount = 0;
 
             for (int i = 0; i < arrayContainer.array.Length; i++)
             {
+
                 StreamReader reader = new StreamReader(arrayContainer.array[i]);
                 string jscene = reader.ReadToEnd();
                 SceneData sceneData = JsonUtility.FromJson<SceneData>(jscene);
+
+                /*
+                var jscene = Resources.Load<TextAsset>(arrayContainer.array[i]);
+                SceneData sceneData = JsonUtility.FromJson<SceneData>(jscene.text);
+                */
 
                 int stars = GetStars(sceneData);
                 bool isUnlocked = i == 0 || previousStarCount > 0;

@@ -32,6 +32,12 @@ namespace Starborne.Control
             string jPaths = streamReader.ReadToEnd();
             ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jPaths);
 
+            /*
+            string pathsPath = "CharPaths";
+            var jsonTextFile = Resources.Load<TextAsset>(pathsPath);
+            ArrayContainer arrayContainer = JsonUtility.FromJson<ArrayContainer>(jsonTextFile.text);
+            */
+
             string[] charPaths = arrayContainer.array;
             characters = new Character[charPaths.Length];
             meshes = new Mesh[charPaths.Length];
@@ -54,6 +60,10 @@ namespace Starborne.Control
             StreamReader streamReader = new StreamReader(path);
             string jCharacter = streamReader.ReadToEnd();
             Character character = JsonUtility.FromJson<Character>(jCharacter);
+            /*
+            var jsonTextFile = Resources.Load<TextAsset>(path);
+            Character character = JsonUtility.FromJson<Character>(jsonTextFile.text);
+            */
             return character;
         }
 

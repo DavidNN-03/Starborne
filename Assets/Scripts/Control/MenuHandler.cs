@@ -18,7 +18,16 @@ namespace Starborne.Control
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                menu.SetActive(!menu.activeInHierarchy);
+                bool newState = !menu.activeInHierarchy;
+                menu.SetActive(newState);
+                if (newState == true)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
         }
 

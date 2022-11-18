@@ -57,8 +57,12 @@ namespace Starborne.Saving
         private void LoadSceneData(string path) /*Sets sceneData to a the value of a JSON-file at the given path.*/
         {
             StreamReader reader = new StreamReader(path);
-            string jscene = reader.ReadToEnd();
-            sceneData = JsonUtility.FromJson<SceneData>(jscene);
+            string jScene = reader.ReadToEnd();
+            sceneData = JsonUtility.FromJson<SceneData>(jScene);
+            /*
+            var jScene = Resources.Load<TextAsset>(path);
+            sceneData = JsonUtility.FromJson<SceneData>(jScene.text);
+            */
         }
     }
 }

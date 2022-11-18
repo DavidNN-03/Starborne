@@ -554,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &240514203137878158
@@ -822,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &240514204073951166
@@ -918,9 +920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 240514203565378360}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &240514204199595138
@@ -1074,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &306637871640585543
@@ -1170,9 +1174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 306637872186888641}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &306637871749691002
@@ -1359,6 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &306637872850203255
@@ -3253,6 +3259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &4085155073102055598
@@ -3732,9 +3739,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 4085155074561090249}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &4085155073857602930
@@ -3826,6 +3834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &4085155074057537981
@@ -5375,6 +5384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &5995096873073081519
@@ -5643,6 +5653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &5995096874013961119
@@ -5739,9 +5750,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 5995096873484427033}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &5995096874123262114
@@ -6135,9 +6147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 6761236881672852316}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &6761236882040992990
@@ -6196,6 +6209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6761236882200291290
@@ -6785,6 +6799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6761236883467565371
@@ -7072,9 +7087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85c513a0c62d545954f619f35ee4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimRange: 5
+  aimRange: 75
   projectileDamage: 5
   shotsPerSecond: 0.5
+  gunMaxSpreadDegrees: 0
   gunsParent: {fileID: 6768265059068967264}
   deathFX: {fileID: 4713105505141901339, guid: ef94de49c9032444eb668b5fe722e536, type: 3}
 --- !u!114 &6768265059434864346
@@ -7166,6 +7182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6768265059764475904
@@ -7722,6 +7739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16adfdc2b4783154eb16a42c98497d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpreadDegrees: 0
   secondsBetweenShots: 2
   prefab: {fileID: 2613111729041189817, guid: 565d5290384548541b879a16d71cceb4, type: 3}
 --- !u!1 &6993880863545816047
