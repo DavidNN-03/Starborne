@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Starborne.SceneHandling;
 
 namespace Starborne.Control
 {
@@ -19,6 +20,16 @@ namespace Starborne.Control
         {
             yield return new WaitForSeconds(invokeDelay);
             onHit.Invoke();
+        }
+
+        public void LoadScene(int buildIndex)
+        {
+            FindObjectOfType<SceneHandler>().LoadScene(buildIndex);
+        }
+
+        public void QuitGame()
+        {
+            FindObjectOfType<SceneHandler>().QuitGame();
         }
     }
 }

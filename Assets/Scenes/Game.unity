@@ -362,9 +362,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3375961775675921543, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072287021163747262, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6072287021199145896, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
       propertyPath: m_Name
       value: Player UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072287021199145896, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6072287021199145903, guid: 30e66f3883d23fd47b9ab7cb8cee71fc, type: 3}
       propertyPath: m_RootOrder
